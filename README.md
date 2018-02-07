@@ -1,8 +1,9 @@
-# csc648-teamNN
+# csc648-team01
 
-- TODO
-
-- Change the repo name to csc648-teamNN , where NN is your team number
-
-- add ALL your team members to your team's repo.
-
+Umang Mathur : umangmathur92
+Alex Nibyt : OleksandrNibyt
+Lorenzo Moises : westune
+Chloe Zirbel : czirbel
+Rosalba Rodriguez : rosalba-rodriguez 
+Taylor Marquez : tmarquez39
+Ryan Liszewski : ryanliszewski
