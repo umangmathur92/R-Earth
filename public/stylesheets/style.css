@@ -22,6 +22,10 @@ html body {
   color: #ffffff;
 }
 
+.nav>li>a{
+  color: #ffffff ;
+}
+
 
 .navbar-collapse {
   min-width: 100%;
