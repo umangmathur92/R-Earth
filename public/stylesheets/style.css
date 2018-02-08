@@ -4,10 +4,6 @@ html body {
   background: linear-gradient(to bottom right, #536976, #292E49);
 }
 
-.navbar-brand{
-  color: #ffffff;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -22,8 +18,13 @@ html body {
   background: none;
 } 
 
+.navbar-brand{
+  color: #ffffff;
+}
 
 
-
+.navbar-collapse {
+  min-width: 100%;
+}
 
 
