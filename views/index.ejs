@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  </head>
+  <%- include('partials/header') -%>
+  <link rel="stylesheet" href="/stylesheets/welcome.css" />
   <body>
       <%- include('partials/navbar') -%>
    <div class="container">
-    <h1>Welcome! </h1>
+    <div class="title"><h1>Welcome to Team 1</h1> </div>
+    <div class="meet-us"><a href="/about"></a></div>
   </div>
   </body>
 </html>

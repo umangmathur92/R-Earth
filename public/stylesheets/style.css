@@ -1,7 +1,11 @@
 html body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #536976, #292E49);
+  background: linear-gradient(to bottom right, #949fb0, #4D607C);
+}
+
+* {
+  color: whitesmoke;
 }
 
 .container {
@@ -14,18 +18,53 @@ html body {
   align-items: center;
 }
 
+.avatars-container {
+  display: inline-block;
+  max-width: 1000px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 40px;
+  text-align: center; 
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px; 
+  border-radius: 60px; 
+  margin: 10px; 
+  
+}
+
+.about-title {
+  font-size: 72px; 
+  text-align: center; 
+}
+
 .navbar {
   background: none;
+  padding: 20px;  
 } 
 
 .navbar-brand{
-  color: #ffffff;
+  color:#D69677;
+  font-size: 24px;
 }
 
 .nav>li>a{
-  color: #ffffff ;
+  color: #D69677;  
+  font-size: 18px;
 }
 
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: transparent !important;
+  padding: 0; 
+  border-bottom: 2px solid whitesmoke;
+  margin: 14px; 
+}
+
+
+  
 
 .navbar-collapse {
   min-width: 100%;
