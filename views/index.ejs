@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+  <%- include('partials/header') -%>
+  <link rel="stylesheet" href="/stylesheets/welcome.css" />
   <body>
-    <h1><%= title %></h1>
-    <p>This is the Home Page for the Software Engineering Term project</p>
+      <%- include('partials/navbar') -%>
+   <div class="container">
+    <div class="title"><h1>Welcome to Team 1</h1> </div>
+    <div class="meet-us"><a href="/about"></a></div>
+  </div>
   </body>
 </html>

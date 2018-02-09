@@ -1,8 +1,101 @@
-body {
-  padding: 50px;
+html body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(to top left, #949fb0, #4D607C);
 }
 
-a {
-  color: #00B7FF;
+* {
+  color: whitesmoke;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 100vh;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatars-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+  text-align: center; 
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px; 
+  border-radius: 60px; 
+  margin: 10px; 
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.about-title {
+  font-size: 72px; 
+  text-align: center; 
+}
+
+.caption-name {
+  font-size: 16px;
+}
+
+.navbar {
+  background: none;
+  padding: 20px;  
+} 
+
+.navbar-brand{
+  color:#D69677;
+  font-size: 24px;
+}
+
+.nav>li>a{
+  color: #D69677;  
+  font-size: 18px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: transparent !important;
+  padding: 0; 
+  border-bottom: 2px solid whitesmoke;
+  margin: 14px; 
+}
+
+.navbar-collapse {
+  min-width: 100%;
+}
+
+.name {
+  font-size: 48px;
+}
+
+.description {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.social-icons-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 200px;
+  justify-content: space-between;
+}
+
+.social-icon {
+  height: 40px;
+  width: 40px;
+  background: transparent; 
+}
+
+
+
+
