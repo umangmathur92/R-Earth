@@ -19,5 +19,9 @@ router.get('/about/umang', function(req,res,next) {
   res.render('team/umang', { title: 'Umang'});
 });
 
+router.get('/about/chloe', function(req, res, next) {
+  res.render('team/chloe', {title: 'Chloe'});
+});
+
 module.exports = router;
 
