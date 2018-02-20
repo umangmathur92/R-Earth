@@ -23,5 +23,13 @@ router.get('/about/chloe', function(req, res, next) {
   res.render('team/chloe', {title: 'Chloe'});
 });
 
+router.get('/about/rosalba', function(req, res, next) {
+  res.render('team/rosalba', {title: 'Rosalba'});
+});
+
+router.get('/about/taylor', function(req, res, next) {
+  res.render('team/taylor', {title: 'Taylor'});
+});
+
 module.exports = router;
 
