@@ -23,5 +23,9 @@ router.get('/about/chloe', function(req, res, next) {
   res.render('team/chloe', {title: 'Chloe'});
 });
 
+router.get('/about/rosalba', function(req, res, next) {
+  res.render('team/rosalba', {title: 'Rosalba'});
+});
+
 module.exports = router;
 
