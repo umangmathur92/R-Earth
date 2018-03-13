@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV === 'development ') {
+  require("dotenv").config();
+}
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,6 +11,11 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var tests = require('./routes/tests');
+var about = require('./routes/about');
+var listings = require('./routes/listings');
+var login = require('./routes/login');
+var signUp = require('./routes/signup');
 
 var app = express();
 
@@ -24,6 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/tests', tests);
+app.use('/about', about);
+app.use('/listings', listings);
+app.use('/login', login);
+app.use('/signup', signUp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
