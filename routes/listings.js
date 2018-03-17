@@ -10,7 +10,7 @@ router.get('/search/:key?', function(req, res, next) {
     const key = req.params.key;
     const results = listing.zipSearch(key);
     results.then( data => {
-        res.send(data[0]);        //Render appropriate .ejs file
+        res.send(data);        //Render appropriate .ejs file
     })
 });
 
