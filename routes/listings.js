@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/search/:key', function(req, res, next) {
+router.get('/search/:key?', function(req, res, next) {
     const key = req.params.key;
     const results = listing.zipSearch(key);
     results.then( data => {
