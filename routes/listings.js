@@ -14,4 +14,12 @@ router.get('/search/:key?', function(req, res, next) {
     })
 });
 
+router.post('/search/', function(req, res, next) {
+    const key = req.body.key;
+    const results = listing.zipSearch(key);
+    results.then( data => {
+        res.send(data);        //Render appropriate .ejs file
+    })
+});
+
 module.exports = router;
