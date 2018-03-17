@@ -4,9 +4,10 @@ const db = require('../db/index');
 
 function zipSearch( key ) {
 	if (key) {
-    return db.any( `SELECT * FROM listing WHERE zipcode = $1 ORDER BY date DESC`, [ key ] );
+		var term = "'"+key + "%'"
+    	return db.any('SELECT * FROM listing WHERE zipcode LIKE ' + term + ' ORDER BY date DESC');
 	} else {
-		return db.any(`SELECT * FROM listing ORDER BY date DESC`);
+		return db.any('SELECT * FROM listing ORDER BY date DESC');
 	}
 }
 
