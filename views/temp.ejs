@@ -1,74 +1,33 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-<link rel="stylesheet" href="/stylesheets/welcome.css" />
 <link rel="stylesheet" href="/stylesheets/tempcss.css" />
-<script>
-	$(document).ready(function() {
-		$("#submit").click(function() {
-			key=$("#key").val();
-			$.post("/listings/search/",{key: key}, function(dataList) {
-				var unorderedList = "<ul id='unl'>";
-				for (var i = 0; i < dataList.length; i++) {
-					var data = dataList[i];
-					unorderedList+="<li>" + "<p>" + data.title + "</p>" + 
-					"<img src='" + data.picture + "'' width = '80' height = '80'>" +
-					"<p>" + data.description + "</p>" +
-					"<p>" + data.address + "</p>" +
-					"<p>" + data.zipcode + "</p>" +
-					"</li>";
-				}
-				unorderedList+="</ul>";
-				var divContainer = document.getElementById("showData");
-				divContainer.innerHTML = "";
-				var template = document.createElement('template');
-				template.innerHTML = unorderedList;
-				divContainer.appendChild(template.content.firstChild);
-				$(document).ready(function () {
-    $("ul#unl li").click(function() {
-   // alert("Clicked list." + $(this).text());
-   //alert("Clicked list." + $(this).index());
-   //alert("Clicked list." + dataList[$(this).index()].zipcode);
-   var urlStr = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&zoom=14";
-   var dataItem = dataList[$(this).index()];
-   var latitude = dataList[$(this).index()].latitude;
-   var longitude = dataList[$(this).index()].longitude;
-   urlStr = urlStr + "&q="+latitude+","+longitude;
-   console.log(urlStr);
-   //https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=18
-   document.getElementById('mapiframe').src = urlStr;   
-});
-});
-			});
-		});
-	});
-	
-</script>
-
-<body>
+<script type="text/javascript" src="javascripts/search.js"></script>
+<body onLoad="document.getElementById('submit').click();">
 	<%- include('partials/navbar') -%>
-	<div style='margin-top:150px;margin-left:0;margin-right:0;'>
+	<div style='margin-left:0;margin-right:0;'>
 		<div class="meet-us"><a href="/about"></a></div>
-		<div class="navbar-form navbar-left">
+		<div class="navbar-form navbar-left" style='margin-left:40px;''>
 			<div class="form-group">
 				<input type="text" id="key" class="form-control" placeholder="Search">
 				<button type="submit" id="submit" class="btn btn-default">Search</button>
 			</div>
 		</div>
 		<br></br><br></br>
-		<div>
-			<div id="showData" style="float:left;width:45%;" ></div>
+		<div style='margin-left:50px;margin-right:0;'>
+			<div id="showData" style="float:left;width:45%;" >
+				<ul id="resultlist">
+				</ul>
+			</div>
 			<div style="float:right;width:45%;">
 				<iframe id="mapiframe" 
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=28.6472799,76.8130732">
-</iframe>
-			</div>
+				width="600"
+				height="450"
+				frameborder="0" style="border:0"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=12">
+			</iframe>
 			<div style="clear:both; font-size:1px;"></div>
-    	</div>
-    	
+		</div>
 	</div>
 </body>
 </html>
