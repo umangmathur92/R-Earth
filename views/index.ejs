@@ -7,35 +7,40 @@
 	
 <%- include('partials/navbar') -%>
 	<div class="index-container">
-		<div class="listings-container">
-			<form class="search_bar huge">
-				<div class="search_dropdown" style="width: 16px;">
-					<span>All</span>
-					<ul>
-						<li class="selected">All</li>
-						<li>Zip Code</li>
-						<li>Name</li>
-					</ul>
-				</div>
-			
-				<input type="text" placeholder="Search for anything" />
-			
-				<button type="submit" value="Search">Search</button>
-			</form>
+
+		<div class="search-container">
+				<form class="search-bar huge">
+						<div class="search-dropdown" style="width: 16px;">
+							<span>All</span>
+							<ul>
+								<li class="selected">All</li>
+								<li>Zip Code</li>
+								<li>Name</li>
+							</ul>
+						</div>
+					
+						<input type="text" placeholder="Search for anything" />
+					
+						<button type="submit" value="Search">Search</button>
+					</form>
+		</div>
+
+		<div class="listings-map-container">
 			<div class="listings-list-container" id="showData" style="float:left;width:45%;" >
 				<ul class ="listings "id="resultlist"/>
 			</div>
-		</div>
+		
 			<div class="map-column-container">
 				<div class="map-container">
 					<iframe id="mapiframe" 
-					width="600"
-					height="450"
+					width="800"
+					height="600"
 					frameborder="0" style="border:0"
 					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=12">
 					</iframe>
-			</div> 
+				</div> 
 			</div>
+		</div>
 	</div>
 </body>
 </html>

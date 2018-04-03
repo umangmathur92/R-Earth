@@ -4,8 +4,42 @@ $(document).ready(function () {
 		createListItem(dataList);
 	});
 
-	$("#submit").click(function () {
+	var bar = ".search-bar";
+  var input = bar + " input[type='text']";
+  var button = bar + " button[type='submit']";
+  var dropdown = bar + " .search-dropdown";
+  var dropdownLabel = dropdown + " > span";
+  var dropdownList = dropdown + " ul";
+  var dropdownListItems = dropdownList + " li";
 
+// Search Bar UI Functions 
+  resizeElements = function() {
+    var barWidth = $(bar).outerWidth();
+
+    var labelWidth = $(dropdownLabel).outerWidth();
+    $(dropdown).width(labelWidth);
+
+    var dropdownWidth = $(dropdown).outerWidth();
+    var buttonWidth	= $(button).outerWidth();
+    var inputWidth = barWidth - dropdownWidth - buttonWidth;
+    var inputWidthPercent = inputWidth / barWidth * 100 + "%";
+
+    $(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
+  }
+
+  function dropdownOn() {
+    $(dropdownList).fadeIn(25);
+    $(dropdown).addClass("active");
+  }
+
+  function dropdownOff() {
+    $(dropdownList).fadeOut(25);
+    $(dropdown).removeClass("active");
+	}
+	
+	resizeElements();
+
+	$("#submit").click(function () {
 		key = $("#key").val();
 
 		$.post("/listings/search/", { key: key }, function (dataList) {
