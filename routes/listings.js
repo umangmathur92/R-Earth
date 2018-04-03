@@ -4,18 +4,18 @@ const listing = require( '../db/listing' );
 const middle = require('../middleware');
 var ejs = require('ejs');
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     const listings = listing.fetchListings();
     listings.then( data => { 
         res.send(data);
     });
-   
 });
 
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const results = listing.zipSearch(key);
     results.then( data => {
+        ejs.render({listings: data})
         res.send(data);        //Render appropriate .ejs file
     });
 });
