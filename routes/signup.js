@@ -3,8 +3,8 @@ var router = express.Router();
 const user = require('../db/users');
 const middle = require('../middleware');
 
-router.get('/', middle.loggedIn, function(req, res, next) {
-    res.send('respond with a resource');
+router.get('/', function(req, res, next) {
+    res.render('signup', { title: 'Sign Up'});
 });
 
 router.post('/', middle.loggedIn, (req, res, next) => {

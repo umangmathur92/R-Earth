@@ -3,11 +3,11 @@ var router = express.Router();
 const user = require('../db/users');
 const middle = require('../middleware');
 
-router.get('/', middle.loggedIn, function(req, res, next) {
-    res.send('respond with a resource');
+router.get('/', function(req, res, next) {
+    res.render('login', { title: 'Login'});
 });
 
-router.post('/', middle.loggedIn, function(req, res, next) {
+router.post('/', function(req, res, next) {
     if( req.body.username && req.body.password ) {
         const username = req.body.username;
         const password = req.body.password;
