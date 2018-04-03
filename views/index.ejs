@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-<link rel="stylesheet" href="/stylesheets/tempcss.css" />
+<link rel="stylesheet" href="/stylesheets/index.css" />
+
 <script type="text/javascript" src="scripts/search.js"></script>
 	
 <%- include('partials/navbar') -%>
 	<div class="index-container">
 		<div class="listings-container">
-			<div class="form-group">
-				<input type="text" id="key" class="form-control" placeholder="Enter ZIP code...">
-				<button type="submit" id="submit" class="btn btn-default">Search</button>
-			</div>
+			<form class="search_bar huge">
+				<div class="search_dropdown" style="width: 16px;">
+					<span>All</span>
+					<ul>
+						<li class="selected">All</li>
+						<li>Zip Code</li>
+						<li>Name</li>
+					</ul>
+				</div>
+			
+				<input type="text" placeholder="Search for anything" />
+			
+				<button type="submit" value="Search">Search</button>
+			</form>
 			<div class="listings-list-container" id="showData" style="float:left;width:45%;" >
 				<ul class ="listings "id="resultlist"/>
 			</div>
 		</div>
-			<div class="map-container">
-				<iframe id="mapiframe" 
-				width="600"
-				height="450"
-				frameborder="0" style="border:0"
-				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=12">
-				</iframe>
+			<div class="map-column-container">
+				<div class="map-container">
+					<iframe id="mapiframe" 
+					width="600"
+					height="450"
+					frameborder="0" style="border:0"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=12">
+					</iframe>
+			</div> 
 			</div>
 	</div>
 </body>

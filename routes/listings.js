@@ -4,7 +4,6 @@ const listing = require( '../db/listing' );
 const middle = require('../middleware');
 var ejs = require('ejs');
 
-
 router.post('/', function(req, res, next) {
     const listings = listing.fetchListings();
     listings.then( data => { 
