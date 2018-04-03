@@ -25,15 +25,15 @@ li p {
 /* li:hover {
   background: #4D607C;
   cursor: pointer;
-} */ */
+} */ 
+
+
 
 .map-column-container {
   flex: 0.75;
-  padding-left: 50px;
 }
 
 .map-container {
-  display: flex;
   position: fixed;
   padding: 10px;
 }
@@ -51,23 +51,17 @@ li p {
 
 .listings {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
-
-
-.listings-container {
+.listings-list-container {
   flex: 1;
 }
-
-
 
 .search-container {
 
 }
-
-
-
 
 /* Search Bar */
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
