@@ -9,7 +9,6 @@ router.post('/', function(req, res, next) {
     const listings = listing.fetchListings();
     listings.then( data => { 
         res.send(data);
-         
     });
    
 });
