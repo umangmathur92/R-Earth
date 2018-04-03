@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'CSC-648 Team 1' });
+  res.render('index', { title: 'R-Earth' });
 });
 
 module.exports = router;

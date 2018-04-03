@@ -1,8 +1,7 @@
-* {margin: 0; padding: 0;}
 
-ul {
+
+.listings {
   list-style-type: none;
-  width: 700px;
 }
 
 h3 {
@@ -18,12 +17,12 @@ li p {
   font: 200 12px/1.5 Georgia, Times New Roman, serif;
 }
 
-li {
+/* li {
   background-color: #6A788D;
   padding: 10px;
   margin: 4px;
   overflow: auto;
-}
+} */
 
 li:hover {
   background: #4D607C;
