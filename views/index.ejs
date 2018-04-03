@@ -2,31 +2,48 @@
 <html>
 <%- include('partials/header') -%>
 <link rel="stylesheet" href="/stylesheets/tempcss.css" />
+<script type="text/javascript" src="javascripts/map.js"></script>
 <script type="text/javascript" src="javascripts/search.js"></script>
 <body onLoad="document.getElementById('submit').click();">
-	<%- include('partials/navbar') -%>
-	<div style='margin-left:0;margin-right:0;'>
-		<div class="meet-us"><a href="/about"></a></div>
-		<div class="navbar-form navbar-left" style='margin-left:40px;''>
-			<div class="form-group">
-				<input type="text" id="key" class="form-control" placeholder="Enter ZIP code...">
-				<button type="submit" id="submit" class="btn btn-default">Search</button>
-			</div>
-		</div>
-		<br></br><br></br>
-		<div style='margin-left:50px;margin-right:0;'>
-			<div id="showData" style="float:left;width:45%;" >
-				<ul id="resultlist">
+<%- include('partials/navbar') -%>
+<div style='margin-left:0;margin-right:0;'>
+	<div class="meet-us"><a href="/about"></a></div>
+	<div class="navbar-form navbar-left" style='margin-left:40px;'>
+
+	</div>
+
+	<br></br>
+
+    <div class="form-inline" style="margin-left:50px">
+        <input type="text" id="key" class="form-control" placeholder="Enter ZIP code...">
+        <button type="submit" id="submit" class="btn btn-default">Search</button>
+    </div>
+
+
+
+	<div class = "row" style = "margin-left:25px;margin-right:0;">
+		<div class = "col-md-5">
+
+
+
+			<div id="showData" style="float:left;" >
+				<ul id="resultlist" style="width:100%; min-width: 100%" >
 				</ul>
 			</div>
-			<div style="float:right;width:45%;">
-				<iframe id="mapiframe" 
-				width="600"
-				height="450"
-				frameborder="0" style="border:0"
-				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=37.757815,-122.50764&zoom=12">
-			</iframe>
+
+		</div>
+
+		<div class ="col-md-7" style="float:right; padding-bottom: 15px">
+
+            <div id = "map" style="width:100%; height:400px"></div>
+
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"
+                    async defer></script>
+
+
 			<div style="clear:both; font-size:1px;"></div>
+
 		</div>
 	</div>
 </body>
