@@ -18,6 +18,15 @@ html body {
   align-items: center;
 }
 
+.index-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  min-width: 100vh;
+  min-width: 100vw;
+}
+
+
 .avatars-container {
   display: flex;
   flex-direction: row;
@@ -95,6 +104,17 @@ html body {
   width: 40px;
   background: transparent; 
 }
+
+.map-container {
+  flex: 1;
+  padding-left: 50px;
+}
+
+.listings-container {
+  flex: 1;
+}
+
+
 
 
 
