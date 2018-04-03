@@ -17,7 +17,7 @@ $(document).ready(function () {
                 zipcodePara.textContent = dataList[i].zipcode;
                 thumbnailImg.src = dataList[i].picture;
                 thumbnailImg.width = '80';
-                thumbnailImg.height = '80'
+                thumbnailImg.height = '80';
                 listItem.appendChild(titlePara);
                 listItem.appendChild(thumbnailImg);
                 listItem.appendChild(descrPara);
@@ -29,6 +29,9 @@ $(document).ready(function () {
             map.panTo(new google.maps.LatLng(dataList[0].latitude, dataList[0].longitude));
             $(document).ready(function () {
                 $("ul#resultlist li").click(function () {
+                    map.panTo(new google.maps.LatLng(dataList[$(this).index()].latitude, dataList[$(this).index()].longitude));
+                });
+                $("ul#resultlist li").hover(function () {
                     map.panTo(new google.maps.LatLng(dataList[$(this).index()].latitude, dataList[$(this).index()].longitude));
                 });
             });
