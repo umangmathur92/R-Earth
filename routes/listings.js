@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const listing = require( '../db/listing' );
 const middle = require('../middleware');
-var ejs = require('ejs');
 
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings();
@@ -15,7 +14,6 @@ router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const results = listing.zipSearch(key);
     results.then( data => {
-        ejs.render({listings: data})
         res.send(data);        //Render appropriate .ejs file
     });
 });

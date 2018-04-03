@@ -38,16 +38,17 @@ $(document).ready(function () {
 	
 	resizeElements();
 
-	$("form").click(function () {
+	$("form").submit(function () {
 		const key = $("#search-input").val();
 		console.log(key);
 		$('#resultlist').empty();
 
 		$.post("/listings/search/", { key: key }, function (dataList) {	
-			if(dataList && dataList.length > 0){
-				createListItem(dataList)
+			console.log("test")
+			if(dataList && dataList.length > 0){	
+				createListItem(dataList);
 			}
-;		});
+		});
 		return false;
 	});
 
