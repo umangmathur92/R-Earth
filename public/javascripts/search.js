@@ -4,6 +4,7 @@ $(document).ready(function () {
         $.post("/listings/search/", {key: key}, function (dataList) {
             var resultList = document.getElementById('resultlist');
             $('#resultlist').empty();
+            removeMarkers();
             for (var i = 0; i < dataList.length; i++) {
                 var listItem = document.createElement('li');
                 var titlePara = document.createElement('h4');
@@ -32,7 +33,9 @@ $(document).ready(function () {
                     map.panTo(new google.maps.LatLng(dataList[$(this).index()].latitude, dataList[$(this).index()].longitude));
                 });
                 $("ul#resultlist li").hover(function () {
-                    map.panTo(new google.maps.LatLng(dataList[$(this).index()].latitude, dataList[$(this).index()].longitude));
+                    var latlng = new google.maps.LatLng(dataList[$(this).index()].latitude, dataList[$(this).index()].longitude);
+                    map.panTo(latlng);
+                    setAnimations(latlng);
                 });
             });
         });
