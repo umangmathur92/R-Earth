@@ -43,7 +43,6 @@ function checkPassword(username, password, callback) {
     });
 }
 
-
 module.exports = {
     getUser: getUser,
     signUp: signUp,

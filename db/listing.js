@@ -4,13 +4,18 @@ const db = require('../db/index');
 
 function zipSearch( key ) {
 	if (key) {
-		var term = "'"+key + "%'"
+		var term = "'" + key + "%'"
     	return db.any('SELECT * FROM listing WHERE zipcode LIKE ' + term + ' ORDER BY date DESC');
 	} else {
-		return db.any('SELECT * FROM listing ORDER BY date DESC');
+		return fetchListings();
 	}
 }
 
+function fetchListings() {
+	return db.any('SELECT * FROM listing ORDER BY date DESC');
+}
+
 module.exports = {
-    zipSearch: zipSearch
+	zipSearch: zipSearch,
+	fetchListings: fetchListings
 }

@@ -1,11 +1,8 @@
 html body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to top left, #949fb0, #4D607C);
-}
-
-* {
-  color: whitesmoke;
+  background-color: #28544B;
+  padding-top: 70px; 
 }
 
 .container {
@@ -26,10 +23,10 @@ html body {
   min-width: 100vw;
 }
 
-
 .avatars-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   max-width: 1000px;
   justify-content: space-around;
   align-items: center;
@@ -56,17 +53,16 @@ html body {
 }
 
 .navbar {
-  background: none;
   padding: 20px;  
 } 
 
 .navbar-brand{
-  color:#D69677;
+  color:#fffaf5;
   font-size: 24px;
 }
 
 .nav>li>a{
-  color: #D69677;  
+  color: #fffaf5;  
   font-size: 18px;
 }
 
@@ -80,6 +76,11 @@ html body {
 
 .navbar-collapse {
   min-width: 100%;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
+.spacer{
+   background-color:#FFA06F;   
 }
 
 .name {
@@ -103,15 +104,6 @@ html body {
   height: 40px;
   width: 40px;
   background: transparent; 
-}
-
-.map-container {
-  flex: 1;
-  padding-left: 50px;
-}
-
-.listings-container {
-  flex: 1;
 }
 
 

@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-<link rel="stylesheet" href="/stylesheets/tempcss.css" />
+<link rel="stylesheet" href="/stylesheets/index.css" />
 <script type="text/javascript" src="scripts/map.js"></script>
 <script type="text/javascript" src="scripts/search.js"></script>
-<body onLoad="document.getElementById('submit').click();">
+	
 <%- include('partials/navbar') -%>
-<div class ="row">
-	<div class = "col-md-5">
-		<div class="index-container">
-
-			<div class="listings-container">
-				<div class="form-group">
-					<input type="text" id="key" class="form-control" placeholder="Enter ZIP code...">
-					<button type="submit" id="submit" class="btn btn-default">Search</button>
-				</div>
-				<div class="listings-list-container" id="showData" style="float:left;width:45%;" >
-					<ul class ="listings "id="resultlist">
-					</ul>
-				</div>
-			</div>
-
-
+	<div class="index-container">
+		<div class="search-container">
+				<span class="input-group-btn">
+					<form class="search-bar huge">
+						<!-- <div class="search-dropdown">
+							<span>All</span>
+							<ul>
+								<li class="selected">All</li>
+								<li>Zip Code</li>
+								<li>Name</li>
+							</ul>
+						</div> -->
+						<input id="search-input"type="text" placeholder="Search for anything" />
+						<button type="submit" value="Search">Search</button>
+					</form>
+				</span>
 		</div>
-	</div>
-	<div class = "col-md-7">
-		<div id = "map" style="width:100%; height:400px"></div>
 
-
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"
+		<div class="listings-map-container">
+			<div class="listings-list-container" id="showData">
+				<ul class ="listings "id="resultlist"/>
+			</div>
+		
+			<div class="map-column-container">
+				<div class="map-container">
+					<div id = "map" style="width:100%; height:400px"></div>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"
 				async defer></script>
+				</div> 
+			</div>
+		</div>
 	</div>
 </div>
 </body>
