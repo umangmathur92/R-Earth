@@ -5,7 +5,18 @@
 }
 
 .search-container {
-  flex: 0.5;
+  flex: 0.10;
+  display: flex;
+  padding: 20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.input-group-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .listings {
@@ -66,10 +77,6 @@
           box-sizing: border-box;
 }
 
-form {
-  margin: 30px auto 110px;
-}
-
 .search-bar {
   background: #fff;
   border: #b7b7b7 solid 1px;
@@ -79,7 +86,8 @@ form {
   position: relative;
   font-family: 'Source Sans Pro', sans-serif;
   max-width: 420px;
-  flex: 0.5,
+  min-width: 300px;
+  flex: 0.5;
 }
 .search-bar input[type=text] {
   border: none;
