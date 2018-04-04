@@ -1,32 +1,35 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-#whole{
-    display:flex;
+.submit-container{
+    display: flex;
     flex-direction: row;
+    flex: 1;
+    height: 100vh;
 }
 
 #feedback-page{
     text-align:center;
 }
 
-#form-main{
-    width:100%;
+.form-container{
+    flex: 1;
+    /* width:100%;
     float:left;
-    padding-top:0px;
+    padding-top:0px; */
 }
 
-#form-div {
-    width:85%;
+.image-upload-container {
+    flex: 1;
+}
+
+#form-div { 
     background-color:rgba(72,72,72,0.4);
     padding-left:35px;
     padding-right:35px;
     padding-top:35px;
     padding-bottom:50px;
-    float: left;
-    left: 50%;
     position: absolute;
     margin-top:30px;
-    margin-left: -260px;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
 }
