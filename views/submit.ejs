@@ -5,11 +5,9 @@
 <script type="text/javascript" src="scripts/submit.js"></script>
 <body>
 <%- include('partials/navbar') -%>
-<div class="whole">
+<div class="submit-container">
 
-	<div class = "col-md-6">
-
-		<div id="form-main">
+		<div class="form-container">
 			<div id="form-div">
 				<form class="form" id="form1">
 
@@ -29,29 +27,21 @@
 						<textarea name="description" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
 					</div>
 
-
-
-
 					<div class="submit">
 						<input type="submit" value="SEND" id="button-blue"/>
 						<div class="ease"></div>
 					</div>
 				</form>
 			</div>
-
 		</div>
 
-		<div class = "col-md-5">
-			<div class="container">
-				<div class ="col-md-5">
+			<div class="image-upload-container">
 					<form action="/upload-target" class="dropzone" id="drop">
 						<div class="dz-message needsclick">
 							<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
 						</div>
 					</form>
-				</div>
 			</div>
-		</div>
 
 	</div>
 
