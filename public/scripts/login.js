@@ -1,11 +1,12 @@
 $(document).ready(function () {
 
-  $('#login-form').submit(function(event) {
+  $('.login-form').submit(function(event) {
     var request = []
 
     var username =  $('#username').val(); 
     var password = $('#password').val()
 
+    console.log("test");
       $.post("/login",
       {
           username: username,
