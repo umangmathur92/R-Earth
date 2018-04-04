@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-<link rel="stylesheet" href="/stylesheets/tempcss.css" />
-<script type="text/javascript" src="javascripts/map.js"></script>
-<script type="text/javascript" src="javascripts/search.js"></script>
-<body onLoad="document.getElementById('submit').click();">
+<link rel="stylesheet" href="/stylesheets/submit.css" />
+<script type="text/javascript" src="scripts/submit.js"></script>
+<body>
 <%- include('partials/navbar') -%>
-<div style='margin-left:0;margin-right:0;'>
-	<div class="meet-us"><a href="/about"></a></div>
-	<div class="navbar-form navbar-left" style='margin-left:40px;'>
+<div class="whole">
 
-	</div>
+	<div class = "col-md-6">
 
-	<br></br>
+		<div id="form-main">
+			<div id="form-div">
+				<form class="form" id="form1">
 
-    <div class="form-inline" style="margin-left:50px">
-        <input type="text" id="key" class="form-control" placeholder="Enter ZIP code...">
-        <button type="submit" id="submit" class="btn btn-default">Search</button>
-    </div>
+					<div class="name">
+						<input name="Title" type="text" class="validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*" id="title" />
+					</div>
+
+					<div class="text">
+						<input name="address" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*">
+					</div>
+
+					<div class="text">
+						<input name="zip" type="text" class="validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip Code*" />
+					</div>
+
+					<div class="text">
+						<textarea name="description" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
+					</div>
 
 
 
-	<div class = "row" style = "margin-left:25px;margin-right:0;">
-		<div class = "col-md-5">
 
-
-
-			<div id="showData" style="float:left;" >
-				<ul id="resultlist" style="width:100%; min-width: 100%" >
-				</ul>
+					<div class="submit">
+						<input type="submit" value="SEND" id="button-blue"/>
+						<div class="ease"></div>
+					</div>
+				</form>
 			</div>
 
 		</div>
 
-		<div class ="col-md-7" style="float:right; padding-bottom: 15px">
-
-            <div id = "map" style="width:100%; height:400px"></div>
-
-
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"
-                    async defer></script>
-
-
-			<div style="clear:both; font-size:1px;"></div>
-
+		<div class = "col-md-5">
+			<div class="container">
+				<div class ="col-md-5">
+					<form action="/upload-target" class="dropzone" id="drop">
+						<div class="dz-message needsclick">
+							<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
+
 	</div>
+
+
+
 </body>
 </html>
