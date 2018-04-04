@@ -1,4 +1,25 @@
 $(document).ready(function () {
+	
+	//Navbar scrool animation
+	var scroll_start = 0;
+	var startchange = $('.search-container');
+	var offset = startchange.offset();
+	 if (startchange.length){
+	$(document).scroll(function() { 
+
+		console.log9
+
+		 scroll_start = $(this).scrollTop();
+		 if(scroll_start > offset.top) {
+			console.log(scroll_start);
+				 $(".navbar").css('background-color', '#FFA06F');
+			} else {
+				 $('.navbar').css('background-color', 'transparent');
+			}
+		});
+	 }
+	
+	 //GET HTTP request for listings 
 	$.get("/listings",function (dataList) {
 		createListItem(dataList);
 	});
