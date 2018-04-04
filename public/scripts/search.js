@@ -1,8 +1,4 @@
-
-
-$(document).ready(function () {
-	
-
+$(document).ready(function () {	
 	//Navbar scrool animation
 	var scroll_start = 0;
 	var startchange = $('.search-container');
@@ -77,7 +73,6 @@ $(document).ready(function () {
 	createListItem = (list) => {
 
 		var resultList = document.getElementById('resultlist');
-
 		for (var i = 0; i < list.length; i++) {
 			var listItem = document.createElement('li');
 			var titlePara = document.createElement('h4');
@@ -98,17 +93,20 @@ $(document).ready(function () {
 			listItem.appendChild(addrPara);
 			listItem.appendChild(zipcodePara);
 			resultlist.appendChild(listItem);
+      addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude));
 		}
-		var urlStr = "https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&zoom=14";
-		var latitude = list[0].latitude;
-		var longitude = list[0].longitude;
-		document.getElementById('mapiframe').src = urlStr + "&q=" + latitude + "," + longitude;
-
+		
+		
+			map.panTo(new google.maps.LatLng(list[0].latitude, list[0].longitude));
 			$("ul#resultlist li").click(function () {
-				var latitude = list[$(this).index()].latitude;
-				var longitude = list[$(this).index()].longitude;
-				document.getElementById('mapiframe').src = urlStr + "&q=" + latitude + "," + longitude;
+				map.panTo(new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude));
 			});
+			$("ul#resultlist li").hover(function () {
+				var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
+				map.panTo(latlng);
+				setAnimations(latlng);
+			});
+	
 	}
 });
 
