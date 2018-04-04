@@ -28,7 +28,7 @@
 }
 
 .listings li {
-  background-color: #e9eded;
+  background-color: #fff;
   ;
   margin: 10px;
   border-radius: 10px;
@@ -48,8 +48,8 @@
 }
 
 .map-container {
-  display: flex;
   position: fixed;
+  display: flex;
   align-items: flex-start;
   padding: 10px;
 }

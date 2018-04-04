@@ -1,17 +1,16 @@
+
+
 $(document).ready(function () {
 	
+
 	//Navbar scrool animation
 	var scroll_start = 0;
 	var startchange = $('.search-container');
 	var offset = startchange.offset();
 	 if (startchange.length){
 	$(document).scroll(function() { 
-
-		console.log9
-
 		 scroll_start = $(this).scrollTop();
 		 if(scroll_start > offset.top) {
-			console.log(scroll_start);
 				 $(".navbar").css('background-color', '#FFA06F');
 			} else {
 				 $('.navbar').css('background-color', 'transparent');
@@ -45,8 +44,9 @@ $(document).ready(function () {
     var inputWidthPercent = inputWidth / barWidth * 100 + "%";
 
     $(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
-  }
-
+	}
+	
+	//Drop Down for search bar
   function dropdownOn() {
     $(dropdownList).fadeIn(25);
     $(dropdown).addClass("active");
@@ -59,6 +59,7 @@ $(document).ready(function () {
 	
 	resizeElements();
 
+	//POST HTTP search 
 	$("form").submit(function () {
 		const key = $("#search-input").val();
 		console.log(key);
