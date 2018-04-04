@@ -1,12 +1,10 @@
 html body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(to top left, #949fb0, #4D607C);
+  background-color: #28544B;
 }
 
-* {
-  color: whitesmoke;
-}
+
 
 .container {
   display: flex;
@@ -61,12 +59,12 @@ html body {
 } 
 
 .navbar-brand{
-  color:#D69677;
+  color:#FFD6A0;
   font-size: 24px;
 }
 
 .nav>li>a{
-  color: #D69677;  
+  color: #FFD6A0;  
   font-size: 18px;
 }
 
@@ -103,15 +101,6 @@ html body {
   height: 40px;
   width: 40px;
   background: transparent; 
-}
-
-.map-container {
-  flex: 1;
-  padding-left: 50px;
-}
-
-.listings-container {
-  flex: 1;
 }
 
 

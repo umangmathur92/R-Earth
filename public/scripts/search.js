@@ -1,21 +1,61 @@
 $(document).ready(function () {
-
-	$.post("/listings",function (dataList) {
+	$.get("/listings",function (dataList) {
 		createListItem(dataList);
 	});
 
-	$("#submit").click(function () {
+	var bar = ".search-bar";
+  var input = bar + " input[type='text']";
+  var button = bar + " button[type='submit']";
+  var dropdown = bar + " .search-dropdown";
+  var dropdownLabel = dropdown + " > span";
+  var dropdownList = dropdown + " ul";
+  var dropdownListItems = dropdownList + " li";
 
-		key = $("#key").val();
+// Search Bar UI Functions 
+  resizeElements = function() {
+    var barWidth = $(bar).outerWidth();
 
-		$.post("/listings/search/", { key: key }, function (dataList) {
-			createListItem(dataList)
-;		});
+    var labelWidth = $(dropdownLabel).outerWidth();
+    $(dropdown).width(labelWidth);
+
+    var dropdownWidth = $(dropdown).outerWidth();
+    var buttonWidth	= $(button).outerWidth();
+    var inputWidth = barWidth - dropdownWidth - buttonWidth;
+    var inputWidthPercent = inputWidth / barWidth * 100 + "%";
+
+    $(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
+  }
+
+  function dropdownOn() {
+    $(dropdownList).fadeIn(25);
+    $(dropdown).addClass("active");
+  }
+
+  function dropdownOff() {
+    $(dropdownList).fadeOut(25);
+    $(dropdown).removeClass("active");
+	}
+	
+	resizeElements();
+
+	$("form").submit(function () {
+		const key = $("#search-input").val();
+		console.log(key);
+		$('#resultlist').empty();
+
+		$.post("/listings/search/", { key: key }, function (dataList) {	
+			console.log("test")
+			if(dataList && dataList.length > 0){	
+				createListItem(dataList);
+			}
+		});
+		return false;
 	});
 
 	createListItem = (list) => {
+
 		var resultList = document.getElementById('resultlist');
-		$('#resultlist').empty();
+
 		for (var i = 0; i < list.length; i++) {
 			var listItem = document.createElement('li');
 			var titlePara = document.createElement('h4');
@@ -41,13 +81,12 @@ $(document).ready(function () {
 		var latitude = list[0].latitude;
 		var longitude = list[0].longitude;
 		document.getElementById('mapiframe').src = urlStr + "&q=" + latitude + "," + longitude;
-		$(document).ready(function () {
+
 			$("ul#resultlist li").click(function () {
 				var latitude = list[$(this).index()].latitude;
 				var longitude = list[$(this).index()].longitude;
 				document.getElementById('mapiframe').src = urlStr + "&q=" + latitude + "," + longitude;
 			});
-		});
 	}
 });
 
