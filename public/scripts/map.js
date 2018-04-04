@@ -20,7 +20,6 @@ function addMarker(coords, label) {
         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
     });
     markers.push(marker);
-
 }
 
 function removeMarkers(){

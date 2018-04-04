@@ -52,6 +52,7 @@
   position: fixed;
   align-items: flex-start;
   padding: 10px;
+  flex: 1;
 }
 
 .listings-map-container {

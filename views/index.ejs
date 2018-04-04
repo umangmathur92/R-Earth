@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-<link rel="stylesheet" href="/stylesheets/index.css" />
-<script type="text/javascript" src="scripts/map.js"></script>
-<script type="text/javascript" src="scripts/search.js"></script>
-	
-<%- include('partials/navbar') -%>
-	<div class="index-container">
-		<div class="search-container">
+	<link rel="stylesheet" href="/stylesheets/index.css" />
+	<script type="text/javascript" src="scripts/map.js"></script>
+	<script type="text/javascript" src="scripts/search.js"></script>
+	<body>
+	<%- include('partials/navbar') -%>
+		<div class="index-container">
+			<div class="search-container">
 				<span class="input-group-btn">
 					<form class="search-bar huge">
-						<!-- <div class="search-dropdown">
-							<span>All</span>
-							<ul>
-								<li class="selected">All</li>
-								<li>Zip Code</li>
-								<li>Name</li>
-							</ul>
-						</div> -->
-						<input id="search-input"type="text" placeholder="Search for anything" />
+						<input id="search-input" type="text" placeholder="Search for anything" />
 						<button type="submit" value="Search">Search</button>
 					</form>
 				</span>
-		</div>
+			</div>
 
-		<div class="listings-map-container">
-			<div class="listings-list-container" id="showData">
-				<ul class ="listings "id="resultlist"/>
+			<div class="listings-map-container">
+				<div class="listings-list-container" id="showData">
+					<ul class="listings " id="resultlist" />
+				</div>
+
+				<div class="map-column-container">
+					<div class="map-container">
+						<div class="map" id="map" style="width:600px; height:600px"></div>
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap" async defer></script>
+					</div>
+				</div>
+
 			</div>
-		
-			<div class="map-column-container">
-				<div class="map-container">
-					<div id = "map" style="width:100%; height:400px"></div>
-          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"
-				async defer></script>
-				</div> 
-			</div>
+
 		</div>
-	</div>
-</div>
-</body>
+	</body>
+
 </html>
