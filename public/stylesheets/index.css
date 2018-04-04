@@ -1,5 +1,28 @@
+* {
+}
+
+
 .listings {
   list-style-type: none;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;;
+}
+
+.listings li {
+  background-color: #e9eded;
+  ;
+  margin: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin: 1rem;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.listings li:hover {
+  box-shadow: 0 14px 28px rgb(255,160,111,0.5), 0 10px 10px rgb(255,160,111,0.5);
 }
 
 .map-column-container {

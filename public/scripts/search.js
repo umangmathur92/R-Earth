@@ -55,6 +55,7 @@ $(document).ready(function () {
 	createListItem = (list) => {
 
 		var resultList = document.getElementById('resultlist');
+
 		for (var i = 0; i < list.length; i++) {
 			var listItem = document.createElement('li');
 			var titlePara = document.createElement('h4');
