@@ -15,8 +15,8 @@ $(document).ready(function () {
 	 }
 	
 	 //GET HTTP request for listings 
-	$.get("/listings",function (dataList) {
-		createListItem(dataList);
+	$.get("/listings",function (listings) {
+		createListItem(listings);
 	});
 
 	var bar = ".search-bar";
@@ -27,7 +27,7 @@ $(document).ready(function () {
   var dropdownList = dropdown + " ul";
   var dropdownListItems = dropdownList + " li";
 
-// Search Bar UI Functions 
+	// Search Bar UI Functions 
   resizeElements = function() {
     var barWidth = $(bar).outerWidth();
 
@@ -70,21 +70,33 @@ $(document).ready(function () {
 		return false;
 	});
 
-	createListItem = (list) => {
+	createListItem = (listings) => {
 
-		var resultList = document.getElementById('resultlist');
-		for (var i = 0; i < list.length; i++) {
+
+		 var listingsList = document.getElementById('listings-list');
+
+		// listings.forEach(listing => {
+		// 	var listingItem = document.getElementById('listing');
+		// 	var listingImage = document.getElementById('listing-image')
+		// 	listingImage.src = listing.picture; 
+
+		// 	listingItem.appendChild(listingImage);
+		// 	listingsList.appendChild(listingItem);
+		// 	console.log(listing);
+		// })
+		
+		for (var i = 0; i < listings.length; i++) {
 			var listItem = document.createElement('li');
 			var titlePara = document.createElement('h4');
 			var thumbnailImg = document.createElement('img');
 			var descrPara = document.createElement('p');
 			var addrPara = document.createElement('p');
 			var zipcodePara = document.createElement('p');
-			titlePara.textContent = list[i].title;
-			descrPara.textContent = list[i].description;
-			addrPara.textContent = list[i].address;
-			zipcodePara.textContent = list[i].zipcode;
-			thumbnailImg.src = list[i].picture;
+			titlePara.textContent = listings[i].title;
+			descrPara.textContent = listings[i].description;
+			addrPara.textContent = listings[i].address;
+			zipcodePara.textContent = listings[i].zipcode;
+			thumbnailImg.src = listings[i].picture;
 			thumbnailImg.width = '80';
 			thumbnailImg.height = '80'
 			listItem.appendChild(titlePara);
@@ -92,16 +104,16 @@ $(document).ready(function () {
 			listItem.appendChild(descrPara);
 			listItem.appendChild(addrPara);
 			listItem.appendChild(zipcodePara);
-			resultlist.appendChild(listItem);
-      addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude));
+			listingsList.appendChild(listItem);
+      addMarker(new google.maps.LatLng(listings[i].latitude, listings[i].longitude));
 		}
 		
 		
-			map.panTo(new google.maps.LatLng(list[0].latitude, list[0].longitude));
-			$("ul#resultlist li").click(function () {
+			map.panTo(new google.maps.LatLng(listings[0].latitude, list[0].longitude));
+			$("ul#listings-list li").click(function () {
 				map.panTo(new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude));
 			});
-			$("ul#resultlist li").hover(function () {
+			$("ul#listings-list li").hover(function () {
 				var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
 				map.panTo(latlng);
 				setAnimations(latlng);

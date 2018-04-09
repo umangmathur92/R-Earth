@@ -6,7 +6,7 @@ const middle = require('../middleware');
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings();
     listings.then( data => { 
-        res.send(data);
+         res.send(data);
     });
 });
 
@@ -14,7 +14,7 @@ router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const results = listing.zipSearch(key);
     results.then( data => {
-        res.send(data);        //Render appropriate .ejs file
+        res.send(data);        
     });
 });
 

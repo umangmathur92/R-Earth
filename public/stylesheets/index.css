@@ -21,7 +21,6 @@
 
 .listings li {
   background-color: #fff;
-  
   margin: 10px;
   border-radius: 10px;
   display: inline-block;
@@ -69,6 +68,9 @@
 
 .listings-list-container {
   flex: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 /* Responsive Design  */
