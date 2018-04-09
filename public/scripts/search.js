@@ -109,12 +109,12 @@ $(document).ready(function () {
 		}
 		
 		
-			map.panTo(new google.maps.LatLng(listings[0].latitude, list[0].longitude));
+			map.panTo(new google.maps.LatLng(listings[0].latitude, listings[0].longitude));
 			$("ul#listings-list li").click(function () {
-				map.panTo(new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude));
+				map.panTo(new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude));
 			});
 			$("ul#listings-list li").hover(function () {
-				var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
+				var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 				map.panTo(latlng);
 				setAnimations(latlng);
 			});
