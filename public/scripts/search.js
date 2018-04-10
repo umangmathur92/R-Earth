@@ -4,7 +4,8 @@ $(document).ready(function () {
 	var startchange = $('.search-container');
 	var offset = startchange.offset();
 	 if (startchange.length){
-	$(document).scroll(function() { 
+	
+		$(document).scroll(function() { 
 		 scroll_start = $(this).scrollTop();
 		 if(scroll_start > offset.top) {
 				 $(".navbar").css('background-color', '#FFA06F');
@@ -108,7 +109,6 @@ $(document).ready(function () {
       addMarker(new google.maps.LatLng(listings[i].latitude, listings[i].longitude));
 		}
 		
-		
 			map.panTo(new google.maps.LatLng(listings[0].latitude, listings[0].longitude));
 			$("ul#listings-list li").click(function () {
 				map.panTo(new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude));
@@ -118,7 +118,6 @@ $(document).ready(function () {
 				map.panTo(latlng);
 				setAnimations(latlng);
 			});
-	
 	}
 });
 
