@@ -97,7 +97,7 @@ $(document).ready(function () {
 			listItem.appendChild(addrPara);
 			listItem.appendChild(zipcodePara);
 			resultlist.appendChild(listItem);
-      		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture);
+      		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
 		}
 		
 			var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);

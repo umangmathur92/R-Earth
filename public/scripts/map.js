@@ -17,11 +17,24 @@ function initMap() {
     infoWindow = new google.maps.InfoWindow({disableAutoPan:false});
 }
 
-function addMarker(coords, image) {
+function addMarker(coords, image, category) {
+    var iconString = '/images/pins/';
+    switch(category){
+        case 0:
+            iconString += 'green';
+            break;
+        case 1:
+            iconString += 'blue';
+            break;
+        case 2:
+            iconString += 'red';
+            break;
+    }
+    iconString += '.png'
     var marker = new google.maps.Marker({
         position: coords,
         map:map,
-        icon: '/images/pins/blue.png',
+        icon: iconString,
         animation: google.maps.Animation.DROP
     });
     markers.push(marker);
