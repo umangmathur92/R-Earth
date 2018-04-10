@@ -2,12 +2,43 @@ const express = require("express");
 const router = express.Router();
 const db = require('../db/index');
 
-function zipSearch( key ) {
+function zipSearch( key, filter, order ) {
 	if (key) {
 		var term = "'" + key + "%'"
-    	return db.any('SELECT * FROM listings WHERE zipcode LIKE ' + term + ' ORDER BY post_date DESC');
+    	return db.any('SELECT * FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order);
 	} else {
 		return fetchListings();
+	}
+}
+
+function addressSearch(key, filter, order) {
+	var term = "'%" + key + "%'";
+	return db.any('SELECT * FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order);
+}
+
+function determineSearch(key, status, category, order) {
+	if(!key){
+		return fetchListings();
+	}
+
+	var filter = "";
+	if(status) {
+		filter += " AND status = " + status;
+	}
+
+	if(category) {
+		filter += " AND category = " + category;
+	}
+
+	if(!order) {
+		order = "post_date DESC";
+	}
+
+	if(isNaN(Number(key))) {
+		return addressSearch(key, filter, order);
+	}
+	else {
+		return zipSearch(key, filter, order);
 	}
 }
 
@@ -39,35 +70,35 @@ function getCurrentDate() {
 
 	var date = year + "-";
 	if(month < 10) {
-		date = date + "0" + month + "-";
+		date += "0" + month + "-";
 	} else{
-		date = date + month + "-";
+		date += month + "-";
 	}
 
 	if(day < 10) {
-		date = date + "0" + day + " ";
+		date += "0" + day + " ";
 	} else {
-		date = date + day + " ";
+		date += day + " ";
 	}
 
 	if(hour < 10) {
-		date = date + "0" + hour + ":";
+		date += "0" + hour + ":";
 	} else {
-		date = date + hour + ":";
+		date += hour + ":";
 	}
 
 	if(min < 10) {
-		date = date + "0" + min + ":";
+		date += "0" + min + ":";
 	} else {
-		date = date + min + ":";
+		date += min + ":";
 	}
 
 	if(sec < 10) {
-		date = date + "0" + sec + ":";
+		date += "0" + sec + ":";
 	} else {
-		date = date + sec + ":";
+		date += sec + ":";
 	}
-	date = date + milli;
+	date += milli;
 	return date;
 }
 
@@ -76,5 +107,7 @@ module.exports = {
 	fetchListings: fetchListings,
 	createListing: createListing,
 	updateResponse: updateResponse,
-	getCurrentDate: getCurrentDate
+	getCurrentDate: getCurrentDate,
+	addressSearch: addressSearch,
+	determineSearch: determineSearch
 }
