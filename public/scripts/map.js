@@ -21,13 +21,16 @@ function addMarker(coords, image, category) {
     var iconString = '/images/pins/';
     switch(category){
         case 0:
-            iconString += 'green';
+            iconString += 'red';
             break;
         case 1:
-            iconString += 'blue';
+            iconString += 'orange';
             break;
         case 2:
-            iconString += 'red';
+            iconString += 'yellow';
+            break;
+        case 3:
+            iconString += 'green';
             break;
     }
     iconString += '.png'
