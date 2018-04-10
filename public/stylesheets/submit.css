@@ -1,0 +1,234 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+.submit-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+    height: 100vh;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#feedback-page{
+    text-align:center;
+}
+
+.form-container{
+    flex: 2;
+    /* width:100%;
+    float:left;
+    padding-top:0px; */
+}
+
+.image-upload-container {
+    flex:1;
+    height: 50%;
+    align-items: center;
+}
+
+#form-div { 
+    background-color:rgba(72,72,72,0.4);
+    padding-left:35px;
+    padding-right:35px;
+    padding-bottom:25px;
+    position: relative;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    width: 95%;
+}
+
+.feedback-input {
+    color:#3c3c3c;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight:500;
+    font-size: 18px;
+    border-radius: 0;
+    line-height: 22px;
+    background-color: #fbfbfb;
+    padding: 13px 13px 13px 54px;
+    margin-bottom: 10px;
+    width:100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 3px solid rgba(0,0,0,0);
+}
+
+.feedback-input:focus{
+    background: #fff;
+    box-shadow: 0;
+    border: 3px solid #3498db;
+    color: #3498db;
+    outline: none;
+    padding: 13px 13px 13px 54px;
+}
+
+.focused{
+    color:#30aed6;
+    border:#30aed6 solid 3px;
+}
+
+/* Icons ---------------------------------- */
+#title{
+    background-image: url(https://cdn3.iconfinder.com/data/icons/minicons-for-web-sites/24/minicons2-78-128.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+#title:focus{
+    background-image: url(https://cdn3.iconfinder.com/data/icons/minicons-for-web-sites/24/minicons2-78-128.png);
+    background-size: 30px 30px;
+    background-position: 8px 5px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+#zip{
+    background-image: url(https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Zip-128.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+#zip:focus{
+    background-image: url(https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Zip-128.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+
+#address{
+    background-image: url(http://www.cook.qld.gov.au/cook-shire-council/images/address-icon.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+#address:focus{
+    background-image: url(http://www.cook.qld.gov.au/cook-shire-council/images/address-icon.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+#description{
+    background-image: url(https://cdn0.iconfinder.com/data/icons/human-resource-vol-1/48/22-128.png);
+    background-size: 30px 30px;
+    background-position: 11px 8px;
+    background-repeat: no-repeat;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    line-height: 150%;
+    resize:vertical;
+}
+
+input:hover, textarea:hover,
+input:focus, textarea:focus {
+    background-color:white;
+}
+
+#button-blue{
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    float:right;
+    width: 25%;
+    border: #fbfbfb solid 4px;
+    cursor:pointer;
+    background-color: #3498db;
+    color:white;
+    font-size:24px;
+    padding-top:22px;
+    padding-bottom:22px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-top:-4px;
+    font-weight:700;
+}
+
+#button-blue:hover{
+    background-color: rgba(0,0,0,0);
+    color: #0493bd;
+}
+
+#button-red{
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    float:left;
+    width: 25%;
+    border: #fbfbfb solid 4px;
+    cursor:pointer;
+    background-color: red;
+    color:white;
+    font-size:24px;
+    padding-top:22px;
+    padding-bottom:22px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    margin-top:-4px;
+    font-weight:700;
+}
+
+#button-red:hover{
+    background-color: rgba(0,0,0,0);
+    color: red;
+}
+
+.submit:hover {
+    color: #3498db;
+}
+
+.ease {
+    width: 0px;
+    height: 74px;
+    float:right;
+    background-color: #fbfbfb;
+    -webkit-transition: .3s ease;
+    -moz-transition: .3s ease;
+    -o-transition: .3s ease;
+    -ms-transition: .3s ease;
+    transition: .3s ease;
+}
+
+#button-blue:hover .ease{
+    width:25%;
+    background-color:white;
+}
+
+@media only screen and (max-width: 580px) {
+    #form-div{
+        left: 3%;
+        margin-right: 3%;
+        width: 88%;
+        margin-left: 0;
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+}
+
+h1{
+    color: white;
+    text-align: center;
+    width: 90%;
+}
+
+.dropzone{
+    background-color: transparent;
+    border-color: white;
+    border: dashed;
+    text-align: center;
+    width: 90%;
+    height: 90%;
+    color: white;
+    font-size: large;
+    line-height: 1000%;
+}
+
+
+
