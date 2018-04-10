@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-        'listing',
+        'listings',
         {
             listing_id: {
                 type: Sequelize.INTEGER,
@@ -11,7 +11,11 @@ module.exports = {
                 autoIncrement: true
             },
             user_id: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'users',
+                    key: 'user_id'
+                }
             },
             title: {
                 type: Sequelize.STRING
@@ -19,7 +23,7 @@ module.exports = {
             picture: {
                 type: Sequelize.STRING
             },
-            date: {
+            post_date: {
                 type: Sequelize.DATE
             },
             description: {
@@ -38,13 +42,33 @@ module.exports = {
                 type: Sequelize.STRING
             },
             status: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'status',
+                    key: 'status_id'
+                }
+            },
+            category: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'categories',
+                    key: 'category_id'
+                }
+            },
+            response: {
                 type: Sequelize.STRING
+            },
+            agency: {
+                type: Sequelize.STRING
+            },
+            response_date: {
+                type: Sequelize.DATE
             }
         }
     );
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable( 'listing' );
+    return queryInterface.dropTable( 'listings' );
   }
 };
