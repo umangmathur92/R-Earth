@@ -18,12 +18,5 @@ router.post('/search/', function(req, res, next) {
     });
 });
 
-router.get('/create', middle.requiresLogIn, function(req, res, next) {
-
-});
-
-router.post('/create', middle.requiresLogIn, function(req, res, next) {
-
-});
 
 module.exports = router;
