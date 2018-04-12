@@ -59,47 +59,6 @@ function updateResponse(status, response, agency) {
 }
 
 function getCurrentDate() {
-	var base = new Date();
-	var year = base.getFullYear();
-	var month = base.getMonth() + 1;
-	var day = base.getDate();
-	var hour = base.getHours();
-	var min = base.getMinutes();
-	var sec = base.getSeconds();
-	var milli = base.getMilliseconds();
-
-	var date = year + "-";
-	if(month < 10) {
-		date += "0" + month + "-";
-	} else{
-		date += month + "-";
-	}
-
-	if(day < 10) {
-		date += "0" + day + " ";
-	} else {
-		date += day + " ";
-	}
-
-	if(hour < 10) {
-		date += "0" + hour + ":";
-	} else {
-		date += hour + ":";
-	}
-
-	if(min < 10) {
-		date += "0" + min + ":";
-	} else {
-		date += min + ":";
-	}
-
-	if(sec < 10) {
-		date += "0" + sec + ":";
-	} else {
-		date += sec + ":";
-	}
-	date += milli;
-	return date;
 }
 
 module.exports = {
