@@ -7,16 +7,24 @@
 <%- include('partials/navbar') -%>
 <div class="submit-container">
 
+	<h1><strong>Submit A Report</strong></h1>
 		<div class="form-container">
 			<div id="form-div">
 				<form class="form" id="form1">
 
 					<div class="name">
 						<input name="Title" type="text" class="validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*" id="title" />
+						<div class="dropdown">
+						</div>
+
 					</div>
+
+
 
 					<div class="text">
 						<input name="address" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*">
+
+
 					</div>
 
 					<div class="text">
@@ -27,20 +35,28 @@
 						<textarea name="description" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
 					</div>
 
-					<div class="submit">
-						<input type="submit" value="SEND" id="button-blue"/>
-						<div class="ease"></div>
+
+
+					<div class = "buttons">
+
+						<div class="submit">
+							<input type="submit" value="SEND" id="button-blue"/>
+						</div>
+
+						<div class="cancel">
+							<button id="button-red"/>CANCEL</button>
+						</div>
+
 					</div>
 				</form>
 			</div>
 		</div>
 
 			<div class="image-upload-container">
-					<form action="/upload-target" class="dropzone" id="drop">
-						<div class="dz-message needsclick">
-							<i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
-						</div>
-					</form>
+                <div id ="upload"></div>
+                <div class = "dropzone" id = "dropzone" ondragover="dragover(event)" ondragexit="dragexit(event)" ondrop="drop(event)">
+					Drag And Drop An Image
+                </div>
 			</div>
 
 	</div>
