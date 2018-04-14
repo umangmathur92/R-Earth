@@ -3,7 +3,7 @@ var router = express.Router();
 const user = require('../db/users');
 const middle = require('../middleware');
 
-router.get('/', function(req, res, next) {
+router.get('/', middle.loggedIn, function(req, res, next) {
     res.render('signup', { title: 'Sign Up'});
 });
 
@@ -27,7 +27,7 @@ router.post('/', middle.loggedIn, (req, res, next) => {
                             res.send('Error creating account');
                         } else {
                             req.session.userId = user.user_id;
-                            res.redirect('/listing/search/');
+                            res.redirect('/');
                         }
                     });
                 } else {

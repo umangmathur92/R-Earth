@@ -3,11 +3,11 @@ var router = express.Router();
 const user = require('../db/users');
 const middle = require('../middleware');
 
-router.get('/', function(req, res, next) {
+router.get('/', middle.loggedIn, function(req, res, next) {
     res.render('login', { title: 'Login'});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', middle.loggedIn, function(req, res, next) {
     if( req.body.username && req.body.password ) {
         const username = req.body.username;
         const password = req.body.password;
@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
                 res.send("Invalid password or username");
             } else {
                 req.session.userId = user.user_id;
-                res.redirect( '/listing/search/' );
+                res.redirect( '/' );
             }
         });
     } else {

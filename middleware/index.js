@@ -3,7 +3,7 @@ Redirects a user away from certain pages (ex: sign up) if they are already logge
  */
 function loggedIn( request, response, next ) {
     if( request.session && request.session.userId ) {
-        return response.redirect( '/listing/search/' );
+        return response.redirect( '/' );
     }
     return next();
 }
