@@ -122,6 +122,18 @@
     background-repeat: no-repeat;
 }
 
+#btnDetect{
+    padding-left: 54px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/e/ea/Arrow_Compass_White.png);
+    background-size: 25px 25px;
+    background-position: 11px 4px;
+    background-repeat: no-repeat;
+}
+
 textarea {
     width: 100%;
     height: 150px;
