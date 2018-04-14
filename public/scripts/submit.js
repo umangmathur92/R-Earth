@@ -1,14 +1,17 @@
 var latitude, longitude, address, zipcode;
+var locationSpinner = document.getElementById('locationSpinner');
 
 function getLocation() {
     if (navigator.geolocation) {
+        setVisibility(locationSpinner, true);
         navigator.geolocation.getCurrentPosition(function onLocationFetchSuccess(position) {
-            //Location(Latitutde & Longitude) Fetched Successfully
+            //Location(Latitude & Longitude only) Fetched Successfully
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
             geocodeLatLng(latitude, longitude);
         }, function onLocationFetchFailure(error) {
             //Failed to fetch Location
+            setVisibility(locationSpinner, false);
             console.log(`Location Fetch Error. Code ${error.code}: ${error.message}`);
             var errorMsgDenied = 'Failed to fetch location.\nPlease manually enable geolocation for this website to autofill your address';
             var genericErrorMsg = 'Unable to fetch your current location !!';
@@ -23,6 +26,7 @@ function geocodeLatLng(latitude, longitude) {
     var geocoder = new google.maps.Geocoder;
     var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
     geocoder.geocode({'location': latlng}, function(results, status) {
+        setVisibility(locationSpinner, false);
         if (status === 'OK') {
             if (results[0]) {
                 var addrComponents = getAddressComponents(results);
@@ -77,4 +81,8 @@ function drop(event){
     image.setAttribute("width", "300px");
     event.target.innerText = "";
     event.target.append(image);
+}
+
+function setVisibility(element, isVisible) {
+    element.style.display = (isVisible) ? "block" : "none";
 }
