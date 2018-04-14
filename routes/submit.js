@@ -4,6 +4,7 @@ const listing = require('../db/listing');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('yayayayyaya');
   res.render('submit', { title: 'R-Earth' });
 });
 

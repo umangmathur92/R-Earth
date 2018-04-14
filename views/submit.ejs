@@ -2,6 +2,7 @@
 <html>
 <%- include('partials/header') -%>
 <link rel="stylesheet" href="/stylesheets/submit.css" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4"></script>
 <script type="text/javascript" src="scripts/submit.js"></script>
 <body>
 <%- include('partials/navbar') -%>
@@ -19,7 +20,7 @@
 
 					</div>
 
-
+					<button type="button" onclick="getLocation()">Get Location</button>
 
 					<div class="text">
 						<input name="address" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*">
@@ -64,4 +65,6 @@
 
 
 </body>
+
+
 </html>
