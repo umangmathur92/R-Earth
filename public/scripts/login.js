@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
   $('.login-form').submit(function(event) {
-    var request = []
+    var request = [];
 
     var username =  $('#username').val(); 
     var password = $('#password').val()
@@ -24,7 +24,7 @@ $(document).ready(function () {
     const name = $('#name').val();
     const confirmation = $('#repeat-password').val();
 
-    console.log($('#name').val())
+    console.log($('#name').val());
       $.post('/signup',
       {
         username: username,

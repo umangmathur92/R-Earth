@@ -56,7 +56,7 @@ function setAnimations(coords){
 
     for(var i = 0; i < markers.length; i++){
         if(coords.equals(markers[i].getPosition())){
-            markers[i].setAnimation(google.maps.Animation.DROP);
+            markers[i].setAnimation(google.maps.Animation.BOUNCE);
         }else{
             markers[i].setAnimation(null);
         }

@@ -1,21 +1,44 @@
-function dragover(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed black";
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var image = document.createElement("IMG");
+        image.setAttribute("height", "300px");
+        image.setAttribute("width", "300px");
+        image.setAttribute("id", "image");
+        document.getElementById('dropzone').innerHTML = "";
+        reader.onload = function(e) {
+            image.setAttribute('src', e.target.result);
+            $('#dropzone').append(image);
+        }
+        reader.readAsDataURL(input.files[0]);
+
+    }
 }
 
-function dragexit(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed white";
+
+
+function goBack() {
+    window.history.back();
 }
 
-function drop(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed white";
-    var image = document.createElement("IMG");
-    image.setAttribute("src", "/images/dolores_trash.jpg");
-    image.setAttribute("id", "image");
-    image.setAttribute("height", "300px");
-    image.setAttribute("width", "300px");
-    event.target.innerText = "";
-    event.target.append(image);
+function submit() {
+
+    var title = $('#title').val();
+    var category = $('.dropdown-select').val();
+    var address = $('#address').val();
+    var zip = $('#zip').val();
+    var description = $('#description').val();
+
+    $.post('/submit', {
+        //body
+        title: title,
+        category: category,
+        address: address,
+        zip: zip,
+        description: description
+    },
+        function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+    });
 }
