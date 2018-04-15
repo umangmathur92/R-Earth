@@ -12,18 +12,19 @@ router.get('/', function(req, res, next) {
 
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
-    const results = listing.zipSearch(key);
+    const status = req.body.status;
+    const category = req.body.category;
+    const order = req.body.order;
+
+    const results = listing.determineSearch(key, status, category, order);
     results.then( data => {
-        res.send(data);        //Render appropriate .ejs file
+        if(data.length) {
+            res.send(data);
+         } else {
+            const message = "No results found";
+        }
     });
 });
 
-router.get('/create', middle.requiresLogIn, function(req, res, next) {
-
-});
-
-router.post('/create', middle.requiresLogIn, function(req, res, next) {
-
-});
 
 module.exports = router;
