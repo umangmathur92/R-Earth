@@ -1,5 +1,6 @@
 var currentFocus;
-
+var pageNum = 1;
+var totalPages = 1;
 
 $(document).ready(function () {
 	//Navbar scrool animation
@@ -18,8 +19,13 @@ $(document).ready(function () {
 	 }
 	
 	 //GET HTTP request for listings 
-	$.get("/listings",function (dataList) {
-		createListItem(dataList);
+	 $.post("/listings/search/", { key: '', pageNum: pageNum }, function (response) {	
+		dataList = response.dataList;
+		totalPages = response.totalNumOfPages;
+		console.log("testzz " + totalPages);
+		if(dataList && dataList.length > 0){	
+			createListItem(dataList);
+		}
 	});
 
 	var bar = ".search-bar";
@@ -62,10 +68,13 @@ $(document).ready(function () {
 	$("form").submit(function () {
 		const key = $("#search-input").val();
 		console.log(key);
+		pageNum = 1;
 		$('#resultlist').empty();
 
-		$.post("/listings/search/", { key: key }, function (dataList) {	
-			console.log("test")
+		$.post("/listings/search/", { key: key, pageNum: pageNum }, function (response) {	
+			dataList = response.dataList;
+			totalPages = response.totalNumOfPages;
+			console.log("testzz " + totalPages);
 			if(dataList && dataList.length > 0){	
 				createListItem(dataList);
 			}
