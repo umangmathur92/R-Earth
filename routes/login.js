@@ -4,15 +4,13 @@ const user = require('../db/users');
 
 router.get('/', function(req, res, next) {
     /*
-    var data = [];
     var login = {};
     if( req.session && req.session.userId ) {
         login.isLoggedIn = true;
     } else {
         login.isLoggedIn = false;
     }
-    data.push(login);
-    res.send(data);
+    res.send(login);
     */
     res.render('login', { title: 'Login'});
 });
@@ -27,8 +25,7 @@ router.post('/', function(req, res, next) {
                res.send("Invalid password or username");
            } else {
                 req.session.userId = user.user_id;
-                var data = [{isLoggedIn: true}];
-                res.send(data);
+                res.send({isLoggedIn: true});
             }
         });
     } else {

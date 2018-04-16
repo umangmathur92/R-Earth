@@ -5,15 +5,13 @@ const listing = require('../db/listing');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     /*
-     var data = [];
      var login = {};
      if( req.session && req.session.userId ) {
          login.isLoggedIn = true;
      } else {
          login.isLoggedIn = false;
      }
-     data.push(login);
-     res.send(data);
+     res.send(login);
      */
     res.render('submit', { title: 'R-Earth' });
 });
