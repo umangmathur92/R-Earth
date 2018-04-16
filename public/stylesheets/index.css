@@ -254,16 +254,22 @@
   display: inline-block;
 }
 
-.pagination a {
+.pagination button {
+  background-color: transparent;
+  outline: none;
   color: yellowgreen;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
 }
 
-.pagination a.active {
+.pagination button.active {
   background-color: #4CAF50;
   color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination button:hover:not(.active) {background-color: #ddd;}
+
+.pagination #numResultsSpan {
+  color: yellowgreen;
+}

@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 const db = require('../db/index');
 
- async function zipSearch(key, filter, order, pageNum) {
+function zipSearch(key, filter, order, pageNum) {
 	if (key) {
 		var term = "'" + key + "%'"
 		var pageSize = 10;
+		var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 		var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 		var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-		return db.any('SELECT *, ' + subQueryToFetchPageCount + ' FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order + subQueryToHandlePagination) ;
+		return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order + subQueryToHandlePagination) ;
 	} else {
 		return fetchListings(pageNum);
 	}
@@ -17,29 +18,26 @@ const db = require('../db/index');
 function addressSearch(key, filter, order, pageNum) {
 	var term = "'%" + key + "%'";
 	var pageSize = 10;
+	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-	return db.any('SELECT *, ' + subQueryToFetchPageCount +' FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order + subQueryToHandlePagination);
+	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order + subQueryToHandlePagination);
 }
 
-async function determineSearch(key, status, category, order, pageNum) {
+function determineSearch(key, status, category, order, pageNum) {
 	if(!key){
 		return fetchListings(pageNum);
 	}
-
 	var filter = "";
 	if(status) {
 		filter += " AND status = " + status;
 	}
-
 	if(category) {
 		filter += " AND category = " + category;
 	}
-
 	if(!order) {
 		order = "post_date DESC";
 	}
-
 	if(isNaN(Number(key))) {
 		return addressSearch(key, filter, order, pageNum);
 	}
@@ -50,11 +48,10 @@ async function determineSearch(key, status, category, order, pageNum) {
 
 function fetchListings(pageNum) {
 	var pageSize = 10;
+	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-	var q = 'SELECT *, ' + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination;
-	console.log('query is: ' + q);
-	return db.any('SELECT *, ' + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination);
+	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination);
 }
 
 function createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category) {

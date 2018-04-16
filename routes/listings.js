@@ -3,14 +3,6 @@ var router = express.Router();
 const listing = require( '../db/listing' );
 const middle = require('../middleware');
 
-router.post('/', function(req, res, next) {
-    const pageNum = req.body.pageNum;
-    const listings = listing.fetchListings(pageNum);
-    listings.then( data => {        
-        res.send(data);
-    });
-});
-
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const status = req.body.status;
@@ -18,22 +10,15 @@ router.post('/search/', function(req, res, next) {
     const order = req.body.order;
     const pageNum = req.body.pageNum;
     const response = listing.determineSearch(key, status, category, order, pageNum);
-    
-    //const results = response[0];
-    //const totalNumOfPages = response[1];
-    //console.log('paaaygeeess: ' + totalNumOfPages);
     response.then( data => {
-        console.log(JSON.stringify(data));
-        if(data.length) {
-            res.send({
-                dataList: data,
-                totalNumOfPages: data[0].numpages
-            });
-         } else {
-            const message = "No results found";
-        }
+        const isSuccess = data.length > 0;
+        res.send({
+            success: isSuccess,
+            dataList: isSuccess ? data : [],
+            totalNumOfPages: isSuccess ? data[0].numpages : 0,
+            totalNumOfResults: isSuccess ? data[0].numresults : 0
+        });
     });
 });
-
 
 module.exports = router;
