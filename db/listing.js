@@ -67,6 +67,9 @@ function updateResponse(status, response, agency) {
 }
 
 function getCurrentDate() {
+	var base = new Date();
+	var date = dateFormat(base, 'yyyy-MM-dd HH:mm:ss:L');
+	return date;
 }
 
 module.exports = {
