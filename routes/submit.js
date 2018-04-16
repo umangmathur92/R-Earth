@@ -4,7 +4,6 @@ const listing = require('../db/listing');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-<<<<<<< HEAD
     /*
      var data = [];
      var login = {};
@@ -17,10 +16,6 @@ router.get('/', function(req, res, next) {
      res.send(data);
      */
     res.render('submit', { title: 'R-Earth' });
-=======
-  console.log('yayayayyaya');
-  res.render('submit', { title: 'R-Earth' });
->>>>>>> f61b56983fe9fb377474a791443f5d8759f0518f
 });
 
 router.post('/create', function(req, res, next) {
