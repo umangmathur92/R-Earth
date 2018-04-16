@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const listing = require( '../db/listing' );
-const middle = require('../middleware');
 
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings();
-    listings.then( data => { 
+    listings.then( data => {
+        var login;
+        if( req.session && req.session.userId ) {
+            login = {isLoggedIn : true};
+        } else {
+            login = {isLoggedIn : false};
+        }
+        data.push(login);
         res.send(data);
     });
 });
@@ -18,6 +24,13 @@ router.post('/search/', function(req, res, next) {
 
     const results = listing.determineSearch(key, status, category, order);
     results.then( data => {
+        var login;
+        if( req.session && req.session.userId ) {
+            login = {isLoggedIn : true};
+        } else {
+            login = {isLoggedIn : false};
+        }
+        data.push(login);
         if(data.length) {
             res.send(data);
          } else {
