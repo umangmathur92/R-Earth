@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/create', function(req, res, next) {
+router.post('/', function(req, res, next) {
   const user_id = req.session.userId;
   const title = req.body.title;
   const picture = req.body.picture;
