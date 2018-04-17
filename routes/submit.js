@@ -4,7 +4,16 @@ const listing = require('../db/listing');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('submit', { title: 'R-Earth' });
+    /*
+     var login = {};
+     if( req.session && req.session.userId ) {
+         login.isLoggedIn = true;
+     } else {
+         login.isLoggedIn = false;
+     }
+     res.send(login);
+     */
+    res.render('submit', { title: 'R-Earth' });
 });
 
 

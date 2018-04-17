@@ -1,4 +1,4 @@
-/*
+/**
 Redirects a user away from certain pages (ex: sign up) if they are already logged in
  */
 function loggedIn( request, response, next ) {
