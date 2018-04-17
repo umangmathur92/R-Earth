@@ -2,19 +2,16 @@ var express = require('express');
 var router = express.Router();
 const user = require('../db/users');
 
+/** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    /*
-   var login = {};
-   if( req.session && req.session.userId ) {
-       login.isLoggedIn = true;
-   } else {
-       login.isLoggedIn = false;
-   }
-   res.send(login);
-   */
-    res.render('signup', { title: 'Sign Up'});
+    var message = {title: 'Sign Up'};
+    if( req.session && req.session.userId ) { //Check for user login
+        message.userId = req.session.userId;
+    }
+   res.render('signup', message);
 });
 
+/** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
@@ -29,13 +26,13 @@ router.post('/', (req, res, next) => {
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
-                if(data == null){
-                    user.signUp(name, username, password, userType, agency, function(error, user) {
+                if(data == null){ //Check if username already exists
+                    user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
                             res.send('Error creating account');
                         } else {
-                            req.session.userId = user.user_id;
-                            res.send({isLoggedIn: true});
+                            req.session.userId = user.user_id; //Create user session
+                            res.send({userId: req.session.userId});
                         }
                     });
                 } else {
