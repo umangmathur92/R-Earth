@@ -25,6 +25,7 @@
     flex:1;
     height: 50%;
     align-items: center;
+    padding-left: 35px;
 }
 
 #form-div { 
@@ -76,6 +77,8 @@
     background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
+    flex-grow: 2;
+
 }
 
 #title:focus{
@@ -91,11 +94,11 @@
     background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
+    flex-grow: 3;
 }
 
 #zip:focus{
     background-image: url(https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Zip-128.png);
-    background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
 }
@@ -106,6 +109,7 @@
     background-size: 30px 30px;
     background-position: 11px 8px;
     background-repeat: no-repeat;
+    flex-grow: 2;
 }
 
 #address:focus{
@@ -141,10 +145,6 @@ textarea {
     resize:vertical;
 }
 
-input:hover, textarea:hover,
-input:focus, textarea:focus {
-    background-color:white;
-}
 
 #button-blue{
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
@@ -256,3 +256,40 @@ h1{
     100% { transform: rotate(360deg); }
 }
 
+
+.name {
+    font-size: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+    padding-left: 10px;
+    flex-grow: 2;
+}
+
+#location{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#imageUpload{
+    color: white;
+}
+
+.dropdown-select{
+    text-align: center;
+}
+
+.addresstext{
+    width: 67.5%;
+}
+
+.ziptext{
+    widht: 20%;
+}

@@ -1,4 +1,20 @@
-var geocoder = new google.maps.Geocoder();
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var image = document.createElement("IMG");
+        image.setAttribute("height", "300px");
+        image.setAttribute("width", "300px");
+        image.setAttribute("id", "image");
+        document.getElementById('dropzone').innerHTML = "";
+        reader.onload = function (e) {
+            image.setAttribute('src', e.target.result);
+            $('#dropzone').append(image);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+var geocoder;
 var latitude, longitude, address, zipcode;
 var locationSpinner = document.getElementById('locationSpinner');
 
@@ -84,27 +100,68 @@ function getAddressComponents(locationResultsArr) {
     return [outputAddress, zip, resultLat, resultLong];
 }
 
-function dragover(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed black";
+
+
+
+function goBack() {
+    window.history.back();
 }
 
-function dragexit(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed white";
+function submit() {
+
+    var title = $('#title').val();
+    var category = $('.dropdown-select').val();
+    var address = $('#address').val();
+    var zipcode = $('#zip').val();
+    var description = $('#description').val();
+
+    $.post('/submit', {
+        //body
+        user_id: 0,
+        title: title,
+        category: category,
+        address: address,
+        zipcode: zipcode,
+        description: description,
+        longitude: longitude,
+        latitude: latitude,
+        picture: "/images/dolores_trash.jpg"
+    },
+        function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+    });
 }
 
-function drop(event){
-    event.preventDefault();
-    event.target.style.border = "4px dashed white";
-    var image = document.createElement("IMG");
-    image.setAttribute("src", "/images/dolores_trash.jpg");
-    image.setAttribute("id", "image");
-    image.setAttribute("height", "300px");
-    image.setAttribute("width", "300px");
-    event.target.innerText = "";
-    event.target.append(image);
+
+function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), {types: ['geocode']});
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+    geocoder = new google.maps.Geocoder();
 }
+
+
+
+function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+    latitude = place.geometry.location.lat();
+    longitude = place.geometry.location.lng();
+    if(isNumeric(place.address_components[6].long_name)){
+        document.getElementById("zip").value = place.address_components[6].long_name;
+    }else{
+        document.getElementById("zip").value = place.address_components[7].long_name;
+    }
+}
+
+function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 
 function setVisibility(element, isVisible) {
     element.style.display = (isVisible) ? "block" : "none";
