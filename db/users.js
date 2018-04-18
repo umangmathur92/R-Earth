@@ -7,6 +7,10 @@ function getUser( username ) {
     return db.oneOrNone(`SELECT * FROM users WHERE  username = $1`, [username] );
 }
 
+function getUserById( userId ) {
+    return db.oneOrNone(`SELECT * FROM users WHERE  user_id = $1`, [userId]);
+}
+
 function signUp(name, username, password, userType, agency, callback) {
     bcrypt.hash( password, 10, function( error, hash ) {
         if( error ) {
@@ -45,6 +49,7 @@ function checkPassword(username, password, callback) {
 
 module.exports = {
     getUser: getUser,
+    getUserById: getUserById,
     signUp: signUp,
     checkPassword: checkPassword
 }
