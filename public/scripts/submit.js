@@ -1,22 +1,29 @@
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        var image = document.createElement("IMG");
-        image.setAttribute("height", "300px");
-        image.setAttribute("width", "300px");
-        image.setAttribute("id", "image");
-        document.getElementById('dropzone').innerHTML = "";
-        reader.onload = function (e) {
-            image.setAttribute('src', e.target.result);
-            $('#dropzone').append(image);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-var geocoder;
+var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
-var locationSpinner = document.getElementById('locationSpinner');
+var locationSpinner;
+
+$(document).ready(function () {
+    //Initialize the geocoding google library
+    geocoder = new google.maps.Geocoder(); 
+    //Initialize the autocomplete & reverse-geocoding google library
+    autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), {types: ['geocode']});
+    //Listen to the 'place changed' event in the address input field
+    autocomplete.addListener('place_changed', function() {
+        onAddressSelectedFromDropdown();
+    });
+    //Set a click listener on the 'auto-detect address from current location' button
+    document.getElementById('btnDetect').addEventListener("click", function() {
+        getLocation();
+    });
+    //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
+    locationSpinner = document.getElementById('locationSpinner');
+});
+
+function onAddressSelectedFromDropdown() {
+    var place = autocomplete.getPlace();
+    var addrComponents = parseAddressComponents(place);
+    updateAddressComponentGlobalVariables(addrComponents);
+}
 
 /**Asynchronously fetches current location using HTML5's Geolocation API. If successful, calls the 'reverseGeocodeLatLng' method.*/
 function getLocation() {
@@ -45,15 +52,8 @@ function reverseGeocodeLatLng(currentLatitude, currentLongitude) {
         setVisibility(locationSpinner, false);
         if (status === 'OK') {
             if (results[0]) {
-                var addrComponents = getAddressComponents(results);
-                address = addrComponents[0];
-                zipcode = addrComponents[1];
-                latitude = addrComponents[2];
-                longitude = addrComponents[3];
-                var addressInputField = document.getElementById('address');
-                var zipCodeInputField = document.getElementById('zip');
-                addressInputField.value = address;
-                zipCodeInputField.value = zipcode;
+                var addrComponents = parseAddressComponents(results[0]);
+                updateAddressComponentGlobalVariables(addrComponents);
             } else {
                 window.alert('No address results found for your location');
             }
@@ -63,32 +63,13 @@ function reverseGeocodeLatLng(currentLatitude, currentLongitude) {
     });
 }
 
-/**Asynchronously fetches complete address and location of the input Zip code using Google Maps' Geocoder API*/
-function geocodeZip(inputZip) {
-    geocoder.geocode({'address': address}, function(results, status) {
-        if (status === 'OK') {
-            if (results[0]) {
-                var addrComponents = getAddressComponents(results);
-                latitude = addrComponents[2];
-                longitude = addrComponents[3];
-                //Use the latitude and longitude values from here if user enters address, zip manually !!
-            } else {
-                console.log('No address results found for the input Zip code');
-            }
-        } else {
-            window.alert('Location Geocoder failed due to: ' + status);
-        }
-    });
-  }
-
 /**Parses input JSON array to return a tuple containing address components*/
-function getAddressComponents(locationResultsArr) {
+function parseAddressComponents(locationJsonData) {
     var outputAddress, zip, resultLat, resultLong;
-    var firsLocationResult = locationResultsArr[0];
-    var addressComponentsArr = firsLocationResult.address_components;
-    outputAddress = firsLocationResult.formatted_address;
-    resultLat = firsLocationResult.geometry.location.lat();
-    resultLong = firsLocationResult.geometry.location.lng();
+    var addressComponentsArr = locationJsonData.address_components;
+    outputAddress = locationJsonData.formatted_address;
+    resultLat = locationJsonData.geometry.location.lat();
+    resultLong = locationJsonData.geometry.location.lng();
     for(var i in addressComponentsArr) {
         var addressComponent = addressComponentsArr[i];
         var addressComponentType = addressComponent.types[0];
@@ -100,23 +81,26 @@ function getAddressComponents(locationResultsArr) {
     return [outputAddress, zip, resultLat, resultLong];
 }
 
+function updateAddressComponentGlobalVariables(addrComponents) {
+    address = addrComponents[0];
+    zipcode = addrComponents[1];
+    latitude = addrComponents[2];
+    longitude = addrComponents[3];
+    updateAddressComponentUIElements(address, zipcode);
+}
 
-
-
-function goBack() {
-    window.history.back();
+function updateAddressComponentUIElements(address, zipcode) {
+    document.getElementById('address').value = address;
+    document.getElementById('zip').value = zipcode;
 }
 
 function submit() {
-
     var title = $('#title').val();
     var category = $('.dropdown-select').val();
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-
     $.post('/submit', {
-        //body
         user_id: 0,
         title: title,
         category: category,
@@ -132,37 +116,22 @@ function submit() {
     });
 }
 
-
-function initAutocomplete() {
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete((document.getElementById('address')), {types: ['geocode']});
-
-    // When the user selects an address from the dropdown, populate the address
-    // fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-    geocoder = new google.maps.Geocoder();
-}
-
-
-
-function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-    latitude = place.geometry.location.lat();
-    longitude = place.geometry.location.lng();
-    if(isNumeric(place.address_components[6].long_name)){
-        document.getElementById("zip").value = place.address_components[6].long_name;
-    }else{
-        document.getElementById("zip").value = place.address_components[7].long_name;
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var image = document.createElement("IMG");
+        image.setAttribute("height", "300px");
+        image.setAttribute("width", "300px");
+        image.setAttribute("id", "image");
+        document.getElementById('dropzone').innerHTML = "";
+        reader.onload = function (e) {
+            image.setAttribute('src', e.target.result);
+            $('#dropzone').append(image);
+        }
+        reader.readAsDataURL(input.files[0]);
     }
 }
 
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
-
-function setVisibility(element, isVisible) {
-    element.style.display = (isVisible) ? "block" : "none";
+function setVisibility(htmlElement, setVisible) {
+    htmlElement.style.display = (setVisible) ? "block" : "none";
 }
