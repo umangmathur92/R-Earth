@@ -62,15 +62,20 @@ function createListing(user_id, title, picture, description, longitude, latitude
 		title, picture, date, description, longitutde, latitude, address, zipcode, 0, category]);
 }
 
-function updateResponse(status, response, agency) {
+function updateResponse(listingId, status, response, agency) {
 	var date = getCurrentDate();
-	return db.any('INSERT INTO listings (status, response, agency, response_date', [status, response, agency, date]);
+	return db.any('INSERT INTO listings (status, response, agency, response_date) VALUES ($1, $2, $3, $4) WHERE listing_id = $5',
+		[status, response, agency, date, listingId]);
 }
 
 function getCurrentDate() {
     var base = new Date();
     var date = dateFormat(base, 'yyyy-MM-dd HH:mm:ss:L');
     return date;
+}
+
+function getListingById(listingId) {
+	return db.oneOrNone(`SELECT * FROM listings WHERE listing_id = $1`, [listingId]);
 }
 
 module.exports = {
@@ -80,5 +85,6 @@ module.exports = {
 	updateResponse: updateResponse,
 	getCurrentDate: getCurrentDate,
 	addressSearch: addressSearch,
-	determineSearch: determineSearch
+	determineSearch: determineSearch,
+	getListingById: getListingById
 }
