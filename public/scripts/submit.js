@@ -114,7 +114,6 @@ function submit() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-
     $.post('/submit', {
         //body
         user_id: 0,

@@ -27,7 +27,12 @@ router.post('/', function(req, res, next) {
   const address = req.body.address;
   const zipcode = req.body.zipcode;
   const category = req.body.category;
-  listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category);
+  console.log("yes");
+  try {
+      listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category);
+  }catch (err){
+      console.log(err);
+  }
 });
 
 router.post('/respond', function(req, res, next) {
