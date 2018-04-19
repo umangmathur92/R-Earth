@@ -11,11 +11,28 @@ function readURL(input) {
             $('#dropzone').append(image);
         }
         reader.readAsDataURL(input.files[0]);
+        getImage();
     }
 }
 
+function getImage(){
+    var reader = new FileReader();
+    var input = document.getElementById('imageUpload');
+    var byteArray = [];
+    reader.onload = function (e) {
+        var array = new Uint8Array(reader.result);
+        for(var i = 0; i < array.length; i++){
+            byteArray.push(array[i]);
+        }
+        console.log(byteArray);
+    }
+    reader.readAsArrayBuffer(input.files[0]);
+    console.log(byteArray);
+    return byteArray;
+}
+
 var geocoder;
-var latitude, longitude, address, zipcode;
+var latitude, longitude, address, zipcode, picture;
 var locationSpinner = document.getElementById('locationSpinner');
 
 /**Asynchronously fetches current location using HTML5's Geolocation API. If successful, calls the 'reverseGeocodeLatLng' method.*/
@@ -114,6 +131,7 @@ function submit() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
+    var picture = getImage();
     $.post('/submit', {
         //body
         user_id: 0,
@@ -124,7 +142,7 @@ function submit() {
         description: description,
         longitude: longitude,
         latitude: latitude,
-        picture: "/images/dolores_trash.jpg"
+        picture: picture
     },
         function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
