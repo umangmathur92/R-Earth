@@ -1,6 +1,7 @@
 var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
 var locationSpinner;
+//var sendImage;
 
 $(document).ready(function () {
     //Initialize the geocoding google library
@@ -100,7 +101,7 @@ function submit() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-    $.post('/submit', {
+    $.post("/submit/create/", {
         user_id: 0,
         title: title,
         category: category,
@@ -108,8 +109,7 @@ function submit() {
         zipcode: zipcode,
         description: description,
         longitude: longitude,
-        latitude: latitude,
-        picture: "/images/dolores_trash.jpg"
+        latitude: latitude
     },
         function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
@@ -127,9 +127,27 @@ function readURL(input) {
         reader.onload = function (e) {
             image.setAttribute('src', e.target.result);
             $('#dropzone').append(image);
+            //sendImage = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
+        //sendImage = getImage();
     }
+}
+
+function getImage(){
+    var reader = new FileReader();
+    var input = document.getElementById('imageUpload');
+    var byteArray = [];
+    reader.onload = function (e) {
+        var array = new Uint8Array(reader.result);
+        for(var i = 0; i < array.length; i++){
+            byteArray.push(array[i]);
+        }
+        console.log(byteArray);
+    }
+    reader.readAsArrayBuffer(input.files[0]);
+    console.log(byteArray);
+    return byteArray;
 }
 
 function setVisibility(htmlElement, setVisible) {

@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 });
 
 /** Create new listing with user information*/
-router.post('/create', function(req, res, next) {
+router.post('/create/', function(req, res, next) {
     const user_id = req.session.userId;
     const title = req.body.title;
     const picture = req.body.picture;
