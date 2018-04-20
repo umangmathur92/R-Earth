@@ -1,13 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const user = require('../db/users');
-const middle = require('../middleware');
 
 router.get('/', function(req, res, next) {
+    /*
+   var login = {};
+   if( req.session && req.session.userId ) {
+       login.isLoggedIn = true;
+   } else {
+       login.isLoggedIn = false;
+   }
+   res.send(login);
+   */
     res.render('signup', { title: 'Sign Up'});
 });
 
-router.post('/', middle.loggedIn, (req, res, next) => {
+router.post('/', (req, res, next) => {
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;
@@ -27,7 +35,7 @@ router.post('/', middle.loggedIn, (req, res, next) => {
                             res.send('Error creating account');
                         } else {
                             req.session.userId = user.user_id;
-                            res.redirect('/listing/search/');
+                            res.send({isLoggedIn: true});
                         }
                     });
                 } else {

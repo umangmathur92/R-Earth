@@ -122,6 +122,21 @@
     background-repeat: no-repeat;
 }
 
+<<<<<<< HEAD
+=======
+#btnDetect{
+    padding-left: 54px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/e/ea/Arrow_Compass_White.png);
+    background-size: 25px 25px;
+    background-position: 11px 4px;
+    background-repeat: no-repeat;
+}
+
+>>>>>>> dd62608555fb32127e8d28896b2bbbd2ff4c8276
 textarea {
     width: 100%;
     height: 150px;
@@ -230,5 +245,21 @@ h1{
     line-height: 1000%;
 }
 
+<<<<<<< HEAD
 
+=======
+#locationSpinner {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+>>>>>>> dd62608555fb32127e8d28896b2bbbd2ff4c8276
 

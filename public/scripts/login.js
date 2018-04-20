@@ -39,6 +39,8 @@ $(document).ready(function () {
       });
   }); 
 
+
+  //Toggles between login and signup forms
   $('.toggle').on('click', function() {
     $('.signin-container').stop().addClass('active');
   });

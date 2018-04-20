@@ -28,7 +28,12 @@
 }
 
 .listings li {
+<<<<<<< HEAD
   background-color: #e9eded;
+=======
+  background-color: #fff;
+  ;
+>>>>>>> dd62608555fb32127e8d28896b2bbbd2ff4c8276
   margin: 10px;
   border-radius: 10px;
   display: inline-block;
@@ -48,10 +53,11 @@
 }
 
 .map-container {
-  display: flex;
   position: fixed;
+  display: flex;
   align-items: flex-start;
   padding: 10px;
+  flex: 1;
 }
 
 .listings-map-container {
@@ -249,5 +255,26 @@
   font-weight: 400;
 }
 
+.pagination {
+  display: inline-block;
+}
 
+.pagination button {
+  background-color: transparent;
+  outline: none;
+  color: yellowgreen;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
+.pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination button:hover:not(.active) {background-color: #ddd;}
+
+.pagination #numResultsSpan {
+  color: yellowgreen;
+}

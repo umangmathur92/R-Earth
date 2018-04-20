@@ -53,7 +53,7 @@ html body {
 }
 
 .navbar {
-  padding: 20px;  
+  padding: 10px;  
 } 
 
 .navbar-brand{
@@ -70,7 +70,7 @@ html body {
   text-decoration: none;
   background-color: transparent !important;
   padding: 0; 
-  border-bottom: 2px solid whitesmoke;
+  border-bottom: 2px solid #acbd86;
   margin: 14px; 
 }
 

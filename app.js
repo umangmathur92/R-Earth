@@ -8,6 +8,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -17,9 +18,21 @@ var listings = require('./routes/listings');
 var login = require('./routes/login');
 var signup = require('./routes/signup');
 var temp = require('./routes/temp');
+var submit = require('./routes/submit');
 
 
 var app = express();
+
+//Use Https only in production
+if(process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    } else {
+      next();
+    }
+  });
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +45,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session ({
+    secret: 'team1 loves the earth',
+    resave: true,
+    saveUninitialized: false
+}));
 
 app.use('/', index);
 app.use('/users', users);
@@ -40,6 +58,7 @@ app.use('/about', about);
 app.use('/listings', listings);
 app.use('/login', login);
 app.use('/signup', signup);
+app.use('/submit', submit);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
