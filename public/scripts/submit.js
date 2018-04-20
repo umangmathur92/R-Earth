@@ -5,6 +5,7 @@ var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
 var locationSpinner;
 var photoByteArray;
+var sendImage;
 
 
 $(document).ready(function () {
@@ -121,20 +122,19 @@ function submitData() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-    var picture = photoByteArray;
+    var picture = sendImage
     $.post('/submit', {
-        user_id: 0,
-        title: title,
-        category: category,
-        address: address,
-        zipcode: zipcode,
-        description: description,
-        longitude: longitude,
-        latitude: latitude,
-        picture: picture
+            title: title,
+            category: category,
+            address: address,
+            zipcode: zipcode,
+            description: description,
+            longitude: longitude,
+            latitude: latitude,
+            picture:picture
     },
         function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
+            //alert("Data: " + data + "\nStatus: " + status);
     });
 }
 
@@ -153,7 +153,7 @@ function readURL(input) {
         reader.onload = function (e) {
             image.setAttribute('src', e.target.result);
             $('#dropzone').append(image);
-            //sendImage = e.target.result;
+            sendImage = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
         photoByteArray = getImage();
@@ -169,7 +169,7 @@ function getImage(){
         for(var i = 0; i < array.length; i++){
             byteArray.push(array[i]);
         }
-        console.log(byteArray);
+        //console.log(byteArray);
     }
     reader.readAsArrayBuffer(input.files[0]);
     return byteArray;
