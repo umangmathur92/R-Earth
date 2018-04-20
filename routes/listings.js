@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const listing = require( '../db/listing' );
 const user = require('../db/users');
+var cloudinary = require('cloudinary');
 
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
 router.post('/search/', function(req, res, next) {
@@ -12,6 +13,13 @@ router.post('/search/', function(req, res, next) {
     const pageNum = req.body.pageNum;
     const response = listing.determineSearch(key, status, category, order, pageNum); //Apply search parameters
     response.then( data => {
+        for(var i = 0; i < data.length; i++) { // Resolve picture URLs: full size and thumbnail
+            var publicId = data[i].picture;
+            var full = getFullImage(publicId);
+            var thumb = getThumbnail(publicId);
+            data[i].picture = full;
+            data[i].thumbnail = thumb;
+        }
         const isSuccess = data.length > 0;
         var message = {
             success: isSuccess,
@@ -49,5 +57,17 @@ router.get('/view', function(req, res, next) {
         }
     });
 });
+
+/** Generate full sized image*/
+function getFullImage(publicId) {
+    var url = cloudinary.url(publicId, {width: 500, height: 375, crop: 'fill'});
+    return url;
+}
+
+/** Generate thumbnail*/
+function getThumbnail(publicId) {
+    var url = cloudinary.url(publicId, {width: 80, height: 80, crop: 'fill'});
+    return url;
+}
 
 module.exports = router;

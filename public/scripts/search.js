@@ -96,9 +96,7 @@ function generateIndividualListItemHtml(list, i) {
 	descrPara.textContent = list[i].description;
 	addrPara.textContent = list[i].address;
 	zipcodePara.textContent = list[i].zipcode;
-	thumbnailImg.src = list[i].picture;
-	thumbnailImg.width = '80';
-	thumbnailImg.height = '80';
+	thumbnailImg.src = list[i].thumbnail;
 	listItem.appendChild(titlePara);
 	listItem.appendChild(thumbnailImg);
 	listItem.appendChild(descrPara);
