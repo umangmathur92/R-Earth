@@ -20,7 +20,6 @@ var signup = require('./routes/signup');
 var temp = require('./routes/temp');
 var submit = require('./routes/submit');
 
-
 var app = express();
 
 //Use Https only in production

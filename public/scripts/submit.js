@@ -4,6 +4,7 @@ var locationSpinner = document.getElementById('locationSpinner');
 var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
 var locationSpinner;
+var photoByteArray;
 
 $(document).ready(function () {
     //Initialize the geocoding google library
@@ -19,6 +20,7 @@ $(document).ready(function () {
         getLocation();
     });
     //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
+    //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
 });
 
@@ -97,13 +99,28 @@ function updateAddressComponentUIElements(address, zipcode) {
     document.getElementById('zip').value = zipcode;
 }
 
-function submit() {
+function submitData() {
+    // var formData = new FormData();
+    // formData.append('photo', photo);
+    // var objArr = [];
+    // objArr.push({"id": 55, "name": 'umang'});
+    // formData.append('objArr', JSON.stringify( objArr ));
+    // $.ajax({
+    //     url: '/submit',
+    //     type:"POST",
+    //     processData:false,
+    //     contentType: false,
+    //     data: formData,
+	//     	complete: function(data){
+    //                     alert("success");
+    //             }
+    //   });
     var title = $('#title').val();
     var category = $('.dropdown-select').val();
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-    var picture = getImage();
+    var picture = photoByteArray;
     $.post('/submit', {
         user_id: 0,
         title: title,
@@ -118,22 +135,6 @@ function submit() {
         function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
     });
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        var image = document.createElement("IMG");
-        image.setAttribute("height", "300px");
-        image.setAttribute("width", "300px");
-        image.setAttribute("id", "image");
-        document.getElementById('dropzone').innerHTML = "";
-        reader.onload = function (e) {
-            image.setAttribute('src', e.target.result);
-            $('#dropzone').append(image);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
 }
 
 function setVisibility(htmlElement, setVisible) {
@@ -153,7 +154,7 @@ function readURL(input) {
             $('#dropzone').append(image);
         }
         reader.readAsDataURL(input.files[0]);
-        getImage();
+        photoByteArray = getImage();
     }
 }
 
@@ -169,6 +170,5 @@ function getImage(){
         console.log(byteArray);
     }
     reader.readAsArrayBuffer(input.files[0]);
-    console.log(byteArray);
     return byteArray;
 }
