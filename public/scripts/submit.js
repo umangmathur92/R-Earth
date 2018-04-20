@@ -4,7 +4,6 @@ var locationSpinner = document.getElementById('locationSpinner');
 var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
 var locationSpinner;
-var photoByteArray;
 var sendImage;
 
 
@@ -102,21 +101,6 @@ function updateAddressComponentUIElements(address, zipcode) {
 }
 
 function submitData() {
-    // var formData = new FormData();
-    // formData.append('photo', photo);
-    // var objArr = [];
-    // objArr.push({"id": 55, "name": 'umang'});
-    // formData.append('objArr', JSON.stringify( objArr ));
-    // $.ajax({
-    //     url: '/submit',
-    //     type:"POST",
-    //     processData:false,
-    //     contentType: false,
-    //     data: formData,
-	//     	complete: function(data){
-    //                     alert("success");
-    //             }
-    //   });
     var title = $('#title').val();
     var category = $('.dropdown-select').val();
     var address = $('#address').val();
@@ -156,21 +140,5 @@ function readURL(input) {
             sendImage = e.target.result;
         }
         reader.readAsDataURL(input.files[0]);
-        photoByteArray = getImage();
     }
-}
-
-function getImage(){
-    var reader = new FileReader();
-    var input = document.getElementById('imageUpload');
-    var byteArray = [];
-    reader.onload = function (e) {
-        var array = new Uint8Array(reader.result);
-        for(var i = 0; i < array.length; i++){
-            byteArray.push(array[i]);
-        }
-        //console.log(byteArray);
-    }
-    reader.readAsArrayBuffer(input.files[0]);
-    return byteArray;
 }
