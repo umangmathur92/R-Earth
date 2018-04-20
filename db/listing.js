@@ -57,9 +57,8 @@ function fetchListings(pageNum) {
 
 function createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category) {
 	var date = getCurrentDate();
-	return db.any('INSERT INTO listings (user_id, title, picture, post_date, description, longitude, latitude,' +
-		' address, zipcode, status, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [user_id,
-		title, picture, date, description, longitutde, latitude, address, zipcode, 0, category]);
+	return db.any('INSERT INTO listings (user_id, title, picture, post_date, description, longitude, latitude, address, zipcode, status, category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', [user_id,
+		title, picture, date, description, longitude, latitude, address, zipcode, 0, category]);
 }
 
 function updateResponse(listingId, status, response, agency) {

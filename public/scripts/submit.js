@@ -1,6 +1,10 @@
+var geocoder;
+var latitude, longitude, address, zipcode, picture;
+var locationSpinner = document.getElementById('locationSpinner');
 var geocoder, autocomplete;
 var latitude, longitude, address, zipcode;
 var locationSpinner;
+var photoByteArray;
 
 $(document).ready(function () {
     //Initialize the geocoding google library
@@ -16,6 +20,7 @@ $(document).ready(function () {
         getLocation();
     });
     //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
+    //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
 });
 
@@ -94,12 +99,28 @@ function updateAddressComponentUIElements(address, zipcode) {
     document.getElementById('zip').value = zipcode;
 }
 
-function submit() {
+function submitData() {
+    // var formData = new FormData();
+    // formData.append('photo', photo);
+    // var objArr = [];
+    // objArr.push({"id": 55, "name": 'umang'});
+    // formData.append('objArr', JSON.stringify( objArr ));
+    // $.ajax({
+    //     url: '/submit',
+    //     type:"POST",
+    //     processData:false,
+    //     contentType: false,
+    //     data: formData,
+	//     	complete: function(data){
+    //                     alert("success");
+    //             }
+    //   });
     var title = $('#title').val();
     var category = $('.dropdown-select').val();
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
+    var picture = photoByteArray;
     $.post('/submit', {
         user_id: 0,
         title: title,
@@ -109,11 +130,15 @@ function submit() {
         description: description,
         longitude: longitude,
         latitude: latitude,
-        picture: "/images/dolores_trash.jpg"
+        picture: picture
     },
         function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
     });
+}
+
+function setVisibility(htmlElement, setVisible) {
+    htmlElement.style.display = (setVisible) ? "block" : "none";
 }
 
 function readURL(input) {
@@ -129,9 +154,21 @@ function readURL(input) {
             $('#dropzone').append(image);
         }
         reader.readAsDataURL(input.files[0]);
+        photoByteArray = getImage();
     }
 }
 
-function setVisibility(htmlElement, setVisible) {
-    htmlElement.style.display = (setVisible) ? "block" : "none";
+function getImage(){
+    var reader = new FileReader();
+    var input = document.getElementById('imageUpload');
+    var byteArray = [];
+    reader.onload = function (e) {
+        var array = new Uint8Array(reader.result);
+        for(var i = 0; i < array.length; i++){
+            byteArray.push(array[i]);
+        }
+        console.log(byteArray);
+    }
+    reader.readAsArrayBuffer(input.files[0]);
+    return byteArray;
 }
