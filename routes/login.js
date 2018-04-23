@@ -10,13 +10,11 @@ router.get('/', function(req, res, next) {
 
 /** User authentication*/
 router.post('/', function(req, res, next) {
-
     if (req.body.username && req.body.password) {
         const username = req.body.username;
         const password = req.body.password;
 
         user.checkPassword(username, password, function (error,user) { //Check for valid user
-           
             //TODO - Display Success and Error messages before redirecting.
             if ( error || !user ) {
                 //Password incorrect or user does not exist

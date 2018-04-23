@@ -12,7 +12,7 @@ cloudinary.config({
 
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
-  var message = {title: 'R-Earth'};
+  var message = {title: 'R-Earth', userId: null};
   console.log(req.session)
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
@@ -53,6 +53,7 @@ router.post('/', function(req, res, next) {
                     .then(data => {
                         console.log(data)
                         res.render('index', {title: 'R-Earth', listings: data})
+                        res.redirect( '/' );
                     })
                 })
                 .catch(error => {
