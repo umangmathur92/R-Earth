@@ -245,9 +245,6 @@ h1{
     line-height: 1000%;
 }
 
-<<<<<<< HEAD
-
-=======
 #locationSpinner {
     border: 3px solid #f3f3f3; /* Light grey */
     border-top: 3px solid #3498db; /* Blue */
@@ -261,7 +258,6 @@ h1{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
->>>>>>> dd62608555fb32127e8d28896b2bbbd2ff4c8276
 
 
 .name {
