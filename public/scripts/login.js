@@ -1,5 +1,10 @@
 $(document).ready(function () {
 
+  var submitButton = document.getElementById('submit');
+  submitButton.addEventListener("click", function() {
+      window.location.replace("/");
+  });
+
   $('.login-form').submit(function(event) {
     var request = [];
 
