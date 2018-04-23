@@ -93,6 +93,9 @@ body {
 
 /* Container */
 .signin-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
   position: relative;
   max-width: 460px;
   width: 100%;
