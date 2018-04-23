@@ -12,8 +12,8 @@ router.get('/:listingId', function(req, res, next) {
   const listingId = req.params.listingId;
   var currentListing = listing.getListingById(listingId);
   currentListing.then( data => {
-    res.render('displaylisting', data);
-    //res.send(data);
+    res.render('displaylisting', {
+      data: data});
   });
 });
 

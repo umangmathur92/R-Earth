@@ -5,18 +5,18 @@
 	
 	<div class="displaylisting-container">
 	
-		<img class="resized-image-container" src="/images/dolores_trash.jpg">
+		<img class="resized-image-container" src="<%= data.picture %>">
 
 		<div class="title-container">
-			<h1>Pollution at Dolores Park</h1>
+			<h1><%= data.title %></h1>
 		</div>
 
 		<div class="date-container">
-			<h2>Date</h2>
+			<h2><%= data.post_date %></h2>
 		</div>
 
 		<div class="location-container">
-			<h2>19th & Dolores St, San Francisco, CA 94114</h2>
+			<h2><%= data.address %></h2>
 		</div>
 
 		<div class="submission-container">
@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="description-container">
-			<h2>Description of Issue</h2>
+			<h2><%= data.description %></h2>
 		</div>
 
 	</div>
