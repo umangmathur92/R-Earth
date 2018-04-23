@@ -1,21 +1,4 @@
 $(document).ready(function () {
-  $('.login-form').submit(function(event) {
-    var request = [];
-
-    //TODO VALIDATION
-    var username =  $('#username').val(); 
-    var password = $('#password').val()
-
-    console.log("test");
-      $.post("/login",
-      {
-          username: username,
-          password: password
-      },
-      function(data, status){
-          alert("Data: " + data + "\nStatus: " + status);
-      });
-  }); 
 
   $('#signup-form').submit(function(event) {
 

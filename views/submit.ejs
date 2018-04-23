@@ -9,8 +9,6 @@
 <div class="submit-container">
 
 	<h1><strong>Submit A Report</strong></h1>
-
-
 	<div class="image-upload-container">
 		<div id ="upload"></div>
 			<div class = "dropzone" id = "dropzone" >
@@ -37,8 +35,6 @@
 								<option value="3" id = "option">Water</option>
 							</select>
 						</div>
-
-
 					</div>
 
 					<div style="width: 100%; overflow: hidden; margin-bottom: 10px;">
@@ -53,28 +49,17 @@
 						<div class="addresstext">
 							<input name="address" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
 						</div>
-
-
-
 						<div class="ziptext">
 							<input name="zip" type="text" class="validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip Code*" required="required"/>
 						</div>
-
 					</div>
-
 					<div>
 						 <textarea name="description" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*" srequired="required"></textarea>
 					</div>
-
-
-
-
 					<div class = "buttons">
-
 						<div class="submit">
 							<button type="button" value="SEND" id="button-blue" onclick = "submitData();"></button>
 						</div>
-
 						<div >
 							<button id="button-red" onclick = "goBack()">CANCEL</button>
 						</div>

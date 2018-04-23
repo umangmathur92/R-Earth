@@ -7,14 +7,14 @@
   <%- include('partials/navbar') -%>
   <div class ="container">
     <div class="form-container">
-        <form class="login-form">
+        <form method="post" action="/login" class="login-form">
         <div class="form-group">
             <label for="username" class="control-label">Username</label>
-            <input type="text" class="form-control" id="username"  value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+            <input type="text" class="form-control" name="username"  value="" required="" title="Please enter you username" placeholder="example@gmail.com">
         </div>
         <div class="form-group">
             <label for="password" class="control-label">Password</label>
-            <input type="password" class="form-control" id="password"  value="" required="" title="Please enter your password">
+            <input type="password" class="form-control" name="password" id="password"  value="" required="" title="Please enter your password">
         </div>
         <button type="submit" class="btn btn-success btn-block">Login</button>
         </form>
