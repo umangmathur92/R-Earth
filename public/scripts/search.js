@@ -1,11 +1,13 @@
 var currentFocus;
 var pageNumber = 1;
+var resultList;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
 	searchListings();//Fetch 1st page of data
 	resizeElements();// Search Bar UI Functions 
 	$("form").submit(function () {
+		resultList = document.getElementById('resultlist')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
@@ -60,7 +62,6 @@ function getPageNumberClickListener(pageNum) {
 }
 
 function createListItems(list) {
-	var resultList = document.getElementById('resultlist');
 	for (var i = 0; i < list.length; i++) {
 		generateIndividualListItemHtml(list, i);
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
@@ -70,7 +71,8 @@ function createListItems(list) {
 	map.panTo(latlng);
 	//Open up the listing page on click
 	$("ul#resultlist li").click(function () {
-		window.alert(JSON.stringify(list[$(this).index()]));
+		//window.alert(JSON.stringify(list[$(this).index()]));
+		$.get("displaylisting");
 	});
 	//actions to be performed when mouse hovers over a list item
 	$("ul#resultlist li").hover(function () {
