@@ -11,14 +11,14 @@ $(document).ready(function () {
 		searchListings();
 		return false;
 	});
+
 });
 
-	fetchListings = () => {
-		$.get("/listings", function(response){
-			createListItems(response)
-		})
-	}
-
+fetchListings = () => {
+	$.get("/listings", function(response){
+		createListItems(response)
+	})
+}
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
@@ -71,14 +71,14 @@ function createListItems(list) {
 
 	var resultList = document.getElementById('listings-list');
 	for (var i = 0; i < list.length; i++) {
-		//resultList.appendChild(generateIndividualListItemHtml(list, i));
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
 	}
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
 
-	$("ul#listings-list li").hover(function () {
+	//Open up the listing page on click
+	$(".listing-container").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
 			setInfoWindow(latlng);
@@ -88,45 +88,21 @@ function createListItems(list) {
 		}
 	});
 
-	//Open up the listing page on click
-	$("ul#listings-list li").click(function () {
+	$(".listing-container").click(function () {
 		setAnimations(latlng);
 		window.alert(JSON.stringify(list[$(this).index()]));
 	});
-}
-
-/**Generates HTML for each individual list item*/
-function generateIndividualListItemHtml(list, i) {
-	var listItem = document.createElement('li');
-	// $( ".inner" ).wrap( "<div class='new'></div>" );
-	var titlePara = document.createElement('h4');
-	var thumbnailImg = document.createElement('img');
-	var descrPara = document.createElement('p');
-	var addrPara = document.createElement('p');
-	var zipcodePara = document.createElement('p');
-	titlePara.textContent = list[i].title;
-	descrPara.textContent = list[i].description;
-	addrPara.textContent = list[i].address;
-	zipcodePara.textContent = list[i].zipcode;
-	thumbnailImg.src = list[i].picture;
-	
-	//thumbnailImg.src = list[i].thumbnail;
-	listItem.appendChild(titlePara);
-	listItem.appendChild(thumbnailImg);
-	listItem.appendChild(descrPara);
-	listItem.appendChild(addrPara);
-	listItem.appendChild(zipcodePara);
-	return listItem;
 }
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
 	var startchange = $('.search-container');
 	var offset = startchange.offset();
+
 	if (startchange.length) {
 		$(document).scroll(function () {
 			scroll_start = $(this).scrollTop();
-			$(".navbar").css('background-color', (scroll_start > offset.top) ? '#FFA06F' : 'transparent');
+			$(".navbar").css('background-color', (scroll_start > offset.top - 5) ? '#FFA06F' : 'transparent');
 		});
 	}
 }
