@@ -4,6 +4,7 @@
 	<link rel="stylesheet" href="/stylesheets/index.css" />
 	<script type="text/javascript" src="scripts/map.js"></script>
 	<script type="text/javascript" src="scripts/search.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap" async defer></script>
 	<body>
 	<%- include('partials/navbar') -%>
 		<div class="index-container">
@@ -19,19 +20,19 @@
 			</div>
 			<div class="listings-map-container">
 				<div class="listings-list-container" id="showData">
+						
+					<% if (listings) { %>
 						<ul class="listings" id="listings-list">
-								<!-- <li id ="listing">
-									<div class ="image-container"> 
-										<img id="listing-image"> </img> 
-									</div> 
-								</li> -->
+							<% listings.forEach(function(listing){ %>
+								<%- include('partials/listing', {listing: listing}); %>
+							<% }); %>
 							</ul> 
+					<% } %>
 				</div>
 
 				<div class="map-column-container">
 					<div class="map-container">
 						<div class="map" id="map"></div>
-						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap"></script>
 					</div>
 				</div>
 			</div>

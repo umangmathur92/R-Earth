@@ -1,8 +1,8 @@
 $(document).ready(function () {
-
   $('.login-form').submit(function(event) {
     var request = [];
 
+    //TODO VALIDATION
     var username =  $('#username').val(); 
     var password = $('#password').val()
 
@@ -18,6 +18,8 @@ $(document).ready(function () {
   }); 
 
   $('#signup-form').submit(function(event) {
+
+    //TODO - VALIDATION
     var request = []
     const username =  $('#username').val(); 
     const password = $('#password').val();
@@ -25,6 +27,7 @@ $(document).ready(function () {
     const confirmation = $('#repeat-password').val();
 
     console.log($('#name').val());
+      
       $.post('/signup',
       {
         username: username,
