@@ -94,12 +94,13 @@ body {
 /* Container */
 .signin-container {
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
   display: flex;
   position: relative;
   max-width: 460px;
   width: 100%;
-  margin: 0 auto 100px;
+  margin: 200px auto 100px;
 }
 .signin-container .active .card:first-child {
   background: #f2f2f2;

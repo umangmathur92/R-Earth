@@ -118,7 +118,7 @@ function submitData() {
             picture:picture
     },
         function(data, status){
-            //alert("Data: " + data + "\nStatus: " + status);
+            alert("Data: " + data + "\nStatus: " + status);
     });
 }
 

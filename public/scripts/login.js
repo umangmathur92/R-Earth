@@ -3,9 +3,8 @@ $(document).ready(function () {
   $('#signup-form').submit(function(event) {
 
     //TODO - VALIDATION
-    var request = []
-    const username =  $('#username').val(); 
-    const password = $('#password').val();
+    const username =  $('#username-sign-up').val(); 
+    const password = $('#password-sign-up').val();
     const name = $('#name').val();
     const confirmation = $('#repeat-password').val();
 

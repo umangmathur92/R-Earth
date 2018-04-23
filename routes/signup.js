@@ -4,15 +4,19 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    var message = {title: 'Sign Up'};
+    const userId = null; 
+    var message = {title: 'Sign Up', };
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
+   var message = {title: 'Sign Up',userId};
    res.render('signup', message);
 });
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
+    console.log(req.body)
+
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;
@@ -22,7 +26,6 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-            res.send('Passwords do not match');
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
@@ -32,7 +35,10 @@ router.post('/', (req, res, next) => {
                             res.send('Error creating account');
                         } else {
                             req.session.userId = user.user_id; //Create user session
-                            res.send({userId: req.session.userId});
+                            req.session.save( function( err ){
+                                req.flash( 'message', 'Login Successful' )
+                                res.redirect( '/' );
+                            });
                         }
                     });
                 } else {

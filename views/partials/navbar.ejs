@@ -17,15 +17,12 @@
                 <a class="nav-link" href="/about">Meet us</a>
             </li>
               <li class = "nav-item">
-                  <a href="/submit">Submit</a>
+                  <a href="/submit">Report an Issue</a>
               </li>
 
-              <% if (!userId) { %>
-                <li class="nav-item">
-                        <a class="nav-link" href="/login">Log in</a>
-                    </li>                               
+              <% if (!userId) { %>                         
                     <li class="nav-item">
-                        <a class="nav-link" href="/signup">Sign Up</a>
+                        <a class="nav-link" href="/signup">Login / Sign Up </a>
                     </li>
               <% } %>
         </div>

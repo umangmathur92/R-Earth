@@ -10,6 +10,9 @@ router.get('/', function(req, res, next) {
 
 /** User authentication*/
 router.post('/', function(req, res, next) {
+
+    console.log(req.body);
+
     if (req.body.username && req.body.password) {
         const username = req.body.username;
         const password = req.body.password;

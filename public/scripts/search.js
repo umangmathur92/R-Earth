@@ -11,13 +11,12 @@ $(document).ready(function () {
 		searchListings();
 		return false;
 	});
-
 });
 
 fetchListings = () => {
-	$.get("/listings", function (response) {
-		createListItems(response)
-	})
+		$.get("/listings", function (response) {
+			createListingMapMarker(response);
+		});
 }
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
@@ -31,7 +30,9 @@ function searchListings() {
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
-			createListItems(dataList);
+			createListingsMapMarker(dataList);
+			var resultList = document.getElementById('resultlist');
+			resultList.appendChild(generateListings());
 		}
 	});
 }
@@ -66,7 +67,7 @@ function getPageNumberClickListener(pageNum) {
 	};
 }
 
-function createListItems(list) {
+function createListingMapMarker(list) {
 
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
@@ -142,4 +143,28 @@ function createListItems(list) {
 		var inputWidth = barWidth - dropdownWidth - buttonWidth;
 		var inputWidthPercent = inputWidth / barWidth * 100 + "%";
 		$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
+	}
+
+	function generateListings(list, i) {
+		var resultlist; 
+		list.forEach(listing => {
+			var listItem = document.createElement('li');
+			var titlePara = document.createElement('h4');
+			var thumbnailImg = document.createElement('img');
+			var descrPara = document.createElement('p');
+			var addrPara = document.createElement('p');
+			var zipcodePara = document.createElement('p');
+			titlePara.textContent = list[i].title;
+			descrPara.textContent = list[i].description;
+			addrPara.textContent = list[i].address;
+			zipcodePara.textContent = list[i].zipcode;
+			thumbnailImg.src = list[i].thumbnail;
+			listItem.appendChild(titlePara);
+			listItem.appendChild(thumbnailImg);
+			listItem.appendChild(descrPara);
+			listItem.appendChild(addrPara);
+			listItem.appendChild(zipcodePara);
+			resultlist.appendChild(listItem);
+		});
+		return resultList; 
 	}

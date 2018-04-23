@@ -18,7 +18,7 @@ router.post('/search/', function(req, res, next) {
     const results = listing.zipSearch(key);
     const userId = req.session.userId;    
     results.then( data => {
-        console.log(data);      
+        res.send(data);    
     });
 });
 

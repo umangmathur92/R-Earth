@@ -2,6 +2,7 @@
 <html>
 <%- include('partials/header') -%>
 	<link rel="stylesheet" href="/stylesheets/index.css" />
+	<script src="https://unpkg.com/ejs@2.5.7/ejs.min.js"></script>
 	<script type="text/javascript" src="scripts/map.js"></script>
 	<script type="text/javascript" src="scripts/search.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&callback=initMap" async defer></script>
@@ -27,13 +28,13 @@
 			</div>
 			<div class="listings-map-container">
 				<div class="listings-list-container" id="showData">
-					<% if (listings) { %>
 						<ul class="listings" id="listings-list">
+						<% if (listings) { %>
 							<% listings.forEach(function(listing){ %>
 								<%- include('partials/listing', {listing: listing}); %>
 							<% }); %>
+							<% } %>
 							</ul> 
-					<% } %>
 				</div>
 				<div class="map-column-container">
 					<div class="map-container">
@@ -46,6 +47,22 @@
 				<div class="pagination" id="pageLinkContainer">
 				</div>
 			</div>
+			<div id="myModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">   
+									Listing
+							</div>
+							<!-- <div class="modal-body">
+								<div class="map" id="map"></div>
+							</div> -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
 		</div>
+		
 	</body>
 </html>
