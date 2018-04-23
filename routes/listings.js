@@ -1,12 +1,27 @@
 var express = require('express');
 var router = express.Router();
 const listing = require( '../db/listing' );
+const middle = require('../middleware');
 const user = require('../db/users');
 var cloudinary = require('cloudinary');
+
+router.get('/', function(req, res, next) {
+    const listings = listing.fetchListings();
+    listings.then( data => { 
+         res.send(data);
+    });
+});
 
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
+    const results = listing.zipSearch(key);
+    results.then( data => {
+        res.send(data);        
+    });
+});
+
+router.get('/create', middle.requiresLogIn, function(req, res, next) {
     const status = req.body.status;
     const category = req.body.category;
     const order = req.body.order;

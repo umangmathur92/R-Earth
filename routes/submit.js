@@ -69,7 +69,6 @@ router.post('/respond', function(req, res, next) {
     }
 });
 
-
 function upload(base64) {
     return cloudinary.uploader.upload(base64, function(result) {
         console.log(result);

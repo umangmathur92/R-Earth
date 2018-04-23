@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+  <ul class="listings">
+    <% if (listings) { %>
+      <% listings.forEach(function(listing){ %>
+        <li>
+          <h4><%= listing.title %></h4> 
+        </li>
+      <% }); %>
+    <% } %>
+  </ul> 
+ 
