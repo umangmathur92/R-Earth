@@ -28,7 +28,7 @@ router.get('/:listingId', function(req, res, next) {
     var postUser = user.getUserById(userId);
     postUser.then( userData => {
       data.username = userData.username;
-      res.render('displaylisting', data);
+      res.render('displaylisting', {data: data});
     //res.send(data);
     });
   });
