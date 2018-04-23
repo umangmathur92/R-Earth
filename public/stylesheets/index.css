@@ -19,17 +19,8 @@
   justify-content: center;
 }
 
-.listings {
-  list-style-type: none;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 10px;;
-}
-
 .listings li {
-  background-color: #e9eded;
-  ;
+  background-color: #fff;
   margin: 10px;
   border-radius: 10px;
   display: inline-block;
@@ -39,17 +30,24 @@
 }
 
 .listings li:hover {
-  box-shadow: 0 14px 28px rgb(172, 189, 134,0.3), 0 10px 10px rgb(172, 189, 134,0.3);
+  box-shadow: 8px 14px 28px rgb(172, 189, 134,0.5), 0 15px 15px rgb(172, 189, 134,0.5);
+}
+
+.map {
+  width: 600px; 
+  height: 600px; 
 }
 
 .map-column-container {
   flex: 0.75;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .map-container {
-  display: flex;
   position: fixed;
+  display: flex;
   align-items: flex-start;
   padding: 10px;
 }
@@ -64,10 +62,45 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  list-style-type: none;
+  padding: 10px;
 }
 
 .listings-list-container {
   flex: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* Responsive Design  */
+@media only screen and (max-width:1366px) {
+  .map {
+    width: 400px;
+    height: 400px; 
+  }
+}
+
+@media screen and (max-width:1024px) {
+  .map {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .map {
+    width: 250px;
+    height: 250px; 
+  }
+}
+
+/* Smartphones Responsive design */
+@media screen and (max-width: 479px) {  
+  .map {
+    width: 150px;
+    height: 150px; 
+  }
 }
 
 /* Search Bar */
@@ -76,6 +109,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
 
 .search-bar {
   background: #fff;
@@ -249,5 +283,26 @@
   font-weight: 400;
 }
 
+.pagination {
+  display: inline-block;
+}
 
+.pagination button {
+  background-color: transparent;
+  outline: none;
+  color: yellowgreen;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
 
+.pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination button:hover:not(.active) {background-color: #ddd;}
+
+.pagination #numResultsSpan {
+  color: yellowgreen;
+}
