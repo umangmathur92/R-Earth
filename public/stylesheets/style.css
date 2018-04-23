@@ -80,12 +80,10 @@ html body {
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus
 .spacer{
-   background-color:#FFA06F;   
+   background-color:black;
 }
 
-.name {
-  font-size: 48px;
-}
+
 
 .description {
   font-size: 20px;
@@ -105,9 +103,3 @@ html body {
   width: 40px;
   background: transparent; 
 }
-
-
-
-
-
-
