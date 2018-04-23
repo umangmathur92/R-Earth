@@ -25,6 +25,13 @@ $(document).ready(function () {
       });
   }); 
 
+  var message = $( '.message' );
+  if ( message.length ) {
+    console.log(message)
+    setTimeout( function() {
+      alert(message);
+    }, 5000 );
+  }
 
   //Toggles between login and signup forms
   $('.toggle').on('click', function() {

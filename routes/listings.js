@@ -16,8 +16,9 @@ router.get('/', function(req, res, next) {
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const results = listing.zipSearch(key);
+    const userId = req.session.userId;    
     results.then( data => {
-        res.send(data);        
+        console.log(data);      
     });
 });
 
@@ -68,7 +69,7 @@ router.get('/view', function(req, res, next) {
                res.send(data);
             });
         } else {
-            res.send(data);
+            res.render('')
         }
     });
 });

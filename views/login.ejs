@@ -6,6 +6,9 @@
 <body>
   <%- include('partials/navbar') -%>
   <div class ="container">
+        <% if (message) { %>
+            <div class="message"><%= message %></div>
+        <% } %>
     <div class="form-container">
         <form method="post" action="/login" class="login-form">
         <div class="form-group">
@@ -20,7 +23,6 @@
         </form>
     </div>
   </div>
-
 </body>
 </html> 
 
