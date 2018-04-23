@@ -9,7 +9,9 @@
 	<%- include('partials/navbar') -%>
 		<div class="index-container">
 			<div class="cover-container">
-				<img class = "cover-image" src='/assets/images/cover_image_golden_gate.jpg'>
+					<h1 class="heading"> Welcome to R-Earth</h1>
+					<h3 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h3>
+					<h4 class="description-heading"> Search local SF enviormantal hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs. LOL</h4>
 			</div>
 			<div class="search-container">
 				<span class="input-group-btn">
@@ -19,11 +21,12 @@
 					</form>
 				</span>
 			</div>
-			<div class="pagination" id="pageLinkContainer">
+			<div class="filters-container">
+					<button class="button radius" id="filter">Date</button>
+					<button id="clearFilter" class="button radius secondary">Clear</button>
 			</div>
 			<div class="listings-map-container">
 				<div class="listings-list-container" id="showData">
-						
 					<% if (listings) { %>
 						<ul class="listings" id="listings-list">
 							<% listings.forEach(function(listing){ %>
@@ -39,6 +42,8 @@
 								<button class="submit-button"> Report an Issue</button>
 							</div>
 					</div>	
+				</div>
+				<div class="pagination" id="pageLinkContainer">
 				</div>
 			</div>
 		</div>
