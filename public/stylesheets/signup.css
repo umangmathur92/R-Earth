@@ -7,6 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* main container  */
+.main-container {
+  display: flex;
+  flex-direction: row; 
+  height: 100vh; 
+  width: 100vh; 
+}
+
+.info-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-inner-container {
+  background-color: olive;
+}
+
+
 /* Pen Title */
 .pen-title {
   padding: 50px 0;
@@ -94,13 +113,14 @@ body {
 /* Container */
 .signin-container {
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
+  justify-content: flex-end;
+  flex-direction: row; 
   display: flex;
   position: relative;
   max-width: 460px;
   width: 100%;
   margin: 200px auto 100px;
+  margin-left: 100px;
 }
 .signin-container .active .card:first-child {
   background: #f2f2f2;
