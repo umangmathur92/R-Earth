@@ -2,12 +2,25 @@
 
 .submit-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     flex: 1;
     height: 100vh;
     flex-wrap: wrap;
     align-items: center;
+    background-color: orange;
+}
+
+.header-container {
+    flex: 0.5;
+}
+
+.report-container {
+    flex: 3;
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
 }
 
 #feedback-page{
@@ -15,10 +28,7 @@
 }
 
 .form-container{
-    flex: 2;
-    /* width:100%;
-    float:left;
-    padding-top:0px; */
+    flex: 4 ;
 }
 
 .image-upload-container {

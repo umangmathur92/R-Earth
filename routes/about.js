@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var message = { title: 'CSC-648 Team 1'};
+    var message = { title: 'CSC-648 Team 1', userId: req.session.Id};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }

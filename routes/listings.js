@@ -12,9 +12,9 @@ cloudinary.config({
 });
 
 router.get('/', function(req, res, next) {
-    const listings = listing.fetchListings();
+    const listings = listing.fetchListings(1);
     listings.then( data => { 
-         res.send(data);
+        res.send(data);
     });
 });
 
@@ -23,8 +23,9 @@ router.get('/', function(req, res, next) {
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
     const results = listing.zipSearch(key);
+    const userId = req.session.userId;    
     results.then( data => {
-        res.send(data);        
+        res.render('listings');    
     });
 });
 
@@ -54,7 +55,6 @@ router.get('/create', middle.requiresLogIn, function(req, res, next) {
             var current = user.getUserById(req.session.userId);
             current.then(userInfo => {
                 message.userType = userInfo.user_type;
-                res.send(message);
             });
         } else {
             res.send(message);
@@ -75,7 +75,7 @@ router.get('/view', function(req, res, next) {
                res.send(data);
             });
         } else {
-            res.send(data);
+            res.render('')
         }
     });
 });
