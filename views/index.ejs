@@ -12,12 +12,12 @@
 			<div class="cover-container">
 					<h1 class="heading"> Welcome to R-Earth</h1>
 					<h3 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h3>
-					<h4 class="description-heading"> Search local SF enviormantal hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs. LOL</h4>
+					<h4 class="description-heading"> Search local SF enviormantal hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs.</h4>
 			</div>
 			<div class="search-container">
 				<span class="input-group-btn">
-					<form class="search-bar huge">
-						<input id="search-input" type="text" placeholder="Search for Zip & Address" />
+					<form class="search-bar huge form-group" data-toggle="validator">
+						<input id="search-input" type="text" pattern="^(^\d{5}$)|(^\d{5}-\d{4}$)" placeholder="Search for Zip & Address" data-error="Enter a valid address or Zip Code." required/>
 						<button type="submit" value="Search"></button>
 					</form>
 				</span>
@@ -29,12 +29,7 @@
 			<div class="listings-map-container">
 				<div class="listings-list-container" id="showData">
 						<ul class="listings" id="listings-list">
-						<% if (listings) { %>
-							<% listings.forEach(function(listing){ %>
-								<%- include('partials/listing', {listing: listing}); %>
-							<% }); %>
-							<% } %>
-							</ul> 
+						</ul> 
 				</div>
 				<div class="map-column-container">
 					<div class="map-container">

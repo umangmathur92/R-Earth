@@ -8,7 +8,7 @@ var cloudinary = require('cloudinary');
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings(1);
     listings.then( data => { 
-         res.send(data);
+        res.send(data);
     });
 });
 
@@ -18,7 +18,7 @@ router.post('/search/', function(req, res, next) {
     const results = listing.zipSearch(key);
     const userId = req.session.userId;    
     results.then( data => {
-        res.send(data);    
+        res.render('listings');    
     });
 });
 
@@ -48,7 +48,6 @@ router.get('/create', middle.requiresLogIn, function(req, res, next) {
             var current = user.getUserById(req.session.userId);
             current.then(userInfo => {
                 message.userType = userInfo.user_type;
-                console.log("TEST");
             });
         } else {
             res.send(message);

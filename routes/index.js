@@ -6,10 +6,9 @@ const listing = require( '../db/listing' );
 router.get('/', function(req, res, next) {
   const listings = listing.fetchListings(1);
     listings.then( data => { 
-        console.log(data);
-        const { userId } = req.session
+        const userId  = req.session.userId; 
         console.log(req.session.userId)
-        res.render('index', { title: 'R-Earth', listings: data, userId: userId ? userId : null});
+        res.render('index', { title: 'R-Earth', userId: userId ? userId : null});
     });
 });
 

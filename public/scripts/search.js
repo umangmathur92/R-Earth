@@ -15,6 +15,7 @@ $(document).ready(function () {
 
 fetchListings = () => {
 		$.get("/listings", function (response) {
+			generateListings(response);
 			createListingMapMarker(response);
 		});
 }
@@ -31,8 +32,7 @@ function searchListings() {
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
 			createListingsMapMarker(dataList);
-			var resultList = document.getElementById('resultlist');
-			resultList.appendChild(generateListings());
+			generateListings(dataList);
 		}
 	});
 }
@@ -145,26 +145,32 @@ function createListingMapMarker(list) {
 		$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
 	}
 
-	function generateListings(list, i) {
-		var resultlist; 
+	generateListings = (list) => {
 		list.forEach(listing => {
-			var listItem = document.createElement('li');
-			var titlePara = document.createElement('h4');
-			var thumbnailImg = document.createElement('img');
-			var descrPara = document.createElement('p');
-			var addrPara = document.createElement('p');
-			var zipcodePara = document.createElement('p');
-			titlePara.textContent = list[i].title;
-			descrPara.textContent = list[i].description;
-			addrPara.textContent = list[i].address;
-			zipcodePara.textContent = list[i].zipcode;
-			thumbnailImg.src = list[i].thumbnail;
-			listItem.appendChild(titlePara);
-			listItem.appendChild(thumbnailImg);
-			listItem.appendChild(descrPara);
-			listItem.appendChild(addrPara);
-			listItem.appendChild(zipcodePara);
-			resultlist.appendChild(listItem);
+
+			$('.listings').append(
+				'   <li class="listing">  '  + 
+				'     <div class ="listing-container">  '  + 
+				'       <div class="thumbnail-container">  '  + 
+				'         <img class="thumbnail"> </img>   '  + 
+				'       </div>  '  + 
+				'       <div class="info-container">  '  + 
+				'         <div class="title-address-container">  '  + 
+				'           <div class="title-container">  '  + 
+				'             <h3 class="title">' + listing.title + '</h3>' + 
+				'           </div>  '  + 
+				'           <div class="address-container">  '  + 
+				'             <p class="address">' + listing.address + '</p>  '  + 
+				'           </div>  '  + 
+				'         </div>  '  + 
+				'         <div class="description-container">  '  + 
+				'           <h5 class="description">' + listing.description + '</h5>'  + 
+				'         </div>  '  + 
+				'       </div>  '  + 
+				'     </div>  '  + 
+				'  </li>  '  
+			)
+
+
 		});
-		return resultList; 
 	}
