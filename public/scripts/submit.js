@@ -119,7 +119,9 @@ function submitData() {
     },
         function(data, status){
             //alert("Data: " + data + "\nStatus: " + status);
+            window.location.replace("/");
     });
+
 }
 
 function setVisibility(htmlElement, setVisible) {
