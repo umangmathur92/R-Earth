@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <link rel="stylesheet" href="/stylesheets/displaylisting.css">
+<body>
+	
+	<div class="displaylisting-container">
+	
+		<img class="resized-image-container" src="<%= data.picture %>">
+
+		<div class="title-container">
+			<h1><%= data.title %></h1>
+		</div>
+
+		<div class="date-container">
+			<h2><%= data.post_date %></h2>
+		</div>
+
+		<div class="location-container">
+			<h2><%= data.address %></h2>
+		</div>
+
+		<div class="submission-container">
+			<h2><%= data.username %></h2>
+		</div>
+
+		<div class="description-container">
+			<h2><%= data.description %></h2>
+		</div>
+
+	</div>
+</body>
+</html>

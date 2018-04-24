@@ -1,11 +1,13 @@
 var currentFocus;
 var pageNumber = 1;
+var resultList;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
 	searchListings();//Fetch 1st page of data
 	resizeElements();// Search Bar UI Functions 
 	$("form").submit(function () {
+		resultList = document.getElementById('resultlist')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
@@ -60,7 +62,6 @@ function getPageNumberClickListener(pageNum) {
 }
 
 function createListItems(list) {
-	var resultList = document.getElementById('resultlist');
 	for (var i = 0; i < list.length; i++) {
 		generateIndividualListItemHtml(list, i);
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
@@ -68,10 +69,6 @@ function createListItems(list) {
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
-	//Open up the listing page on click
-	$("ul#resultlist li").click(function () {
-		window.alert(JSON.stringify(list[$(this).index()]));
-	});
 	//actions to be performed when mouse hovers over a list item
 	$("ul#resultlist li").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
@@ -102,6 +99,9 @@ function generateIndividualListItemHtml(list, i) {
 	listItem.appendChild(descrPara);
 	listItem.appendChild(addrPara);
 	listItem.appendChild(zipcodePara);
+	listItem.addEventListener("click", function() {
+		window.open('/displaylisting'+'/'+list[i].listing_id);
+    });
 	resultlist.appendChild(listItem);
 }
 
