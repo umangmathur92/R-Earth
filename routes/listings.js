@@ -5,12 +5,19 @@ const middle = require('../middleware');
 const user = require('../db/users');
 var cloudinary = require('cloudinary');
 
+cloudinary.config({
+    cloud_name: 'csc648team01',
+    api_key: '532321131662413',
+    api_secret: 'RqHswX8LkdYsslb5VX_74AEMckg'
+});
+
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings(1);
     listings.then( data => { 
         res.send(data);
     });
 });
+
 
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
 router.post('/search/', function(req, res, next) {

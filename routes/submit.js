@@ -24,7 +24,8 @@ router.get('/', function(req, res, next) {
 
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
-    const user_id = req.session.userId;
+    //const user_id = req.session.userId;
+    const user_id = 1;
     const title = req.body.title;
     const description = req.body.description;
     const longitude = req.body.longitude;

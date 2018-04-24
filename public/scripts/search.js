@@ -1,5 +1,6 @@
 var currentFocus;
 var pageNumber = 1;
+var resultList;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
@@ -7,6 +8,7 @@ $(document).ready(function () {
 	resizeElements();// Search Bar UI Functions 
 
 	$("form").submit(function () {
+		resultList = document.getElementById('resultlist')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
@@ -68,16 +70,15 @@ function getPageNumberClickListener(pageNum) {
 }
 
 function createListingMapMarker(list) {
-
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
 	}
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
-
-	//Open up the listing page on click
-	$(".listing").hover(function () {
+  
+	//actions to be performed when mouse hovers over a list item
+	$("ul#resultlist li").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
 			console.log("Test");
@@ -87,7 +88,31 @@ function createListingMapMarker(list) {
 			currentFocus = latlng;
 		}
 	});
+}
 
+/**Generates HTML for each individual list item*/
+function generateIndividualListItemHtml(list, i) {
+	var listItem = document.createElement('li');
+	var titlePara = document.createElement('h4');
+	var thumbnailImg = document.createElement('img');
+	var descrPara = document.createElement('p');
+	var addrPara = document.createElement('p');
+	var zipcodePara = document.createElement('p');
+	titlePara.textContent = list[i].title;
+	descrPara.textContent = list[i].description;
+	addrPara.textContent = list[i].address;
+	zipcodePara.textContent = list[i].zipcode;
+	thumbnailImg.src = list[i].thumbnail;
+	listItem.appendChild(titlePara);
+	listItem.appendChild(thumbnailImg);
+	listItem.appendChild(descrPara);
+	listItem.appendChild(addrPara);
+	listItem.appendChild(zipcodePara);
+	listItem.addEventListener("click", function() {
+		window.open('/displaylisting'+'/'+list[i].listing_id);
+    });
+	resultlist.appendChild(listItem);
+}
 	//Routes to listing detail page
 		$(".listing-container").click(function () {
 			setAnimations(latlng);
