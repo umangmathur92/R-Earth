@@ -48,7 +48,7 @@ router.get('/create', middle.requiresLogIn, function(req, res, next) {
             var current = user.getUserById(req.session.userId);
             current.then(userInfo => {
                 message.userType = userInfo.user_type;
-                res.send(message);
+                console.log("TEST");
             });
         } else {
             res.send(message);
