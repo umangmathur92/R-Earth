@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
     listings.then( data => { 
          res.send(data);
     });
+});
 
 
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
