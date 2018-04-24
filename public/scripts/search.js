@@ -8,7 +8,7 @@ $(document).ready(function () {
 	resizeElements();// Search Bar UI Functions 
 
 	$("form").submit(function () {
-		resultList = document.getElementById('resultlist')
+		resultList = document.getElementByClassName('listings')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
@@ -25,6 +25,7 @@ fetchListings = () => {
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
 	const key = $("#search-input").val().trim();
+	$('.listings').empty();
 	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
 		dataList = response.dataList;
 		totalPages = response.totalNumOfPages;
@@ -126,7 +127,7 @@ function generateIndividualListItemHtml(list, i) {
 				});
 			}
 		});
-	}
+	
 
 	function setNavbarScrollAnimation() {
 		var scroll_start = 0;
@@ -195,7 +196,6 @@ function generateIndividualListItemHtml(list, i) {
 				'     </div>  '  + 
 				'  </li>  '  
 			)
-
-
 		});
 	}
+
