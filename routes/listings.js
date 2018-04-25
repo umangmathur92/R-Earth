@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const listing = require( '../db/listing' );
-const middle = require('../middleware');
 const user = require('../db/users');
 var cloudinary = require('cloudinary');
 
@@ -10,6 +9,7 @@ cloudinary.config({
     api_key: '532321131662413',
     api_secret: 'RqHswX8LkdYsslb5VX_74AEMckg'
 });
+
 
 router.get('/', function(req, res, next) {
     const listings = listing.fetchListings(1);
@@ -55,7 +55,9 @@ router.post('/search/', function(req, res, next) {
     });
 });
 
-router.get('/create', middle.requiresLogIn, function(req, res, next) {
+/** Zipcode search, option filter by category and order listings by date. Pagination included */
+router.post('/search/', function(req, res, next) {
+    const key = req.body.key;
     const status = req.body.status;
     const category = req.body.category;
     const order = req.body.order;
