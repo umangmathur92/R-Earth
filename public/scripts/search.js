@@ -1,6 +1,6 @@
 var currentFocus;
 var pageNumber = 1;
-var resultList;
+var listings;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
@@ -8,7 +8,6 @@ $(document).ready(function () {
 	resizeElements();// Search Bar UI Functions 
 
 	$("form").submit(function () {
-		resultList = document.getElementByClassName('listings')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
@@ -17,6 +16,7 @@ $(document).ready(function () {
 
 fetchListings = () => {
 		$.get("/listings", function (response) {
+			listings = response; 
 			generateListings(response);
 			createListingMapMarker(response);
 		});
@@ -27,6 +27,7 @@ function searchListings() {
 	const key = $("#search-input").val().trim();
 	$('.listings').empty();
 	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
+		console.log(response)
 		dataList = response.dataList;
 		totalPages = response.totalNumOfPages;
 		var totalNumOfResults = response.totalNumOfResults;
@@ -34,7 +35,7 @@ function searchListings() {
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
-			createListingsMapMarker(dataList);
+			createListingMapMarker(dataList);
 			generateListings(dataList);
 		}
 	});
@@ -89,6 +90,10 @@ function createListingMapMarker(list) {
 			currentFocus = latlng;
 		}
 	});
+
+	$('.listing').click(function(){
+		console.log(listings[$(this).index()]);
+	})
 }
 
 /**Generates HTML for each individual list item*/
@@ -131,15 +136,12 @@ function generateIndividualListItemHtml(list, i) {
 
 	function setNavbarScrollAnimation() {
 		var scroll_start = 0;
-		var startchange = $('.search-container');
-		var offset = startchange.offset();
 
-		if (startchange.length) {
 			$(document).scroll(function () {
 				scroll_start = $(this).scrollTop();
-				$(".navbar").css('background-color', (scroll_start > offset.top - 5) ? '#FFA06F' : 'transparent');
+				console.log(scroll_start);
+				$(".navbar").css('background-color', (scroll_start  > 20) ? '#FFA06F' : 'transparent');
 			});
-		}
 	}
 
 	//Drop Down for search bar
@@ -172,30 +174,29 @@ function generateIndividualListItemHtml(list, i) {
 	}
 
 	generateListings = (list) => {
+		console.log(list)
 		list.forEach(listing => {
-
 			$('.listings').append(
 				'   <li class="listing">  '  + 
-				'     <div class ="listing-container">  '  + 
-				'       <div class="thumbnail-container">  '  + 
-				'         <img class="thumbnail"> </img>   '  + 
-				'       </div>  '  + 
-				'       <div class="info-container">  '  + 
-				'         <div class="title-address-container">  '  + 
-				'           <div class="title-container">  '  + 
-				'             <h3 class="title">' + listing.title + '</h3>' + 
-				'           </div>  '  + 
-				'           <div class="address-container">  '  + 
-				'             <p class="address">' + listing.address + '</p>  '  + 
-				'           </div>  '  + 
-				'         </div>  '  + 
-				'         <div class="description-container">  '  + 
-				'           <h5 class="description">' + listing.description + '</h5>'  + 
-				'         </div>  '  + 
-				'       </div>  '  + 
-				'     </div>  '  + 
-				'  </li>  '  
-			)
-		});
-	}
-
+		'     <div class ="listing-container">  '  + 
+		'       <div class="thumbnail-container">  '  + 
+		'         <img class="thumbnail" src=' + listing.thumbnail + '>' +  '</img>'  + 
+		'       </div>  '  + 
+		'       <div class="info-container">  '  + 
+		'         <div class="title-address-container">  '  + 
+		'           <div class="title-container">  '  + 
+		'             <h3 class="title">' + listing.title + '</h3>' + 
+		'           </div>  '  + 
+		'           <div class="address-container">  '  + 
+		'             <p class="address">' + listing.address + '</p>  '  + 
+		'           </div>  '  + 
+		'         </div>  '  + 
+		'         <div class="description-container">  '  + 
+		'           <h5 class="description">' + listing.description + '</h5>'  + 
+		'         </div>  '  + 
+		'       </div>  '  + 
+		'     </div>  '  + 
+		'  </li>  '
+			);	
+	})
+}

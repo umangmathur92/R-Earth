@@ -103,6 +103,7 @@
   flex: 1;
   flex-direction: column;
   padding: 10px;
+  min-width: 970px;
 }
 
 .listings li {
@@ -171,13 +172,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.listings {
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  padding: 10px;
 }
 
 .listings-list-container {

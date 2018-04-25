@@ -36,8 +36,12 @@ router.post('/', (req, res, next) => {
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save( function( err ){
-                                req.flash( 'message', 'Login Successful' )
-                                res.redirect( '/' );
+                                req.flash( 'message', 'Signup Successful' )
+                                if(req.session.previousPage === 'submit'){
+                                    res.redirect( '/submit' );
+                                } else {
+                                    res.redirect( '/' );
+                                }
                             });
                         }
                     });

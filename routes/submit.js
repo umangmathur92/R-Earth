@@ -18,7 +18,10 @@ router.get('/', function(req, res, next) {
      message.userId = req.session.userId;
      res.render('submit', message);
   } else {
-      res.render('signup', message);
+      req.session.previousPage = 'submit';
+      req.session.save(function(error){
+        res.render('signup', message);
+      })
   }
 });
 

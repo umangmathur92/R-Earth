@@ -16,7 +16,7 @@
 			</div>
 			<div class="search-container">
 				<span class="input-group-btn">
-					<form class="search-bar huge form-group" data-toggle="validator">
+					<form class="search-bar huge" data-toggle="validator">
 						<input id="search-input" type="text" pattern="^(^\d{5}$)|(^\d{5}-\d{4}$)" placeholder="Search for Zip & Address" data-error="Enter a valid address or Zip Code." required/>
 						<button type="submit" value="Search"></button>
 					</form>
@@ -25,7 +25,8 @@
 			<div class="filters-container">
 					<button class="button radius" id="filter">Date</button>
 					<button id="clearFilter" class="button radius secondary">Clear</button>
-			</div>=
+					<div class="pagination" id="pageLinkContainer"></div>	
+			</div>
 			<div class="listings-map-container">
 				<div class="listings-list-container" id="showData">
 						<ul class="listings" id="listings-list">
@@ -38,8 +39,6 @@
 								<a class="btn btn primary submit-button" href="/submit">Report a Issue</a>
 							</div>
 					</div>	
-				</div>
-				<div class="pagination" id="pageLinkContainer">
 				</div>
 			</div>
 			<div id="myModal" class="modal fade" role="dialog">
