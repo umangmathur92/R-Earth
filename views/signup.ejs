@@ -5,23 +5,24 @@
 <script type="text/javascript" src="/scripts/login.js"></script> 
 <body>
   <%- include('partials/navbar') -%>
+  <div class="main-container">
   <div class ="signin-container">
-      <div class="card"></div>
+    <div class="card"></div>
       <div class="card">
         <h1 class="title">Login</h1>
-        <form id="login-form">
+        <form class="login-form" method="post" action="/login" >
           <div class="input-container">
-            <input type="#{type}" id="#username" required="required"/>
-            <label for="#{label}">Username</label>
+            <input type="text"value="" name="username" id="username" required="required"/>
+            <label for="username">Username</label>
             <div class="bar"></div>
           </div>
           <div class="input-container">
-            <input type="#{type}" id="#password" required="required"/>
-            <label for="#{label}">Password</label>
+            <input id="password" value="" name="password" required="required"/>
+            <label for="password">Password</label>
             <div class="bar"></div>
           </div>
           <div class="button-container">
-            <button><span>Go</span></button>
+            <button type="submit"><span>Go</span></button>
           </div>
           <div class="footer"><a href="#">Forgot your password?</a></div>
         </form>
@@ -33,30 +34,36 @@
         </h1>
         <form id="signup-form">
           <div class="input-container">
-            <input type="#{type}" id="username" required="required"/>
-            <label for="#{label}">Username</label>
+            <input type="username" id="username-sign-up" required="required"/>
+            <label for="username">Username</label>
             <div class="bar"></div>
           </div>
           <div class="input-container">
-              <input type="#{type}" id="name" required="required"/>
-              <label for="#{label}">Name</label>
+              <input type="name" id="name" required="required"/>
+              <label for="name">Name</label>
               <div class="bar"></div>
             </div>
           <div class="input-container">
-            <input type="#{type}" id="password" required="required"/>
-            <label for="#{label}">Password</label>
+            <input type="password" id="password-sign-up" required="required"/>
+            <label for="password">Password</label>
             <div class="bar"></div>
           </div>
           <div class="input-container">
-            <input type="#{type}" id="repeat-password" required="required"/>
-            <label for="#{label}">Repeat Password</label>
+            <input type="password" id="repeat-password" required="required"/>
+            <label for="password">Repeat Password</label>
             <div class="bar"></div>
           </div>
           <div class="button-container">
-            <button><span>Next</span></button>
+            <button type="submit"><span>Next</span></button>
           </div>
         </form>
       </div>
+    </div>
+    <div class="info-container">
+      <div class="info-inner-container">
+        <Text> R-Eaarth</Text>
+      </div>
+    </div>
   </div>
 </body>
 

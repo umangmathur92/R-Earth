@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert( 'listings', [
         {
             listing_id: 0,
-            user_id: 1,
+            user_id: 0,
             title: 'Pollution at Dolores Park',
             picture: '/images/dolores_trash.jpg',
             post_date: Sequelize.literal('NOW()'),

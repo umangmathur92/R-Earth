@@ -10,9 +10,7 @@ function initMap() {
     options = {
         zoom: 13,
         mapTypeId: 'terrain'
-
     }
-
     map = new google.maps.Map(document.getElementById('map'), options);
     infoWindow = new google.maps.InfoWindow({disableAutoPan:false});
 }
@@ -64,7 +62,7 @@ function setAnimations(coords){
 }
 
 function setInfoWindow(coords){
-
+    
     var i = 0;
     while(!coords.equals(markers[i].getPosition())){
         i++;
@@ -72,6 +70,4 @@ function setInfoWindow(coords){
     var contentString = "<img src='" + images[i] + "' style = 'width: 160px; height: 160px;'>";
     infoWindow.setContent(contentString);
     infoWindow.open(map, markers[i]);
-
-
 }

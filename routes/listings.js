@@ -10,6 +10,15 @@ cloudinary.config({
     api_secret: 'RqHswX8LkdYsslb5VX_74AEMckg'
 });
 
+
+router.get('/', function(req, res, next) {
+    const listings = listing.fetchListings(1);
+    listings.then( data => { 
+        res.send(data);
+    });
+});
+
+
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
 router.post('/search/', function(req, res, next) {
     const key = req.body.key;
@@ -46,6 +55,41 @@ router.post('/search/', function(req, res, next) {
     });
 });
 
+/** Zipcode search, option filter by category and order listings by date. Pagination included */
+router.post('/search/', function(req, res, next) {
+    const key = req.body.key;
+    const status = req.body.status;
+    const category = req.body.category;
+    const order = req.body.order;
+    const pageNum = req.body.pageNum;
+    const response = listing.determineSearch(key, status, category, order, pageNum); //Apply search parameters
+    response.then( data => {
+        for(var i = 0; i < data.length; i++) { // Resolve picture URLs: full size and thumbnail
+            var publicId = data[i].picture;
+            var full = getFullImage(publicId);
+            var thumb = getThumbnail(publicId);
+            data[i].picture = full;
+            data[i].thumbnail = thumb;
+        }
+        const isSuccess = data.length > 0;
+        var message = {
+            success: isSuccess,
+            dataList: isSuccess ? data : [],
+            totalNumOfPages: isSuccess ? data[0].numpages : 0,
+            totalNumOfResults: isSuccess ? data[0].numresults : 0,
+        };
+        if( req.session && req.session.userId ) { //Check for user login and type
+            message.userId = req.session.userId;
+            var current = user.getUserById(req.session.userId);
+            current.then(userInfo => {
+                message.userType = userInfo.user_type;
+            });
+        } else {
+            res.send(message);
+        }
+    });
+});
+
 /** View full details of a single listing */
 router.get('/view', function(req, res, next) {
     const listingId = req.body.listingId;
@@ -59,7 +103,7 @@ router.get('/view', function(req, res, next) {
                res.send(data);
             });
         } else {
-            res.send(data);
+            res.render('')
         }
     });
 });
