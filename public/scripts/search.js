@@ -15,11 +15,11 @@ $(document).ready(function () {
 });
 
 fetchListings = () => {
-		$.get("/listings", function (response) {
-			listings = response; 
-			generateListings(response);
-			createListingMapMarker(response);
-		});
+	$.get("/listings", function (response) {
+		listings = response;
+		generateListings(response);
+		createListingMapMarker(response);
+	});
 }
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
@@ -78,7 +78,7 @@ function createListingMapMarker(list) {
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
-  
+
 	//actions to be performed when mouse hovers over a list item
 	$("ul#resultlist li").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
@@ -91,8 +91,9 @@ function createListingMapMarker(list) {
 		}
 	});
 
-	$('.listing').click(function(){
+	$('.listing').click(function () {
 		console.log(listings[$(this).index()]);
+		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
 	})
 }
 
@@ -114,89 +115,76 @@ function generateIndividualListItemHtml(list, i) {
 	listItem.appendChild(descrPara);
 	listItem.appendChild(addrPara);
 	listItem.appendChild(zipcodePara);
-	listItem.addEventListener("click", function() {
-		window.open('/displaylisting'+'/'+list[i].listing_id);
-    });
+	listItem.addEventListener("click", function () {
+		window.open('/displaylisting' + '/' + list[i].listing_id);
+	});
 	resultlist.appendChild(listItem);
 }
-	//Routes to listing detail page
-		$(".listing-container").click(function () {
-			setAnimations(latlng);
-			const listing = list[$(this).index()];
-			if (listing) {
-				
-				$.get('/listings/view', {
-					listingId: listing.listing_id,
-				},
-				function (data, status) {
-				});
-			}
-		});
-	
 
-	function setNavbarScrollAnimation() {
-		var scroll_start = 0;
 
-			$(document).scroll(function () {
-				scroll_start = $(this).scrollTop();
-				console.log(scroll_start);
-				$(".navbar").css('background-color', (scroll_start  > 20) ? '#FFA06F' : 'transparent');
-			});
-	}
+function setNavbarScrollAnimation() {
+	var scroll_start = 0;
 
-	//Drop Down for search bar
-	function dropdownOn(dropdownList, dropdown) {
-		$(dropdownList).fadeIn(25);
-		$(dropdown).addClass("active");
-	}
+	$(document).scroll(function () {
+		scroll_start = $(this).scrollTop();
+		console.log(scroll_start);
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#FFA06F' : 'transparent');
+	});
+}
 
-	function dropdownOff(dropdownList, dropdown) {
-		$(dropdownList).fadeOut(25);
-		$(dropdown).removeClass("active");
-	}
+//Drop Down for search bar
+function dropdownOn(dropdownList, dropdown) {
+	$(dropdownList).fadeIn(25);
+	$(dropdown).addClass("active");
+}
 
-	function resizeElements() {
-		var bar = ".search-bar";
-		var input = bar + " input[type='text']";
-		var button = bar + " button[type='submit']";
-		var dropdown = bar + " .search-dropdown";
-		var dropdownLabel = dropdown + " > span";
-		var dropdownList = dropdown + " ul";
-		var dropdownListItems = dropdownList + " li";
-		var barWidth = $(bar).outerWidth();
-		var labelWidth = $(dropdownLabel).outerWidth();
-		$(dropdown).width(labelWidth);
-		var dropdownWidth = $(dropdown).outerWidth();
-		var buttonWidth = $(button).outerWidth();
-		var inputWidth = barWidth - dropdownWidth - buttonWidth;
-		var inputWidthPercent = inputWidth / barWidth * 100 + "%";
-		$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
-	}
+function dropdownOff(dropdownList, dropdown) {
+	$(dropdownList).fadeOut(25);
+	$(dropdown).removeClass("active");
+}
 
-	generateListings = (list) => {
-		console.log(list)
-		list.forEach(listing => {
-			$('.listings').append(
-				'   <li class="listing">  '  + 
-		'     <div class ="listing-container">  '  + 
-		'       <div class="thumbnail-container">  '  + 
-		'         <img class="thumbnail" src=' + listing.thumbnail + '>' +  '</img>'  + 
-		'       </div>  '  + 
-		'       <div class="info-container">  '  + 
-		'         <div class="title-address-container">  '  + 
-		'           <div class="title-container">  '  + 
-		'             <h3 class="title">' + listing.title + '</h3>' + 
-		'           </div>  '  + 
-		'           <div class="address-container">  '  + 
-		'             <p class="address">' + listing.address + '</p>  '  + 
-		'           </div>  '  + 
-		'         </div>  '  + 
-		'         <div class="description-container">  '  + 
-		'           <h5 class="description">' + listing.description + '</h5>'  + 
-		'         </div>  '  + 
-		'       </div>  '  + 
-		'     </div>  '  + 
-		'  </li>  '
-			);	
+function resizeElements() {
+	var bar = ".search-bar";
+	var input = bar + " input[type='text']";
+	var button = bar + " button[type='submit']";
+	var dropdown = bar + " .search-dropdown";
+	var dropdownLabel = dropdown + " > span";
+	var dropdownList = dropdown + " ul";
+	var dropdownListItems = dropdownList + " li";
+	var barWidth = $(bar).outerWidth();
+	var labelWidth = $(dropdownLabel).outerWidth();
+	$(dropdown).width(labelWidth);
+	var dropdownWidth = $(dropdown).outerWidth();
+	var buttonWidth = $(button).outerWidth();
+	var inputWidth = barWidth - dropdownWidth - buttonWidth;
+	var inputWidthPercent = inputWidth / barWidth * 100 + "%";
+	$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
+}
+
+generateListings = (list) => {
+	console.log(list)
+	list.forEach(listing => {
+		$('.listings').append(
+			'   <li class="listing">  ' +
+			'     <div class ="listing-container">  ' +
+			'       <div class="thumbnail-container">  ' +
+			'         <img class="thumbnail" src=' + listing.thumbnail + '>' + '</img>' +
+			'       </div>  ' +
+			'       <div class="info-container">  ' +
+			'         <div class="title-address-container">  ' +
+			'           <div class="title-container">  ' +
+			'             <h3 class="title">' + listing.title + '</h3>' +
+			'           </div>  ' +
+			'           <div class="address-container">  ' +
+			'             <p class="address">' + listing.address + '</p>  ' +
+			'           </div>  ' +
+			'         </div>  ' +
+			'         <div class="description-container">  ' +
+			'           <h5 class="description">' + listing.description + '</h5>' +
+			'         </div>  ' +
+			'       </div>  ' +
+			'     </div>  ' +
+			'  </li>  '
+		);
 	})
 }
