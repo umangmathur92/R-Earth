@@ -1,3 +1,13 @@
+/**
+ * @file Search.js
+ * API Calls: 
+ * GET '/Listings' - Get's all the Enviormental Listings
+ * POST 'Listings/search' - Post's a search with either an address or Zip Code 
+ * 
+ * Functionality: 
+ * Handles DOM creation of Listings, and handles UI events. @file 
+ */
+
 var currentFocus;
 var pageNumber = 1;
 var listings;
@@ -19,6 +29,7 @@ fetchListings = () => {
 		listings = response;
 		generateListings(response);
 		createListingMapMarker(response);
+		setUpListingListeners();
 	});
 }
 
@@ -71,6 +82,13 @@ function getPageNumberClickListener(pageNum) {
 	};
 }
 
+setUpListingListeners = () => {
+	$('.listing').click(function () {
+		console.log(listings[$(this).index()]);
+		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
+	})
+}
+
 function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
@@ -90,11 +108,6 @@ function createListingMapMarker(list) {
 			currentFocus = latlng;
 		}
 	});
-
-	$('.listing').click(function () {
-		console.log(listings[$(this).index()]);
-		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
-	})
 }
 
 /**Generates HTML for each individual list item*/
@@ -127,7 +140,6 @@ function setNavbarScrollAnimation() {
 
 	$(document).scroll(function () {
 		scroll_start = $(this).scrollTop();
-		console.log(scroll_start);
 		$(".navbar").css('background-color', (scroll_start > 20) ? '#FFA06F' : 'transparent');
 	});
 }
@@ -162,7 +174,6 @@ function resizeElements() {
 }
 
 generateListings = (list) => {
-	console.log(list)
 	list.forEach(listing => {
 		$('.listings').append(
 			'   <li class="listing">  ' +
