@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
-   var message = {title: 'Sign Up',userId};
+   var message = {title: 'Sign Up',userId, page: 'login'};
    res.render('signup', message);
 });
 

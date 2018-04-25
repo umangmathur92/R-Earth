@@ -4,7 +4,7 @@ const user = require('../db/users');
 
 /** Display login page*/
 router.get('/', function(req, res, next) {
-    var message = { title: 'Login', message: null, userId: null };
+    var message = { title: 'Login', message: null, userId: null, page: 'login'};
     res.render( 'login' , message );
 });
 

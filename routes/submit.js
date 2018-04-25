@@ -12,7 +12,7 @@ cloudinary.config({
 
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
-  var message = {title: 'R-Earth', userId: null};
+  var message = {title: 'R-Earth', userId: null, page: 'submit'};
   console.log(req.session)
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
