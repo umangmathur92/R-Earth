@@ -70,7 +70,7 @@ function fetchListings() {
 
 /** Get all available listings sorted by street name alphabetical*/
 function listingsByAddress() {
-
+	
 }
 
 /** Get all available listings sorted by title alphabetical*/
