@@ -54,7 +54,7 @@ function determineSearch(key, status, category, order, pageNum) {
 	}
 }
 
-/** Get all available listings*/
+/** Get all available listings with pagination data*/
 function fetchListingsPagination(pageNum) {
 	var pageSize = 10;
 	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
@@ -63,8 +63,24 @@ function fetchListingsPagination(pageNum) {
 	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination);
 }
 
+/** Get all available listings sorted by date*/
 function fetchListings() {
     return db.any('SELECT * FROM listings ORDER BY post_date DESC');
+}
+
+/** Get all available listings sorted by street name alphabetical*/
+function listingsByAddress() {
+
+}
+
+/** Get all available listings sorted by title alphabetical*/
+function listingsByTitle() {
+	return db.any('SELECT * FROM listings ORDER BY title ASC');
+}
+
+/** Get all available listings sorted by status*/
+function listingsByStatus() {
+    return db.any('SELECT * FROM listings ORDER BY status ASC');
 }
 
 /** Create new listing in database with initial information*/
@@ -87,6 +103,9 @@ function getListingById(listingId) {
 module.exports = {
 	zipSearch: zipSearch,
 	fetchListings: fetchListings,
+	listingsByAddress: listingsByAddress,
+	listingsByTitle: listingsByTitle,
+	listingsByStatus: listingsByStatus,
 	createListing: createListing,
 	updateResponse: updateResponse,
 	addressSearch: addressSearch,

@@ -49,7 +49,7 @@ router.post('/', function(req, res, next) {
         res.send(login);
         })
         .catch(error => {
-            res.send({error:error})''
+            res.send({error:error});
         });
     } else {
         res.send(login);
