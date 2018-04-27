@@ -35,36 +35,22 @@ router.post('/', function(req, res, next) {
 
     cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
         const picture = result.public_id;
-        listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
-    });
-    var login = {};
-    if( req.session && req.session.userId ) { //Check for user login and type
-        login.userId = req.session.userId;
-        const current = user.getUserById(req.session.userId);
-            current.then( userInfo => {
-                login.userType = userInfo.user_type;
-            res.send(login);
+        var newListing = listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
+        newListing.catch(error => {
+            res.send({error:error});
         });
-    } else {
-        res.send(login);
-    }
-});
-
-/** Respond to existing listing if user is an authorized environmental agent*/
-router.post('/respond', function(req, res, next) {
-    const listingId = req.body.listingId;
-    const status = req.body.status;
-    const description = req.body.description;
-    const agency = req.body.agency;
-    listing.updateResponse(listingId, status, description, agency); //Add response information to listing
+    });
     var login = {};
     if( req.session && req.session.userId ) { //Check for user login and type
         login.userId = req.session.userId;
         const current = user.getUserById(req.session.userId);
         current.then( userInfo => {
             login.userType = userInfo.user_type;
-            res.send(login);
-      });
+        res.send(login);
+        })
+        .catch(error => {
+            res.send({error:error})''
+        });
     } else {
         res.send(login);
     }

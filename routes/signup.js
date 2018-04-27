@@ -22,26 +22,32 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-            res.send('Passwords do not match');
+            res.send({error: 'Passwords do not match'});
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send('Error creating account');
+                            res.send({error: 'Internal Error Creating Account'});
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             res.send({userId: req.session.userId});
                         }
+                    })
+                    .catch(error => {
+                        res.send({error:error});
                     });
                 } else {
-                    res.send('Username already exists');
+                    res.send({error: 'Username already exists'});
                 }
+            }).
+            catch(error => {
+                res.send({error:error});
             });
         }
     } else{
-        res.send("Missing required fields");
+        res.send({error: "Missing required fields"});
     }
 });
 

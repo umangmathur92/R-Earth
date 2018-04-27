@@ -12,7 +12,6 @@ cloudinary.config({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('i was callllledd');
   res.render('displaylisting');
 });
 
@@ -28,8 +27,13 @@ router.get('/:listingId', function(req, res, next) {
     postUser.then( userData => {
       data.username = userData.username;
       res.render('displaylisting', {data: data});
-    //res.send(data);
+    })
+    .catch(error => {
+      res.send({error: error});
     });
+  })
+  .catch(error => {
+    res.send({error: error});
   });
 });
 

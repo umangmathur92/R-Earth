@@ -6,31 +6,35 @@ const dateFormat = require('dateformat');
 /** Search all listings by zipcode*/
 function zipSearch(key, filter, order, pageNum) {
 	if (key) {
-		var term = "'" + key + "%'"
+        var term = "'" + key + "%'"
+		/*
 		var pageSize = 10;
 		var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 		var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 		var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-		return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order + subQueryToHandlePagination) ;
+		*/
+		return db.any('SELECT * FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order) ;
 	} else {
-		return fetchListings(pageNum);
+		return fetchListings();
 	}
 }
 
 /** Search by physical address*/
 function addressSearch(key, filter, order, pageNum) {
 	var term = "'%" + key + "%'";
+	/*
 	var pageSize = 10;
 	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order + subQueryToHandlePagination);
+	*/
+	return db.any('SELECT * FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order);
 }
 
 /** Apply filters before executing zipcode or address search*/
 function determineSearch(key, status, category, order, pageNum) {
 	if(!key){
-		return fetchListings(pageNum);
+		return fetchListings();
 	}
 	var filter = "";
 	if(status) {
@@ -51,12 +55,16 @@ function determineSearch(key, status, category, order, pageNum) {
 }
 
 /** Get all available listings*/
-function fetchListings(pageNum) {
+function fetchListingsPagination(pageNum) {
 	var pageSize = 10;
 	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
 	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination);
+}
+
+function fetchListings() {
+    return db.any('SELECT * FROM listings ORDER BY post_date DESC');
 }
 
 /** Create new listing in database with initial information*/

@@ -33,16 +33,25 @@ router.post('/search/', function(req, res, next) {
             totalNumOfPages: isSuccess ? data[0].numpages : 0,
             totalNumOfResults: isSuccess ? data[0].numresults : 0,
         };
+        if(!isSuccess) {
+            message.error = "No results found";
+        }
         if( req.session && req.session.userId ) { //Check for user login and type
             message.userId = req.session.userId;
             var current = user.getUserById(req.session.userId);
             current.then(userInfo => {
                 message.userType = userInfo.user_type;
                 res.send(message);
+            })
+            .catch(error => {
+                res.send({error: error});
             });
         } else {
             res.send(message);
         }
+    })
+    .catch(error => {
+        res.send({error: error});
     });
 });
 

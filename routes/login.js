@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
 
         user.checkPassword(username, password, function (error, user) { //Check for valid password
            if (error || !user) {
-               res.send({}); //Password incorrect or user does not exist
+               res.send({error: "Invalid username or password"}); //Password incorrect or user does not exist
            } else {
                 req.session.userId = user.user_id; //Create user session
                 req.session.save()
