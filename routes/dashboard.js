@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
           userType: userType,
           userAgency: userAgency
         };
-        req.send(message);
+        res.send(message);
     })
     .catch(error => {
         res.send({userId: userId, userType: userType, error:error});
@@ -65,9 +65,9 @@ router.post('/respond', function(req, res, next) {
         res.send({userId: userId, userType: userType, error: "User is not logged in"});
     }
 
-    if(userType != 1){
-        res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
-    }
+    //if(userType != 1){
+     //   res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
+    //}
     const listingId = req.body.listingId;
     const status = req.body.status;
     const description = req.body.description;
