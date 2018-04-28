@@ -70,7 +70,7 @@ function fetchListings() {
 
 /** Get all available listings sorted by street name alphabetical*/
 function listingsByAddress() {
-	
+	return db.any('SELECT address FROM listings ORDER BY substring(address, E\'([^\\\\s]+)\')');
 }
 
 /** Get all available listings sorted by title alphabetical*/

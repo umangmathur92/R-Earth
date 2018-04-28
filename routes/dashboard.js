@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
                 res.send({error: error});
             });
         } else {
-            res.send(message);
+            res.send(data[1]);
         }
     })
     .catch(error => {
