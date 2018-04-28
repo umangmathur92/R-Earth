@@ -22,32 +22,32 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-            res.send({error: 'Passwords do not match'});
+            res.send({userId: null, userType: null, error: 'Passwords do not match'});
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send({error: 'Internal Error Creating Account'});
+                            res.send({userId: null, userType: null, error: 'Internal Error Creating Account'});
                         } else {
                             req.session.userId = user.user_id; //Create user session
-                            res.send({userId: req.session.userId});
+                            res.send({userId: user.user_id, userType: user.user_type});
                         }
                     })
                     .catch(error => {
-                        res.send({error:error});
+                        res.send({userId: null, userType: null, error:error});
                     });
                 } else {
-                    res.send({error: 'Username already exists'});
+                    res.send({userId: null, userType: null, error: 'Username already exists'});
                 }
             }).
             catch(error => {
-                res.send({error:error});
+                res.send({userId: null, userType: null, error:error});
             });
         }
     } else{
-        res.send({error: "Missing required fields"});
+        res.send({userId: null, userType: null, error: "Missing required fields"});
     }
 });
 

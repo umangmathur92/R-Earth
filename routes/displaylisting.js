@@ -16,7 +16,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:listingId', function(req, res, next) {
+  var userId = req.session.userId;
+  var userType;
+  if(req.session && userId) {
+      var current = user.getUserById(userId);
+      current.then(userInfo => {
+          userType = userInfo.user_type;
+      })
+      .catch(error => {
+          res.send({userId: userId, userType: userType, error: error});
+      });
+  }
+
   const listingId = req.params.listingId;
+  if(!listingId) {
+      res.send({userId: userId, userType: userType, error: "No listing ID specified"})
+  }
   var currentListing = listing.getListingById(listingId);
   currentListing.then( data => {
     var publicId = data.picture;
@@ -26,14 +41,14 @@ router.get('/:listingId', function(req, res, next) {
     var postUser = user.getUserById(userId);
     postUser.then( userData => {
       data.username = userData.username;
-      res.render('displaylisting', {data: data});
+      res.render('displaylisting', {userId: userId, userType: userType, data: data});
     })
     .catch(error => {
-      res.send({error: error});
+      res.send({userId: userId, userType: userType, error: error});
     });
   })
   .catch(error => {
-    res.send({error: error});
+    res.send({userId: userId, userType: userType, error: error});
   });
 });
 

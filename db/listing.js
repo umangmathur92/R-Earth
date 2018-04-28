@@ -91,7 +91,7 @@ function createListing(user_id, title, picture, description, longitude, latitude
 
 /** Update and existing listing with response information from environmental agent*/
 function updateResponse(listingId, status, response, agency) {
-	return db.any('INSERT INTO listings (status, response, agency, response_date) VALUES ($1, $2, $3, now()) WHERE listing_id = $4',
+	return db.any('UPDATE listings SET status = $1, response = $2, agency = $3, response_date = now() WHERE listing_id = $4',
 		[status, response, agency, listingId]);
 }
 

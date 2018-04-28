@@ -47,6 +47,8 @@ function checkPassword(username, password, callback) {
     });
 }
 
+function get
+
 module.exports = {
     getUser: getUser,
     getUserById: getUserById,
