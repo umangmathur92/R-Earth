@@ -55,24 +55,6 @@ router.post('/search/', function(req, res, next) {
     });
 });
 
-/** View full details of a single listing */
-router.get('/view', function(req, res, next) {
-    const listingId = req.body.listingId;
-    const details = listing.getListingById(listingId);
-    details.then( data => {
-        if( req.session && req.session.userId ) { //Check for user login and type
-            data.userId = req.session.userId;
-            const current = user.getUserById(req.session.userId);
-            current.then( userInfo => {
-               data.userType = userInfo.user_type;
-               res.send(data);
-            });
-        } else {
-            res.send(data);
-        }
-    });
-});
-
 /** Generate full sized image*/
 function getFullImage(publicId) {
     var url = cloudinary.url(publicId, {width: 500, height: 375, crop: 'fill'});

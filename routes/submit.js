@@ -22,8 +22,8 @@ router.get('/', function(req, res, next) {
 
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
-    //const user_id = req.session.userId;
-    const user_id = 1;
+    const user_id = req.session.userId;
+    //const user_id = 1;
     const title = req.body.title;
     const description = req.body.description;
     const longitude = req.body.longitude;
@@ -46,7 +46,7 @@ router.post('/', function(req, res, next) {
         const current = user.getUserById(req.session.userId);
         current.then( userInfo => {
             login.userType = userInfo.user_type;
-        res.send(login);
+            res.send(login);
         })
         .catch(error => {
             res.send({error:error});
