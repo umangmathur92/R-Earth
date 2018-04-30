@@ -9,11 +9,14 @@
 	<body>
 	<%- include('partials/navbar') -%>
 		<div class="index-container">
+			
+		<% if (!userId) { %>   
 			<div class="cover-container">
 					<h1 class="heading"> Welcome to R-Earth</h1>
 					<h3 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h3>
 					<h4 class="description-heading"> Search local SF enviormantal hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs.</h4>
 			</div>
+		<% } %>
 			<div class="search-container">
 				<span class="input-group-btn">
 					<form class="search-bar huge" data-toggle="validator">
@@ -34,20 +37,32 @@
 				</div>
 				<div class="map-column-container">
 					<div class="filters-container">
-						<div class="date-container">
-
+						<div class="status-container">
+							<h3> Sort Status	 </h3>
+							<div class="btn-group" role="group" aria-label="...">
+									<button type="button" class="btn btn-default">Newest</button>
+									<button type="button" class="btn btn-default">Oldest</button>
+							</div>
 						</div>
 						
 						<div class="categories-container"> 
-
+							<h3> Sort by category </h3>
+							<div class="btn-group" role="group" aria-label="...">
+									<button type="button" class="btn btn-default">All</button>
+									<button type="button" class="btn btn-default">Land</button>
+									<button type="button" class="btn btn-default">Air</button>
+									<button type="button" class="btn btn-default">Water</button>
+								</div>								
 						</div>
 
 						<div class="date-container">
-
+							<h3> Sort by date </h3>
+							<div class="btn-group" role="group" aria-label="...">
+									<button type="button" class="btn btn-default">Newest</button>
+									<button type="button" class="btn btn-default">Oldest</button>
+							</div>
 						</div>
-
 					</div>
-
 					<div class="map-container">
 						<div class="map" id="map"></div>
 						<div class="submit-button-container">
