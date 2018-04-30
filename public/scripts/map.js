@@ -12,7 +12,7 @@ function initMap() {
         mapTypeId: 'terrain'
     }
     map = new google.maps.Map(document.getElementById('map'), options);
-    infoWindow = new google.maps.InfoWindow({disableAutoPan:false});
+    infoWindow = new google.maps.InfoWindow({disableAutoPan:false, maxWidth: 200});
 }
 
 function addMarker(coords, image, category) {
@@ -61,13 +61,14 @@ function setAnimations(coords){
     }
 }
 
-function setInfoWindow(coords){
+function setInfoWindow(coords, title){
     
     var i = 0;
     while(!coords.equals(markers[i].getPosition())){
         i++;
     }
-    var contentString = "<img src='" + images[i] + "' style = 'width: 160px; height: 160px;'>";
+    var contentString = "<h4>" + title + "</h4>" +
+        "<img src='" + images[i] + "' style = 'width: 100%; height: 100%'>";
     infoWindow.setContent(contentString);
     infoWindow.open(map, markers[i]);
 }

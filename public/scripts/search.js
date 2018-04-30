@@ -86,7 +86,16 @@ setUpListingListeners = () => {
 	$('.listing').click(function () {
 		console.log(listings[$(this).index()]);
 		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
-	})
+	});
+	$('.listing').hover(function () {
+        var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
+        if (!latlng.equals(currentFocus)) {
+            setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0]);
+            setAnimations(latlng);
+            map.panTo(latlng);
+            currentFocus = latlng;
+        }
+    });
 }
 
 function createListingMapMarker(list) {
@@ -97,17 +106,6 @@ function createListingMapMarker(list) {
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
 
-	//actions to be performed when mouse hovers over a list item
-	$("ul#resultlist li").hover(function () {
-		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
-		if (!latlng.equals(currentFocus)) {
-			console.log("Test");
-			setInfoWindow(latlng);
-			setAnimations(latlng);
-			map.panTo(latlng);
-			currentFocus = latlng;
-		}
-	});
 }
 
 /**Generates HTML for each individual list item*/

@@ -1,37 +1,57 @@
-var cards = [];
+var listings = [];
+var index = 0;
 
 $(document).ready(function () {
 
+    //test for adding cards
     document.getElementById('test').addEventListener("click", function() {
         document.getElementById('listings').appendChild(createCard({title: "This is where the title will go", address: "1800 Holloway San Francisco, California zip code", description: "This is where the description will go bullshit bullshit bullshit. asdfasdfasdfasdfasdf"}));
 
     });
+
+    //date-sort button
+    document.getElementById('date-sort').addEventListener("click", function() {
+        console.log("date");
+    });
+
+    //title-sort button
+    document.getElementById('title-sort').addEventListener("click", function() {
+        console.log("title");
+    });
+
+    //status-sort button
+    document.getElementById('status-sort').addEventListener("click", function() {
+        console.log("status");
+    });
+
+    //address-sort button
+    document.getElementById('address-sort').addEventListener("click", function() {
+        console.log("address");
+    });
 });
 
 
+function updateDescription(info){
+    $.post('/submit/respond', {
+            listingId: info.listingId,
+            status: info.status,
+            description: info.description,
+            agency: info.agency
+        },
+        function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+            window.location.replace("/");
+        });
+}
 
 
-
-/*<div class="card">
-    <div class="card-body text-primary">
-    <div class="card-title" id="title">This is the title</div>
-<div class="card-text" id="address">The Address will go here.  It will include the number, street name and city.</div>
-<div class="card-text" id="description">The description will go here</div>
-<div class="card-text" id="modalbutton">
-    <button class="btn">Update</button>
-    </div>
-
-<div class="card-text" id="save">
-    <button class="btn">Save</button>
-    </div>
-
-    </div>
-    </div>*/
 
 //creates card with necessary id and classes
 function createCard(info) {
+
     var card = document.createElement('div');
     card.className = "card";
+    card.index = index++;
 
     var cardbody = document.createElement('div');
     cardbody.className = "card-body text-primary";
@@ -72,6 +92,9 @@ function createCard(info) {
     button.innerHTML = "Update";
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#exampleModal");
+    button.addEventListener("click", function(){
+        console.log(card.index);
+    });
 
 
     //dropdown menu
@@ -130,6 +153,8 @@ function createCard(info) {
     cardbody.appendChild(dropdown);
     cardbody.appendChild(save);
 
-
     return card;
 }
+
+
+

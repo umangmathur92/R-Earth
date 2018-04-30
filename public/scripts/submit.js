@@ -106,7 +106,7 @@ function submitData() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-    var picture = sendImage
+    var picture = sendImage;
     $.post('/submit', {
             title: title,
             category: category,
