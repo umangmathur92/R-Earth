@@ -104,6 +104,9 @@
   flex-direction: column;
   padding: 10px;
   min-width: 970px;
+  max-height: 100vh;
+  overflow:hidden; 
+  overflow-y:scroll;
 }
 
 .listings li {
@@ -145,11 +148,10 @@
 
 .map-container {
   position: static;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  flex: 1;
+  height: 100vh;
 }
 
 .submit-button-container {

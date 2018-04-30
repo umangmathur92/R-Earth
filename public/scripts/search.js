@@ -93,6 +93,7 @@ function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
 	}
+	
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
@@ -109,31 +110,6 @@ function createListingMapMarker(list) {
 		}
 	});
 }
-
-/**Generates HTML for each individual list item*/
-function generateIndividualListItemHtml(list, i) {
-	var listItem = document.createElement('li');
-	var titlePara = document.createElement('h4');
-	var thumbnailImg = document.createElement('img');
-	var descrPara = document.createElement('p');
-	var addrPara = document.createElement('p');
-	var zipcodePara = document.createElement('p');
-	titlePara.textContent = list[i].title;
-	descrPara.textContent = list[i].description;
-	addrPara.textContent = list[i].address;
-	zipcodePara.textContent = list[i].zipcode;
-	thumbnailImg.src = list[i].thumbnail;
-	listItem.appendChild(titlePara);
-	listItem.appendChild(thumbnailImg);
-	listItem.appendChild(descrPara);
-	listItem.appendChild(addrPara);
-	listItem.appendChild(zipcodePara);
-	listItem.addEventListener("click", function () {
-		window.open('/displaylisting' + '/' + list[i].listing_id);
-	});
-	resultlist.appendChild(listItem);
-}
-
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
