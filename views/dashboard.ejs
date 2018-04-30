@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/header') -%>
+<link rel="stylesheet" href="/stylesheets/dashboard.css" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&libraries=places"></script>
+<script type="text/javascript" src="scripts/dashboard.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+<%- include('partials/navbar') -%>
+<div class="dashboard">
+
+	<div id = "dashboardcontainer">
+	<h1><strong>Environmental Specialist Dashboard</strong></h1>
+
+
+
+	<div id = "listings">
+
+        <button id="test">test</button>
+        <div class="categories">
+            <div class="card-body text-primary">
+
+
+                <div class="card-title" >
+                    <button class="btn">Date</button>
+                </div>
+
+                <div class="card-title" >
+                    <button class="btn">Title</button>
+                </div>
+
+                <div class="card-text" id="category-address">
+                    <button class="btn">Address</button>
+                </div>
+                <div class="card-text" id="category-description">
+                </div>
+
+                <div class="card-text" id="category-modalbutton"></div>
+                <div class="card-text" id="category-dropdown">
+                    <button class="btn">Status</button></div>
+                <div class="card-text" id="category-save"></div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+	</div>
+	</div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                <div class="modal-body">
+                    <textarea type="text"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
