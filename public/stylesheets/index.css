@@ -151,9 +151,7 @@
 /* Map */
 .map {
   width: 600px; 
-  height: 600px; 
-  justify-content: center;
-  align-items: center;
+  height: 600px;
 }
 
 .map-column-container {
@@ -167,7 +165,6 @@
   align-items: center;
   justify-content: center;
   align-items: center;
-  display: flex;
   padding: 10px;
   height: 100vh;
 }
@@ -217,9 +214,11 @@
     width: 500px;
     height: 500px;
   }
+  
   .map-container {
     align-items: center;
     justify-content: center;
+    display: flex;
     height: 500px;
   }
 }
