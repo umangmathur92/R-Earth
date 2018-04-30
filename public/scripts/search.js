@@ -17,7 +17,11 @@ $(document).ready(function () {
 	fetchListings()
 	resizeElements();// Search Bar UI Functions 
 
-	$("form").submit(function () {
+	//Initialize materialize select
+	$('select').formSelect();
+
+	$(".search-form").submit(function () {
+		console.log("test")
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;

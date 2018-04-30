@@ -7,9 +7,16 @@
 .search-container {
   flex: 0.10;
   display: flex;
-  padding: 20px;
   padding-top: 100px;
   padding-bottom: 100px;
+}
+.search-bar {
+  width: 1000px;
+}
+
+.search-bar-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .filters-container {
