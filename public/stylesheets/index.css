@@ -17,10 +17,13 @@
 .search-bar-container {
   display: flex;
   flex-direction: row;
+  margin-left: 50px;
 }
 
 .filters-container {
   height: 400px;
+  margin-left: 50px;
+  margin-right: 200px;
 }
 
 .cover-container {

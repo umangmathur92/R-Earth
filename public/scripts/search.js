@@ -21,10 +21,20 @@ $(document).ready(function () {
 	$('select').formSelect();
 
 	$("form").submit(function () {
-		console.log("test")
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
+	});
+
+	$("#apply_filter_button").click(function(){
+		var categorySelectors = document.querySelector('.categories');
+		var categories= M.FormSelect.getInstance(categorySelectors);
+
+		var statusSelectors = document.querySelector('.status');
+		var statuses = M.FormSelect.getInstance(statusSelectors);
+
+		console.log(statuses);
+		console.log(categories);
 	});
 });
 
