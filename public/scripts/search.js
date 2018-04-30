@@ -39,7 +39,7 @@ fetchListings = () => {
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
-	const key = $("#search-input").val().trim();
+	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
 	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
 		console.log(response)
