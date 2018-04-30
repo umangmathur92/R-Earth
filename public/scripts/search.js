@@ -20,7 +20,7 @@ $(document).ready(function () {
 	//Initialize materialize select
 	$('select').formSelect();
 
-	$(".search-form").submit(function () {
+	$("form").submit(function () {
 		console.log("test")
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();

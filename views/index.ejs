@@ -21,24 +21,34 @@
 			</div>
 		<% } %>
 			<div class="search-container">
-					<form class="search-form" data-toggle="validator" method="post">
-						<div class="search-bar-container">
+					<form class="search-form" data-toggle="validator" onSubmit="false">
+						<!-- <div class="search-bar-container"> -->
 						<input placeholder="Zip Code or Address" id="search_bar" class="search-bar" type="text" class="validate">
-						<button class="btn waves-effect waves-light">Search
+						<button class="btn waves-effect waves-light" type="submit" value="Search" onSubmit="return false">Search
 								<i class="material-icons">search</i>
 						</button>
-						</div>
+						<!-- </div> -->
 					</form>	
 			</div>
 			<div class="filters-container">	
 							<label> Filters </label>
 							<select multiple>
-								<option value="1" disabled selected>Choose your option</option>
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
+								<option value="1" disabled selected>All Categories
+								</option>
+								<option value="1">Land</option>
+								<option value="2">Air</option>w
+								<option value="3">Water</option>
 							</select>
 							<label>Materialize Multiple Select</label>
+							<select multiple>
+									<option value="1" disabled selected>Status
+									</option>
+									<option value="1"> Unverfied </option>
+									<option value="2"> In progress </option>w
+									<option value="3"> Aknowledged </option>
+									<option value="3"> Serviced </option>
+								</select>
+								<label>Materialize Multiple Select</label>
 					<div class="pagination" id="pageLinkContainer"></div>	
 			</div>
 			<div class="listings-map-container">
