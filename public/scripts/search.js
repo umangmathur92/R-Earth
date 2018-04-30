@@ -28,13 +28,25 @@ $(document).ready(function () {
 
 	$("#apply_filter_button").click(function(){
 		var categorySelectors = document.querySelector('.categories');
-		var categories= M.FormSelect.getInstance(categorySelectors);
+		var categories = M.FormSelect.getInstance(categorySelectors);
+		var selectedCategories = categories.getSelectedValues();
 
 		var statusSelectors = document.querySelector('.status');
 		var statuses = M.FormSelect.getInstance(statusSelectors);
+		var selectedStatuses = statuses.getSelectedValues();
 
-		console.log(statuses);
-		console.log(categories);
+		console.log(selectedCategories);
+		console.log(selectedStatuses);
+		var filtered = [];
+		listings.forEach(listing => {
+			if(($.inArray(listing.category.toString(), selectedCategories) > -1) && ($.inArray(listing.status.toString(), selectedStatuses) > -1)) {
+				filtered.push(listing);
+			}
+		})
+
+		$('.listings').empty();
+		generateListings(filtered);
+		createListingMapMarker(filtered);
 	});
 });
 
@@ -60,8 +72,8 @@ function searchListings() {
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
-			createListingMapMarker(dataList);
 			generateListings(dataList);
+			createListingMapMarker(dataList);
 		}
 	});
 }
@@ -113,7 +125,7 @@ function createListingMapMarker(list) {
 	map.panTo(latlng);
 
 	//actions to be performed when mouse hovers over a list item
-	$("ul#resultlist li").hover(function () {
+	$(".listing-container").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
 			console.log("Test");

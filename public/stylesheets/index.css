@@ -59,6 +59,10 @@
   justify-content: center;
 }
 
+#apply_Filter_button {
+  padding: 10px;
+}
+
 .listing-container {
   display: flex; 
   flex-direction: row;
@@ -148,6 +152,8 @@
 .map {
   width: 600px; 
   height: 600px; 
+  justify-content: center;
+  align-items: center;
 }
 
 .map-column-container {
@@ -160,6 +166,8 @@
   position: static;
   align-items: center;
   justify-content: center;
+  align-items: center;
+  display: flex;
   padding: 10px;
   height: 100vh;
 }
@@ -206,8 +214,13 @@
 
 @media screen and (max-width:1024px) {
   .map {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
+  }
+  .map-container {
+    align-items: center;
+    justify-content: center;
+    height: 500px;
   }
 }
 
@@ -223,6 +236,10 @@
   .map {
     width: 150px;
     height: 150px; 
+  }
+
+  .map-container {
+    height: 200px;
   }
 }
 
