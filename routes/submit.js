@@ -50,14 +50,14 @@ router.post('/', function(req, res, next) {
             current
                 .then( userInfo => {
                     login.userType = userInfo.user_type;
-                    return login;
                 })
                 .then( login => {
-                    const listings = fetchListings(1)
+                    const listings = listing.fetchListings(1)
+                listings
                     .then(data => {
                         console.log(data)
-                        res.render('index', {title: 'R-Earth', listings: data})
                         res.redirect( '/' );
+                        res.end()
                     })
                 })
                 .catch(error => {

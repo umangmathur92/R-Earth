@@ -23,6 +23,13 @@ $(document).ready(function () {
     //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
     //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
+
+
+    $("#form1").submit(function(){
+        submitData();
+        return false; 
+    })
+
 });
 
 function onAddressSelectedFromDropdown() {
@@ -121,6 +128,7 @@ function submitData() {
             alert("Data: " + data + "\nStatus: " + status);
             window.location.replace("/");
     });
+
 
 }
 
