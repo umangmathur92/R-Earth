@@ -12,13 +12,18 @@ cloudinary.config({
 
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
-  var message = {title: 'R-Earth'};
+  var message = {title: 'R-Earth', userId: null};
+  console.log(req.session)
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
+     res.render('submit', message);
+  } else {
+      req.session.previousPage = 'submit';
+      req.session.save(function(error){
+        res.render('signup', message);
+      })
   }
-  res.render('submit', message);
 });
-
 
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
@@ -44,6 +49,7 @@ router.post('/', function(req, res, next) {
     const category = req.body.category;
     const base64 = req.body.picture;
 
+<<<<<<< HEAD
     if(user_id && title && description && longitude && latitude && address && zipcode && category && base64) {
         cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
             const picture = result.public_id;
@@ -52,6 +58,33 @@ router.post('/', function(req, res, next) {
                 res.send({userId: userId, userType: userType, error:error});
             });
         });
+=======
+    cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
+        const picture = result.public_id;
+        listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
+    });
+    var login = {};
+
+    if( req.session && req.session.userId ) { //Check for user login and type
+        login.userId = req.session.userId;
+        const current = user.getUserById(req.session.userId);
+            current
+                .then( userInfo => {
+                    login.userType = userInfo.user_type;
+                    return login;
+                })
+                .then( login => {
+                    const listings = fetchListings(1)
+                    .then(data => {
+                        console.log(data)
+                        res.render('index', {title: 'R-Earth', listings: data})
+                        res.redirect( '/' );
+                    })
+                })
+                .catch(error => {
+
+                })
+>>>>>>> 77f9583df856a16a5af213c5327ce43f1125ebf2
     } else {
         res.send({userId: userId, userType: userType, error: "Missing fields required to submit a listing"});
     }

@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV === 'development ') {
+if(process.env.NODE_ENV === 'development') {
   require("dotenv").config();
 }
 
@@ -9,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -21,6 +22,7 @@ var temp = require('./routes/temp');
 var submit = require('./routes/submit');
 var displayListing = require('./routes/displaylisting');
 var dashboard = require('./routes/dashboard');
+
 
 var app = express();
 
@@ -44,16 +46,20 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('keyboard cat'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 app.use(session ({
     secret: 'team1 loves the earth',
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false
+      secure: false,
+      maxAge: 60000
     }
 }));
+
+
 
 app.use('/', index);
 app.use('/users', users);

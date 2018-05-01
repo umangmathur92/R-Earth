@@ -1,32 +1,53 @@
+/**
+ * @file Search.js
+ * API Calls: 
+ * GET '/Listings' - Get's all the Enviormental Listings
+ * POST 'Listings/search' - Post's a search with either an address or Zip Code 
+ * 
+ * Functionality: 
+ * Handles DOM creation of Listings, and handles UI events. @file 
+ */
+
 var currentFocus;
 var pageNumber = 1;
-var resultList;
+var listings;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
-	searchListings();//Fetch 1st page of data
+	fetchListings()
 	resizeElements();// Search Bar UI Functions 
+
 	$("form").submit(function () {
-		resultList = document.getElementById('resultlist')
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
 	});
 });
 
+fetchListings = () => {
+	$.get("/listings", function (response) {
+		listings = response;
+		generateListings(response);
+		createListingMapMarker(response);
+		setUpListingListeners();
+	});
+}
+
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
 	const key = $("#search-input").val().trim();
-	$('#resultlist').empty();
+	$('.listings').empty();
 	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
+		console.log(response)
 		dataList = response.dataList;
 		totalPages = response.totalNumOfPages;
 		var totalNumOfResults = response.totalNumOfResults;
 		var numResultsOnThisPage = dataList.length;
-		removeMarkers();//Remove all Google maps markers
+		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
-			createListItems(dataList);
+			createListingMapMarker(dataList);
+			generateListings(dataList);
 		}
 	});
 }
@@ -37,13 +58,13 @@ function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, num
 	$('#pageLinkContainer').empty();
 	var numResultsSpan = document.createElement('span');
 	numResultsSpan.setAttribute('id', 'numResultsSpan');
-	const firstResultNum = (((currentPageNum-1)*10)+1);
+	const firstResultNum = (((currentPageNum - 1) * 10) + 1);
 	const lastResultNum = firstResultNum + numResultsOnThisPage - 1;
 	var successMessage = 'Displaying ' + firstResultNum + ' to ' + lastResultNum + ' of ' + totalNumOfResults + ' Results';
 	var failureMessage = 'No Results Found !';
 	numResultsSpan.innerHTML = (totalNumOfResults > 0) ? successMessage : failureMessage;
 	paginationDiv.appendChild(numResultsSpan);
-	for(var i=1; i<=totalPages; i++) {
+	for (var i = 1; i <= totalPages; i++) {
 		var pageLink = document.createElement('button');
 		pageLink.innerHTML = i;
 		const pageNum = i;
@@ -61,18 +82,26 @@ function getPageNumberClickListener(pageNum) {
 	};
 }
 
-function createListItems(list) {
+setUpListingListeners = () => {
+	$('.listing').click(function () {
+		console.log(listings[$(this).index()]);
+		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
+	})
+}
+
+function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
-		generateIndividualListItemHtml(list, i);
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
 	}
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
+
 	//actions to be performed when mouse hovers over a list item
 	$("ul#resultlist li").hover(function () {
 		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
+			console.log("Test");
 			setInfoWindow(latlng);
 			setAnimations(latlng);
 			map.panTo(latlng);
@@ -99,22 +128,20 @@ function generateIndividualListItemHtml(list, i) {
 	listItem.appendChild(descrPara);
 	listItem.appendChild(addrPara);
 	listItem.appendChild(zipcodePara);
-	listItem.addEventListener("click", function() {
-		window.open('/displaylisting'+'/'+list[i].listing_id);
-    });
+	listItem.addEventListener("click", function () {
+		window.open('/displaylisting' + '/' + list[i].listing_id);
+	});
 	resultlist.appendChild(listItem);
 }
 
+
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
-	var startchange = $('.search-container');
-	var offset = startchange.offset();
-	if (startchange.length) {
-		$(document).scroll(function () {
-			scroll_start = $(this).scrollTop();
-			$(".navbar").css('background-color', (scroll_start > offset.top) ? '#FFA06F' : 'transparent');
-		});
-	}
+
+	$(document).scroll(function () {
+		scroll_start = $(this).scrollTop();
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#FFA06F' : 'transparent');
+	});
 }
 
 //Drop Down for search bar
@@ -144,4 +171,31 @@ function resizeElements() {
 	var inputWidth = barWidth - dropdownWidth - buttonWidth;
 	var inputWidthPercent = inputWidth / barWidth * 100 + "%";
 	$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
+}
+
+generateListings = (list) => {
+	list.forEach(listing => {
+		$('.listings').append(
+			'   <li class="listing">  ' +
+			'     <div class ="listing-container">  ' +
+			'       <div class="thumbnail-container">  ' +
+			'         <img class="thumbnail" src=' + listing.thumbnail + '>' + '</img>' +
+			'       </div>  ' +
+			'       <div class="info-container">  ' +
+			'         <div class="title-address-container">  ' +
+			'           <div class="title-container">  ' +
+			'             <h3 class="title">' + listing.title + '</h3>' +
+			'           </div>  ' +
+			'           <div class="address-container">  ' +
+			'             <p class="address">' + listing.address + '</p>  ' +
+			'           </div>  ' +
+			'         </div>  ' +
+			'         <div class="description-container">  ' +
+			'           <h5 class="description">' + listing.description + '</h5>' +
+			'         </div>  ' +
+			'       </div>  ' +
+			'     </div>  ' +
+			'  </li>  '
+		);
+	})
 }
