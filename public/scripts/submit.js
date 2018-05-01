@@ -125,8 +125,11 @@ function submitData() {
             picture:picture
     },
         function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-            window.location.replace("/");
+            if(status == "success"){
+                window.location.replace("/");
+            } else {
+                alert("Data: " + data + "\nStatus: " + status);
+            }
     });
 
 

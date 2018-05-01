@@ -55,9 +55,9 @@ router.post('/', function(req, res, next) {
                     const listings = listing.fetchListings(1)
                 listings
                     .then(data => {
-                        console.log(data)
-                        res.redirect( '/' );
-                        res.end()
+                        res.status = 200;
+                        res.send("Report Submitted Succesfully");
+                        res.end();
                     })
                 })
                 .catch(error => {
