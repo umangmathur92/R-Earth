@@ -26,15 +26,22 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
+<<<<<<< HEAD
+            res.send({userId: null, userType: null, error: 'Passwords do not match'});
+=======
+>>>>>>> 77f9583df856a16a5af213c5327ce43f1125ebf2
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send('Error creating account');
+                            res.send({userId: null, userType: null, error: 'Internal Error Creating Account'});
                         } else {
                             req.session.userId = user.user_id; //Create user session
+<<<<<<< HEAD
+                            res.send({userId: user.user_id, userType: user.user_type});
+=======
                             req.session.save( function( err ){
                                 req.flash( 'message', 'Signup Successful' )
                                 if(req.session.previousPage === 'submit'){
@@ -43,15 +50,22 @@ router.post('/', (req, res, next) => {
                                     res.redirect( '/' );
                                 }
                             });
+>>>>>>> 77f9583df856a16a5af213c5327ce43f1125ebf2
                         }
+                    })
+                    .catch(error => {
+                        res.send({userId: null, userType: null, error:error});
                     });
                 } else {
-                    res.send('Username already exists');
+                    res.send({userId: null, userType: null, error: 'Username already exists'});
                 }
+            }).
+            catch(error => {
+                res.send({userId: null, userType: null, error:error});
             });
         }
     } else{
-        res.send("Missing required fields");
+        res.send({userId: null, userType: null, error: "Missing required fields"});
     }
 });
 

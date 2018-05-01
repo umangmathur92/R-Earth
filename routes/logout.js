@@ -6,7 +6,9 @@ router.get('/', function(req, res, next) {
     if( req.session ){
         req.session.destroy( function( error ){ //Destroy existing session
             if( error ) {
-                return next( error );
+                res.send({userId: null, userType: null, error:error});
+            } else {
+                res.send({userId: null, userType: null});
             }
         });
     }

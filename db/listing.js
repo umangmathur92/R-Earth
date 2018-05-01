@@ -6,31 +6,35 @@ const dateFormat = require('dateformat');
 /** Search all listings by zipcode*/
 function zipSearch(key, filter, order, pageNum) {
 	if (key) {
-		var term = "'" + key + "%'"
+        var term = "'" + key + "%'"
+		/*
 		var pageSize = 10;
 		var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 		var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 		var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-		return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order + subQueryToHandlePagination) ;
+		*/
+		return db.any('SELECT * FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order) ;
 	} else {
-		return fetchListings(pageNum);
+		return fetchListings();
 	}
 }
 
 /** Search by physical address*/
 function addressSearch(key, filter, order, pageNum) {
 	var term = "'%" + key + "%'";
+	/*
 	var pageSize = 10;
 	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
-	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order + subQueryToHandlePagination);
+	*/
+	return db.any('SELECT * FROM listings WHERE LOWER(address) LIKE LOWER(' + term + ') ' + filter + ' ORDER BY ' + order);
 }
 
 /** Apply filters before executing zipcode or address search*/
 function determineSearch(key, status, category, order, pageNum) {
 	if(!key){
-		return fetchListings(pageNum);
+		return fetchListings();
 	}
 	var filter = "";
 	if(status) {
@@ -50,13 +54,33 @@ function determineSearch(key, status, category, order, pageNum) {
 	}
 }
 
-/** Get all available listings*/
-function fetchListings(pageNum) {
+/** Get all available listings with pagination data*/
+function fetchListingsPagination(pageNum) {
 	var pageSize = 10;
 	var subQueryToFetchNumOfResults = 'count(*) OVER() AS numresults, ';
 	var subQueryToFetchPageCount = 'ceil((count(*) OVER())::numeric/'+ pageSize + ') AS numpages ';
 	var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
 	return db.any('SELECT *, ' + subQueryToFetchNumOfResults + subQueryToFetchPageCount + ' FROM listings ORDER BY post_date DESC ' + subQueryToHandlePagination);
+}
+
+/** Get all available listings sorted by date*/
+function fetchListings() {
+    return db.any('SELECT * FROM listings ORDER BY post_date DESC');
+}
+
+/** Get all available listings sorted by street name alphabetical*/
+function listingsByAddress() {
+	return db.any('SELECT * FROM listings ORDER BY split_part(address, \' \', 2)');
+}
+
+/** Get all available listings sorted by title alphabetical*/
+function listingsByTitle() {
+	return db.any('SELECT * FROM listings ORDER BY title ASC');
+}
+
+/** Get all available listings sorted by status*/
+function listingsByStatus() {
+    return db.any('SELECT * FROM listings ORDER BY status ASC');
 }
 
 /** Create new listing in database with initial information*/
@@ -67,7 +91,7 @@ function createListing(user_id, title, picture, description, longitude, latitude
 
 /** Update and existing listing with response information from environmental agent*/
 function updateResponse(listingId, status, response, agency) {
-	return db.any('INSERT INTO listings (status, response, agency, response_date) VALUES ($1, $2, $3, now()) WHERE listing_id = $4',
+	return db.any('UPDATE listings SET status = $1, response = $2, agency = $3, response_date = now() WHERE listing_id = $4',
 		[status, response, agency, listingId]);
 }
 
@@ -79,6 +103,9 @@ function getListingById(listingId) {
 module.exports = {
 	zipSearch: zipSearch,
 	fetchListings: fetchListings,
+	listingsByAddress: listingsByAddress,
+	listingsByTitle: listingsByTitle,
+	listingsByStatus: listingsByStatus,
 	createListing: createListing,
 	updateResponse: updateResponse,
 	addressSearch: addressSearch,
