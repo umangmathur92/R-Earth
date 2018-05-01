@@ -107,6 +107,10 @@ function updateAddressComponentUIElements(address, zipcode) {
     document.getElementById('zip').value = zipcode;
 }
 
+goBack = () => {
+    window.location.replace("/");
+}
+
 function submitData() {
     var title = $('#title').val();
     var category = $('.dropdown-select').val();
