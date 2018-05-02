@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
       req.session.previousPage = 'submit';
       req.session.save(function(error){
         res.render('signup', message);
-      })
+      });
   }
 });
 

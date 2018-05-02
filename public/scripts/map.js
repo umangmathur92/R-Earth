@@ -68,7 +68,7 @@ function setInfoWindow(coords, address, title){
 
     var contentString = "<div id ='card'>" +
         "<img id='image' src= " + images[i] +   ">" +
-        "<div id='card-title'> <strong>" + title  +  "</strong> </div>" +
+        "<div id='card-title' > <strong>" + title  +  "</strong> </div>" +
         "<div id='card-address'>" + address + "</div>" +
         "</div>";
 

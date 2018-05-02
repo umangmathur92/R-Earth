@@ -288,11 +288,10 @@ h1{
 }
 
 .dropdown{
-    height: 100%;
+    height: 80%;
     width: 50%;
     text-align: center;
-    font-size: 30px;
-    padding-left: 10px;
+    font-size: 24px;
     flex-grow: 2;
     align-self: center;
 }
@@ -309,6 +308,7 @@ h1{
 
 .dropdown-select{
     text-align: center;
+    height: 80%;
 }
 
 .addresstext{

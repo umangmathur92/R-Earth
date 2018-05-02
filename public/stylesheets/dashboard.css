@@ -121,7 +121,7 @@ h1{
 
 #title{
     color: #002244;
-    font-size: 24px;
+    font-size: 20px;
     flex: 2;
 }
 
@@ -131,6 +131,11 @@ h1{
     font-size: 24px;
 }
 
+.modal-title{
+    font-size: 25px;
+    align-self: center;
+    text-align: center;
+}
 
 .btn:hover{
     color: white;
@@ -138,7 +143,8 @@ h1{
 }
 
 .modal-body{
-    min-height: 33%;
+    min-height: 50%;
+    height: 50%;
 }
 
 .card-body{

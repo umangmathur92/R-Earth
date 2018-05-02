@@ -104,7 +104,7 @@ setUpListingListeners = () => {
 
 function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
-		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address, list[i].title);
+		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address.split(",")[0], list[i].title);
 	}
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);

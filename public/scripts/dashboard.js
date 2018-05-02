@@ -1,11 +1,13 @@
 var listings = [];
 var index = 0;
+var cards = [];
+
 
 $(document).ready(function () {
     $.get('/listings', {test: "title"},
     function(data, status){
         listings = data;
-        console.log(listings);
+        update();
     });
     //test for adding cards
     document.getElementById('test').addEventListener("click", function() {
@@ -18,8 +20,7 @@ $(document).ready(function () {
         $.get('/listings', {test: "date"},
         function(data, status){
             listings = data;
-            console.log(listings);
-            console.log(data);
+            update();
         });
     });
 
@@ -28,8 +29,7 @@ $(document).ready(function () {
         $.get('/listings', {test: "title"},
         function(data, status){
             listings = data;
-            console.log(listings);
-            console.log(data);
+            update();
         });
 
     });
@@ -39,8 +39,7 @@ $(document).ready(function () {
         $.get('/listings', {test: "status"},
         function(data, status){
             listings = data;
-            console.log(listings);
-            console.log(data);
+            update();
         });
     });
 
@@ -49,27 +48,17 @@ $(document).ready(function () {
         $.get('/listings', {test: "address"},
         function(data, status){
             listings = data;
-            console.log(listings);
-            console.log(data);
+            update();
         });
     });
 });
 
-function updateDescription(info){
-    $.post('/submit/respond', {
-            listingId: info.listingId,
-            status: info.status,
-            description: info.description,
-            agency: info.agency
-        },
-        function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
-            window.location.replace("/");
-        });
-}
+
 
 //creates card with necessary id and classes
 function createCard(info) {
+
+    console.log(info.status);
 
     var card = document.createElement('div');
     card.className = "card";
@@ -115,7 +104,8 @@ function createCard(info) {
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#exampleModal");
     button.addEventListener("click", function(){
-        console.log(card.index);
+        index = card.index;
+        document.getElementById("modal-title").innerHTML = "<strong>" + info.title + "</strong>";
     });
 
 
@@ -129,6 +119,7 @@ function createCard(info) {
     var select = document.createElement('select');
     select.className = "dropdown-select";
     select.name = "one";
+
     var option1 = document.createElement('option');
     option1.value = 1;
     option1.id = "option";
@@ -145,6 +136,21 @@ function createCard(info) {
     option4.value = 4;
     option4.id = "option";
     option4.innerHTML = "Fixed";
+
+    switch(info.status){
+        case 0:
+            option1.setAttribute("selected", "selected");
+            break;
+        case 1:
+            option2.setAttribute("selected", "selected");
+            break;
+        case 2:
+            option3.setAttribute("selected", "selected");
+            break;
+        case 3:
+            option4.setAttribute("selected", "selected");
+            break;
+    }
 
     select.appendChild(option1);
     select.appendChild(option2);
@@ -175,8 +181,20 @@ function createCard(info) {
     cardbody.appendChild(dropdown);
     cardbody.appendChild(save);
 
+    cards.push(card);
     return card;
 }
 
+function update(){
+    cards = [];
+    var info;
+    for(var i = 0; i < listings.length; i++){
+        info = {title: listings[i].title,
+            address: listings[i].address,
+            description: listings[i].description,
+            status: listings[i].status
+        };
+        document.getElementById('listings').appendChild(createCard(info));
 
-
+    }
+}

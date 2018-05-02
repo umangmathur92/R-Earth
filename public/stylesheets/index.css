@@ -50,12 +50,14 @@
   align-items: center;
   justify-content: center;
   align-self: center;
+  text-align: center;
 }
 
 #card-address{
   flex: 0.5;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .heading {

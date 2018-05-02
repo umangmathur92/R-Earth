@@ -40,7 +40,10 @@ router.post('/', (req, res, next) => {
                                 req.flash( 'message', 'Signup Successful' )
                                 if(req.session.previousPage === 'submit'){
                                     res.redirect( '/submit' );
-                                } else {
+                                }else if(req.session.previousPage === 'dashboard'){
+                                    res.redirect( '/dashboard' );
+                                }
+                                else {
                                     res.redirect( '/' );
                                 }
                             });
