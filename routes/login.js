@@ -17,6 +17,7 @@ router.post('/', function(req, res, next) {
         const username = req.body.username;
         const password = req.body.password;
 
+
         user.checkPassword(username, password, function (error,user) { //Check for valid user
             //TODO - Display Success and Error messages before redirecting.
             if ( error || !user ) {

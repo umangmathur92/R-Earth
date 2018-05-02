@@ -26,6 +26,7 @@ function addMarker(coords, image, address, title) {
 
     markers.push(marker);
     images.push(image);
+
     marker.addListener('click', function (){
         var contentString = "<div id ='card'>" +
             "<img id='image' src= " + image +   ">" +
@@ -34,6 +35,8 @@ function addMarker(coords, image, address, title) {
             "</div>";
         infoWindow.setContent(contentString);
         infoWindow.open(map, marker);
+        map.panTo(coords);
+        setAnimations(coords);
     });
 }
 

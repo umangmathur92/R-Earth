@@ -21,6 +21,17 @@ router.get('/', function(req, res, next) {
 
 /** Zipcode search, option filter by category and order listings by date. Pagination included */
 router.post('/search/', function(req, res, next) {
+    var userId = req.session.userId;
+    var userType;
+    if(req.session && userId) {
+        var current = user.getUserById(userId);
+        current.then(userInfo => {
+            userType = userInfo.user_type;
+        })
+        .catch(error => {
+            res.send({userId: userId, userType: userType, error: error});
+        });
+    }
     const key = req.body.key;
     const status = req.body.status;
     const category = req.body.category;
@@ -41,6 +52,8 @@ router.post('/search/', function(req, res, next) {
             dataList: isSuccess ? data : [],
             totalNumOfPages: isSuccess ? data[0].numpages : 0,
             totalNumOfResults: isSuccess ? data[0].numresults : 0,
+            userId: userId,
+            userType: userType
         };
         if( req.session && req.session.userId ) { //Check for user login and type
             message.userId = req.session.userId;
@@ -103,8 +116,12 @@ router.get('/view', function(req, res, next) {
                res.send(data);
             });
         } else {
-            res.render('')
+            res.render('');
         }
+        res.send(message);
+    })
+    .catch(error => {
+        res.send({userId: userId, userType: userType, error: error});
     });
 });
 
