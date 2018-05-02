@@ -22,6 +22,8 @@ $(document).ready(function () {
 		searchListings();
 		return false;
 	});
+
+
 });
 
 fetchListings = () => {
@@ -87,20 +89,22 @@ setUpListingListeners = () => {
 		console.log(listings[$(this).index()]);
 		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
 	});
+
 	$('.listing').hover(function () {
         var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
         if (!latlng.equals(currentFocus)) {
-            setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0]);
+            setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0], listings[$(this).index()].title);
             setAnimations(latlng);
             map.panTo(latlng);
             currentFocus = latlng;
         }
     });
+
 }
 
 function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
-		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
+		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address, list[i].title);
 	}
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);

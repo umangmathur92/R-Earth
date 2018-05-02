@@ -2,7 +2,11 @@ var listings = [];
 var index = 0;
 
 $(document).ready(function () {
-
+    $.get('/listings', {test: "title"},
+    function(data, status){
+        listings = data;
+        console.log(listings);
+    });
     //test for adding cards
     document.getElementById('test').addEventListener("click", function() {
         document.getElementById('listings').appendChild(createCard({title: "This is where the title will go", address: "1800 Holloway San Francisco, California zip code", description: "This is where the description will go bullshit bullshit bullshit. asdfasdfasdfasdfasdf"}));
@@ -11,25 +15,45 @@ $(document).ready(function () {
 
     //date-sort button
     document.getElementById('date-sort').addEventListener("click", function() {
-        console.log("date");
+        $.get('/listings', {test: "date"},
+        function(data, status){
+            listings = data;
+            console.log(listings);
+            console.log(data);
+        });
     });
 
     //title-sort button
     document.getElementById('title-sort').addEventListener("click", function() {
-        console.log("title");
+        $.get('/listings', {test: "title"},
+        function(data, status){
+            listings = data;
+            console.log(listings);
+            console.log(data);
+        });
+
     });
 
     //status-sort button
     document.getElementById('status-sort').addEventListener("click", function() {
-        console.log("status");
+        $.get('/listings', {test: "status"},
+        function(data, status){
+            listings = data;
+            console.log(listings);
+            console.log(data);
+        });
     });
 
     //address-sort button
     document.getElementById('address-sort').addEventListener("click", function() {
-        console.log("address");
+        $.get('/listings', {test: "address"},
+        function(data, status){
+            listings = data;
+            console.log(listings);
+            console.log(data);
+        });
     });
 });
-
 
 function updateDescription(info){
     $.post('/submit/respond', {
@@ -43,8 +67,6 @@ function updateDescription(info){
             window.location.replace("/");
         });
 }
-
-
 
 //creates card with necessary id and classes
 function createCard(info) {

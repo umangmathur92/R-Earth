@@ -10,6 +10,22 @@ router.get('/', function(req, res, next) {
      message.userId = req.session.userId;
   }
   res.render('dashboard', message);
+
+});
+
+router.get('/listings', function(req, res, next){
+    var list = listing.listingByTitle();
+    res.send(list);
+});
+
+router.get('/title-sort', function(req, res, next){
+    var list = listing.listingByTitle();
+    res.send(list);
+});
+
+router.get('/status-sort', function(req, res, next){
+    var list = listing.listingByStatus();
+    res.send(list);
 });
 
 

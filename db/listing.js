@@ -17,6 +17,22 @@ function zipSearch(key, filter, order, pageNum) {
 	}
 }
 
+
+/** Get all available listings sorted by street name alphabetical*/
+function listingsByAddress() {
+    return db.any('SELECT * FROM listings ORDER BY split_part(address, \' \', 2)');
+}
+
+/** Get all available listings sorted by title alphabetical*/
+function listingsByTitle() {
+    return db.any('SELECT * FROM listings ORDER BY title ASC');
+}
+
+/** Get all available listings sorted by status*/
+function listingsByStatus() {
+    return db.any('SELECT * FROM listings ORDER BY status ASC');
+}
+
 /** Search by physical address*/
 function addressSearch(key, filter, order, pageNum) {
 	var term = "'%" + key + "%'";
@@ -83,5 +99,8 @@ module.exports = {
 	updateResponse: updateResponse,
 	addressSearch: addressSearch,
 	determineSearch: determineSearch,
-	getListingById: getListingById
+	getListingById: getListingById,
+	listingByAddress: listingsByAddress,
+	listingByTitle: listingsByTitle,
+	listingByStatus: listingsByStatus
 }
