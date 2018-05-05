@@ -79,4 +79,3 @@ function upload(base64) {
 }
 
 module.exports = router;
-
