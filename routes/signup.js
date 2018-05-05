@@ -9,14 +9,11 @@ router.get('/', function(req, res, next) {
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
-   var message = {title: 'Sign Up',userId};
    res.render('signup', message);
 });
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
-    console.log(req.body)
-
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;
@@ -26,7 +23,7 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-
+            res.send({userId: null, userType: null, error: 'Passwords do not match'});
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
@@ -40,10 +37,7 @@ router.post('/', (req, res, next) => {
                                 req.flash( 'message', 'Signup Successful' )
                                 if(req.session.previousPage === 'submit'){
                                     res.redirect( '/submit' );
-                                }else if(req.session.previousPage === 'dashboard'){
-                                    res.redirect( '/dashboard' );
-                                }
-                                else {
+                                } else {
                                     res.redirect( '/' );
                                 }
                             });

@@ -55,73 +55,13 @@ router.post('/search/', function(req, res, next) {
             userId: userId,
             userType: userType
         };
-        if( req.session && req.session.userId ) { //Check for user login and type
-            message.userId = req.session.userId;
-            var current = user.getUserById(req.session.userId);
-            current.then(userInfo => {
-                message.userType = userInfo.user_type;
-                res.send(message);
-            });
-        } else {
-            res.send(message);
-        }
-    });
-});
-
-/** Zipcode search, option filter by category and order listings by date. Pagination included */
-router.post('/search/', function(req, res, next) {
-    const key = req.body.key;
-    const status = req.body.status;
-    const category = req.body.category;
-    const order = req.body.order;
-    const pageNum = req.body.pageNum;
-    const response = listing.determineSearch(key, status, category, order, pageNum); //Apply search parameters
-    response.then( data => {
-        for(var i = 0; i < data.length; i++) { // Resolve picture URLs: full size and thumbnail
-            var publicId = data[i].picture;
-            var full = getFullImage(publicId);
-            var thumb = getThumbnail(publicId);
-            data[i].picture = full;
-            data[i].thumbnail = thumb;
-        }
-        const isSuccess = data.length > 0;
-        var message = {
-            success: isSuccess,
-            dataList: isSuccess ? data : [],
-            totalNumOfPages: isSuccess ? data[0].numpages : 0,
-            totalNumOfResults: isSuccess ? data[0].numresults : 0,
-        };
-        if( req.session && req.session.userId ) { //Check for user login and type
-            message.userId = req.session.userId;
-            var current = user.getUserById(req.session.userId);
-            current.then(userInfo => {
-                message.userType = userInfo.user_type;
-            });
-        } else {
-            res.send(message);
-        }
-    });
-});
-
-/** View full details of a single listing */
-router.get('/view', function(req, res, next) {
-    const listingId = req.body.listingId;
-    const details = listing.getListingById(listingId);
-    details.then( data => {
-        if( req.session && req.session.userId ) { //Check for user login and type
-            data.userId = req.session.userId;
-            const current = user.getUserById(req.session.userId);
-            current.then( userInfo => {
-               data.userType = userInfo.user_type;
-               res.send(data);
-            });
-        } else {
-            res.render('');
+        if(!isSuccess) {
+            message.error = "No results found";
         }
         res.send(message);
     })
     .catch(error => {
-        res.send({userId: userId, userType: userType, error: error});
+       res.send({userId: userId, userType: userType, error: error});
     });
 });
 

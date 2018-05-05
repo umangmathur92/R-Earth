@@ -10,33 +10,33 @@ router.get('/', function(req, res, next) {
 
 /** User authentication*/
 router.post('/', function(req, res, next) {
-
-    console.log(req.body);
+    var userId = req.session.userId;
+    var userType;
+    if(req.session && userId) {
+        var current = user.getUserById(userId);
+        current.then(userInfo => {
+            userType = userInfo.user_type;
+        })
+        .catch(error => {
+            res.send({userId: userId, userType: userType, error: error});
+        });
+    }
 
     if (req.body.username && req.body.password) {
         const username = req.body.username;
         const password = req.body.password;
 
-
-        user.checkPassword(username, password, function (error,user) { //Check for valid user
-            //TODO - Display Success and Error messages before redirecting.
-            if ( error || !user ) {
-                //Password incorrect or user does not exist
-               res.redirect( '/login' ); 
+        user.checkPassword(username, password, function (error, user) { //Check for valid password
+           if (error || !user) {
+               res.send({userId: userId, userType: userType, error: "Invalid username or password"}); //Password incorrect or user does not exist
            } else {
                 req.session.userId = user.user_id; //Create user session
-                req.session.save( function( err ){
-                    req.flash( 'message', 'Login Successful' )
-                    if(req.session.previousPage === 'submit'){
-                        res.redirect( '/submit' );
-                    } else {
-                        res.redirect( '/' );
-                    }
-                });
+                req.session.save();
+                res.send({userId: user.user_id, userType: user.user_type});
             }
         });
     } else {
-        res.redirect( '/login' )
+        res.send({userId: userId, userType: userType, error: "Missing required fields to login"});
     }
 });
 
