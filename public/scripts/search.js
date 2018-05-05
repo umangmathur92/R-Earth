@@ -176,26 +176,25 @@ function resizeElements() {
 generateListings = (list) => {
 	list.forEach(listing => {
 		$('.listings').append(
-			'   <li class="listing">  ' +
-			'     <div class ="listing-container">  ' +
-			'       <div class="thumbnail-container">  ' +
-			'         <img class="thumbnail" src=' + listing.thumbnail + '>' + '</img>' +
-			'       </div>  ' +
-			'       <div class="info-container">  ' +
-			'         <div class="title-address-container">  ' +
-			'           <div class="title-container">  ' +
-			'             <h3 class="title">' + listing.title + '</h3>' +
-			'           </div>  ' +
-			'           <div class="address-container">  ' +
-			'             <p class="address">' + listing.address + '</p>  ' +
-			'           </div>  ' +
-			'         </div>  ' +
-			'         <div class="description-container">  ' +
-			'           <h5 class="description">' + listing.description + '</h5>' +
-			'         </div>  ' +
-			'       </div>  ' +
-			'     </div>  ' +
-			'  </li>  '
+			'<li class="listing">' +       
+            '<div class="listing-container">      ' +     
+                '<div class="thumbnail-container">       ' +      
+                    '<img class="thumbnail" src=' + listing.thumbnail + '>' + '</img>' +
+                '</div> ' +  
+                '<div class="info_container">       ' +  
+                '<div class="info-container-1">    ' +         
+                    '<h3 class="li_title">' + listing.title + '</h3>' +
+                    '<p class="li_description">' + listing.description + '</p>' +     
+                    '<p class="li_address">' + listing.address + '</p>  ' +
+                '</div>   ' +  
+                '<div class="info-container-2">  ' +           
+                    '<p class="li_status"><b>Status: </b>' + listing.status + '</p>   ' +  
+                    '<p class="li_category"><b>Category: </b>' + listing.category + '</p>     ' +  
+                    '<p class="li_date"><b>Report Date: </b>' + listing.post_date + '</p>' +  
+                '</div>  ' +  
+            '</div>       ' +  
+            '</div>    ' +  
+        '</li> '
 		);
 	})
 }
