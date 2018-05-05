@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const listing = require( '../db/listing' );
+const listing = require('../db/listing');
 const user = require('../db/users');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,7 +19,11 @@ router.get('/', function(req, res, next) {
             res.send({userId: userId, userType: userType, error:error});
         });
     } else {
-        res.send({userId: userId, userType: userType, error: "User is not logged in"});
+        req.session.previousPage = 'dashboard';
+        req.session.save(function(error){
+            var message = {title: 'R-Earth', userId: null};
+            res.render('signup', message);
+        });
     }
 
     //if(userType != 1){
@@ -40,11 +45,14 @@ router.get('/', function(req, res, next) {
           userType: userType,
           userAgency: userAgency
         };
-        res.send(message);
+        res.render('dashboard', message);
     })
     .catch(error => {
         res.send({userId: userId, userType: userType, error:error});
     });
+
+
+
 });
 
 /** Respond to existing listing if user is an authorized environmental agent*/
