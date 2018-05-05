@@ -129,7 +129,10 @@
 }
 
 .li_category {
-  padding-top: 20px;
+  padding-top: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
 }
 
 .li_date {
