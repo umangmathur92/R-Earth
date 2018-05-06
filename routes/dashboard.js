@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
           userType: userType,
           userAgency: userAgency
         };
-        res.render('dashboard', message);
+        res.send(message);
     })
     .catch(error => {
         res.send({userId: userId, userType: userType, error:error});
