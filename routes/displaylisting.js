@@ -3,6 +3,7 @@ var router = express.Router();
 const listing = require( '../db/listing' );
 const user = require('../db/users');
 var cloudinary = require('cloudinary');
+const dateFormat = require('dateformat');
 
 cloudinary.config({
     cloud_name: 'csc648team01',
@@ -37,6 +38,9 @@ router.get('/:listingId', function(req, res, next) {
     var publicId = data.picture;
     var full = getFullImage(publicId);
     data.picture = full;
+    data.category_string = getCategoryFromId(data.category);
+    data.status_string = getStatusFromId(data.status);
+    data.post_date_string = getFormattedDateString(data.post_date);
     var userId = data.user_id;
     var postUser = user.getUserById(userId);
     postUser.then( userData => {
@@ -56,6 +60,40 @@ router.get('/:listingId', function(req, res, next) {
 function getFullImage(publicId) {
     var url = cloudinary.url(publicId, {width: 500, height: 375, crop: 'fill'});
     return url;
+}
+
+function getCategoryFromId(categoryId) {
+	switch (categoryId) {
+		case 0:
+		return "Land";
+		case 1:
+		return "Water";
+		case 2:
+		return "Air";
+		case 3:
+		return "Fire";
+		default:
+		return "-";
+	}
+}
+
+function getStatusFromId(statusId) {
+	switch (statusId) {
+		case 0:
+		return "Reported";
+		case 1:
+		return "Acknowledged";
+		case 2:
+		return "Work in Progress";
+		case 3:
+		return "Resolved";
+		default:
+		return "-";
+	}
+}
+
+function getFormattedDateString(inputDate) {
+	return dateFormat(inputDate, 'mmmm d yyyy, h:MM tt Z');
 }
 
 module.exports = router;
