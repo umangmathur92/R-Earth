@@ -21,6 +21,7 @@ var temp = require('./routes/temp');
 var submit = require('./routes/submit');
 var displayListing = require('./routes/displaylisting');
 var dashboard = require('./routes/dashboard');
+var logout = require('./routes/logout');
 
 
 var app = express();
@@ -70,6 +71,7 @@ app.use('/signup', signup);
 app.use('/submit', submit);
 app.use('/displaylisting', displayListing);
 app.use('/dashboard', dashboard);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

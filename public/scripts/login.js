@@ -18,9 +18,6 @@ $(document).ready(function () {
         password_confirmation: confirmation,
         user_type: 0,
         agency: null,
-      },
-      function(data, status){
-          alert("Data: " + data + "\nStatus: " + status);
       });
   }); 
 

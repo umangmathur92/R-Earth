@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const listing = require('../db/listing');
 const user = require('../db/users');
+const dateFormat = require('dateformat');
 
 
 /* GET home page. */
@@ -43,6 +44,10 @@ router.post('/', function(req, res, next) {
         current.then(userInfo => {
             userAgency = userInfo.agency;
             userType = userInfo.user_type;
+            if(userType != 1){
+                //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
+                res.redirect('/');
+            }
         })
         .catch(error =>{
             res.send({userId: userId, userType: userType, error:error});
@@ -55,11 +60,6 @@ router.post('/', function(req, res, next) {
         });
     }
 
-    if(userType != 1){
-        //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
-        res.redirect('/');
-    }
-
     var dateSort = listing.fetchListings();
     var addressSort = listing.listingsByAddress();
     var titleSort = listing.listingsByTitle();
@@ -67,10 +67,10 @@ router.post('/', function(req, res, next) {
 
     Promise.all([dateSort, addressSort, titleSort, statusSort]).then( data => { //Wait for all queries to complete
         var message = {
-          date: data[0],
-          address: data[1],
-          title: data[2],
-          status: data[3],
+          date: changeAllDates(data[0]),
+          address: changeAllDates(data[1]),
+          title: changeAllDates(data[2]),
+          status: changeAllDates(data[3]),
           userId: userId,
           userType: userType,
           userAgency: userAgency
@@ -103,9 +103,10 @@ router.post('/respond', function(req, res, next) {
         res.send({userId: userId, userType: userType, error: "User is not logged in"});
     }
 
-    //if(userType != 1){
+    if(userType != 1){
      //   res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
-    //}
+        res.redirect('/');
+    }
     const listingId = req.body.listingId;
     const status = req.body.status;
     const description = req.body.description;
@@ -118,5 +119,13 @@ router.post('/respond', function(req, res, next) {
         res.send({userId: userId, userType: userType, error: "Missing required fields to create a response"});
     }
 });
+
+function changeAllDates(dataSet) {
+    for(var i = 0; i < dataSet.length; i++) {
+        var date = dataSet[i].post_date;
+        dataSet[i].post_date = dateFormat(date, 'mmmm d yyyy, h:MM tt Z');
+    }
+    return dataSet;
+}
 
 module.exports = router;
