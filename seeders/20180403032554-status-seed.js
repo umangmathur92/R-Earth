@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('status', [
         {
             status_id: 0,
-            type: 'Reported'
+            type: 'Unverified'
         },
         {
             status_id: 1,
@@ -13,7 +13,7 @@ module.exports = {
         },
         {
             status_id: 2,
-            type: 'Work in Progress'
+            type: 'In Progress'
         },
         {
             status_id: 3,
