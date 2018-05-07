@@ -4,8 +4,7 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    const userId = null; 
-    var message = {title: 'Sign Up', };
+    var message = {title: 'Sign Up', userId: null};
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
@@ -34,12 +33,15 @@ router.post('/', (req, res, next) => {
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save( function( err ){
+                                /*
                                 req.flash( 'message', 'Signup Successful' )
                                 if(req.session.previousPage === 'submit'){
+                                    console.log("Sub");
                                     res.redirect( '/submit' );
                                 } else {
-                                    res.redirect( '/' );
+                                    res.send( '/' );
                                 }
+                                */
                             });
                         }
                     })

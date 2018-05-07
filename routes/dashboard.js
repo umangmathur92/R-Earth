@@ -9,6 +9,35 @@ router.get('/', function(req, res, next) {
     var userType;
     var userAgency;
     var userId = req.session.userId;
+    var message = {userId: null, userType: 0};
+    if(req.session && userId) {
+        var current = user.getUserById(userId);
+        current.then(userInfo => {
+            userAgency = userInfo.agency;
+        userType = userInfo.user_type;
+        if(userType != 1) {
+            res.redirect('/');
+        } else {
+            res.render('dashboard', message);
+        }
+    })
+    .catch(error =>{
+            res.send({userId: userId, userType: userType, error:error});
+    });
+    } else {
+        req.session.previousPage = 'dashboard';
+        req.session.save(function(error){
+            var message = {title: 'R-Earth', userId: null};
+            res.render('signup', message);
+        });
+    }
+});
+
+/* GET home page. */
+router.post('/', function(req, res, next) {
+    var userType;
+    var userAgency;
+    var userId = req.session.userId;
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
@@ -26,9 +55,10 @@ router.get('/', function(req, res, next) {
         });
     }
 
-    //if(userType != 1){
-      //  res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
-    //}
+    if(userType != 1){
+        //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
+        res.redirect('/');
+    }
 
     var dateSort = listing.fetchListings();
     var addressSort = listing.listingsByAddress();
@@ -45,7 +75,7 @@ router.get('/', function(req, res, next) {
           userType: userType,
           userAgency: userAgency
         };
-        res.render('dashboard', message);
+        res.send(message);
     })
     .catch(error => {
         res.send({userId: userId, userType: userType, error:error});
@@ -83,7 +113,7 @@ router.post('/respond', function(req, res, next) {
         var update = listing.updateResponse(listingId, status, description, userAgency); //Add response information to listing
         update.catch(error => {
             res.send({userId: userId, userType: userType, error:error});
-        })
+        });
     }else {
         res.send({userId: userId, userType: userType, error: "Missing required fields to create a response"});
     }

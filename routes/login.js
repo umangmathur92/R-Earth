@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
            } else {
                 req.session.userId = user.user_id; //Create user session
                 req.session.save();
-                res.send({userId: user.user_id, userType: user.user_type});
+                res.redirect('/');
             }
         });
     } else {

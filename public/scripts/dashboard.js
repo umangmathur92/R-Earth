@@ -4,52 +4,50 @@ var cards = [];
 
 
 $(document).ready(function () {
-    $.get('/listings', {test: "title"},
-    function(data, status){
-        listings = data;
+    $.post('/dashboard',
+    function(response){
+        listings = response.date;
         update();
-    });
-    //test for adding cards
-    document.getElementById('test').addEventListener("click", function() {
-        document.getElementById('listings').appendChild(createCard({title: "This is where the title will go", address: "1800 Holloway San Francisco, California zip code", description: "This is where the description will go bullshit bullshit bullshit. asdfasdfasdfasdfasdf"}));
-
     });
 
     //date-sort button
     document.getElementById('date-sort').addEventListener("click", function() {
-        $.get('/listings', {test: "date"},
-        function(data, status){
-            listings = data;
-            update();
-        });
+       clearListings();
+        $.post('/dashboard',
+            function(response){
+                listings = response.date;
+                update();
+            });
     });
 
     //title-sort button
     document.getElementById('title-sort').addEventListener("click", function() {
-        $.get('/listings', {test: "title"},
-        function(data, status){
-            listings = data;
-            update();
-        });
-
+        clearListings();
+        $.post('/dashboard',
+            function(response){
+                listings = response.title;
+                update();
+            });
     });
 
     //status-sort button
     document.getElementById('status-sort').addEventListener("click", function() {
-        $.get('/listings', {test: "status"},
-        function(data, status){
-            listings = data;
-            update();
-        });
+        clearListings();
+        $.post('/dashboard',
+            function(response){
+                listings = response.status;
+                update();
+            });
     });
 
     //address-sort button
     document.getElementById('address-sort').addEventListener("click", function() {
-        $.get('/listings', {test: "address"},
-        function(data, status){
-            listings = data;
-            update();
-        });
+        clearListings();
+        $.post('/dashboard',
+            function(response){
+                listings = response.address;
+                update();
+            });
     });
 });
 
@@ -57,12 +55,10 @@ $(document).ready(function () {
 
 //creates card with necessary id and classes
 function createCard(info) {
-
-    console.log(info.status);
-
     var card = document.createElement('div');
     card.className = "card";
     card.index = index++;
+    card.listingId = info.listingId;
 
     var cardbody = document.createElement('div');
     cardbody.className = "card-body text-primary";
@@ -71,7 +67,7 @@ function createCard(info) {
     var date = document.createElement('div');
     date.className = "card-title";
     date.id = "title";
-    date.innerHTML = "11/21/1994";
+    date.innerHTML = info.date;
 
     //title
     var title = document.createElement('div');
@@ -135,7 +131,7 @@ function createCard(info) {
     var option4 = document.createElement('option');
     option4.value = 4;
     option4.id = "option";
-    option4.innerHTML = "Fixed";
+    option4.innerHTML = "Resolved";
 
     switch(info.status){
         case 0:
@@ -168,6 +164,15 @@ function createCard(info) {
     var sbutton = document.createElement('button');
     sbutton.className = "btn";
     sbutton.innerHTML = "Save";
+    sbutton.addEventListener("click", function() {
+        index = card.index;
+        var modalContent = document.getElementById("modal-text").value;
+        $.post('/dashboard/respond',
+            {listingId: card.listingId, status: select.value - 1, description: modalContent},
+            function(response){
+
+            });
+    });
     save.appendChild(sbutton);
 
     //assembling the card
@@ -185,6 +190,14 @@ function createCard(info) {
     return card;
 }
 
+function clearListings() {
+    var listings = document.getElementById('listings');
+    while(listings.childNodes.length > 3) {
+        listings.removeChild(listings.lastChild);
+    }
+
+}
+
 function update(){
     cards = [];
     var info;
@@ -192,7 +205,9 @@ function update(){
         info = {title: listings[i].title,
             address: listings[i].address,
             description: listings[i].description,
-            status: listings[i].status
+            status: listings[i].status,
+            listingId: listings[i].listing_id,
+            date: listings[i].post_date
         };
         document.getElementById('listings').appendChild(createCard(info));
 
