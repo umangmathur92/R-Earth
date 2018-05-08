@@ -4,7 +4,7 @@ const user = require('../db/users');
 
 /** Display login page*/
 router.get('/', function(req, res, next) {
-    var message = { title: 'Login', message: null, userId: null, page: 'login'};
+    var message = { title: 'Login', message: null, userId: null, userType: null, page: 'login'};
     res.render( 'login' , message );
 });
 
@@ -31,6 +31,7 @@ router.post('/', function(req, res, next) {
                res.send({userId: userId, userType: userType, error: "Invalid username or password"}); //Password incorrect or user does not exist
            } else {
                 req.session.userId = user.user_id; //Create user session
+				req.session.userType = user.user_type;
                 req.session.save();
                 res.redirect('/');
             }

@@ -4,7 +4,7 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    var message = {title: 'Sign Up', message: null, userId: null, page: 'login'};
+    var message = {title: 'Sign Up', message: null, userId: null, userType: null, page: 'login'};
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }

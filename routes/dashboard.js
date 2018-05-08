@@ -10,15 +10,16 @@ router.get('/', function(req, res, next) {
     var userType;
     var userAgency;
     var userId = req.session.userId;
-    var message = {userId: null, userType: 0};
+    var message = {userId: userId, userType: 0, page: 'dashboard'};
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
-            userAgency = userInfo.agency;
-        userType = userInfo.user_type;
+        userAgency = userInfo.agency;
+		userType = userInfo.user_type;
         if(userType != 1) {
             res.redirect('/');
         } else {
+			message = {userId: userId, userType: userType, page: 'dashboard'}
             res.render('dashboard', message);
         }
     })
@@ -28,7 +29,7 @@ router.get('/', function(req, res, next) {
     } else {
         req.session.previousPage = 'dashboard';
         req.session.save(function(error){
-            var message = {title: 'R-Earth', userId: null};
+            var message = {title: 'R-Earth', userId: null, page: 'login'};
             res.render('signup', message);
         });
     }
@@ -55,7 +56,7 @@ router.post('/', function(req, res, next) {
     } else {
         req.session.previousPage = 'dashboard';
         req.session.save(function(error){
-            var message = {title: 'R-Earth', userId: null};
+            var message = {title: 'R-Earth', userId: null, page: 'login'};
             res.render('signup', message);
         });
     }

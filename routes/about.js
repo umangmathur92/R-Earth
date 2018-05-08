@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var message = { title: 'CSC-648 Team 1', userId: req.session.Id, page: 'about'};
+    var message = { title: 'CSC-648 Team 1', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/ryan', function(req,res,next) {
-    var message = { title: 'Ryan', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Ryan', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -18,7 +18,7 @@ router.get('/ryan', function(req,res,next) {
 });
 
 router.get('/umang', function(req,res,next) {
-    var message = { title: 'Umang', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Umang', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -26,7 +26,7 @@ router.get('/umang', function(req,res,next) {
 });
 
 router.get('/chloe', function(req, res, next) {
-    var message = { title: 'Chloe', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Chloe', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -34,7 +34,7 @@ router.get('/chloe', function(req, res, next) {
 });
 
 router.get('/Alex', function(req,res,next) {
-    var message = { title: 'Alex', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Alex', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -42,7 +42,7 @@ router.get('/Alex', function(req,res,next) {
 });
 
 router.get('/rosalba', function(req, res, next) {
-    var message = { title: 'Rosalba', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Rosalba', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -50,7 +50,7 @@ router.get('/rosalba', function(req, res, next) {
 });
 
 router.get('/taylor', function(req, res, next) {
-    var message = { title: 'Taylor', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Taylor', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
@@ -58,7 +58,7 @@ router.get('/taylor', function(req, res, next) {
 });
 
 router.get('/lorenzo', function(req, res, next) {
-    var message = { title: 'Lorenzo', userId: req.session.Id, page: 'about'};
+    var message = { title: 'Lorenzo', userId: req.session.Id, userType: req.session.userType, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
     }
