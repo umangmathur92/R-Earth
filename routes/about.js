@@ -33,7 +33,7 @@ router.get('/chloe', function(req, res, next) {
     res.render('team/chloe', message);
 });
 
-router.get('/about/Alex', function(req,res,next) {
+router.get('/Alex', function(req,res,next) {
     var message = { title: 'Alex', userId: req.session.Id, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
@@ -41,7 +41,7 @@ router.get('/about/Alex', function(req,res,next) {
     res.render('team/Alex', message);
 });
 
-router.get('/about/rosalba', function(req, res, next) {
+router.get('/rosalba', function(req, res, next) {
     var message = { title: 'Rosalba', userId: req.session.Id, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
@@ -49,7 +49,7 @@ router.get('/about/rosalba', function(req, res, next) {
     res.render('team/rosalba', message);
 });
 
-router.get('/about/taylor', function(req, res, next) {
+router.get('/taylor', function(req, res, next) {
     var message = { title: 'Taylor', userId: req.session.Id, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
@@ -57,7 +57,7 @@ router.get('/about/taylor', function(req, res, next) {
     res.render('team/taylor', message);
 });
 
-router.get('/about/lorenzo', function(req, res, next) {
+router.get('/lorenzo', function(req, res, next) {
     var message = { title: 'Lorenzo', userId: req.session.Id, page: 'about'};
     if( req.session && req.session.userId ) {
         message.userId = req.session.userId;
