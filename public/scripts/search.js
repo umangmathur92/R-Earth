@@ -18,7 +18,8 @@ $(document).ready(function () {
 	resizeElements();// Search Bar UI Functions 
 
 	//Initialize materialize select
-	$('select').formSelect();
+	$('.categories').formSelect();
+	$('.status').formSelect();
 
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performedxss
@@ -214,11 +215,13 @@ getFilteredSelectors = () => {
 	var categorySelector = document.querySelector('.categories');
 	var category = M.FormSelect.getInstance(categorySelector);
 	var selectedCategory = category.getSelectedValues();
+
+	console.log(selectedCategory);	
+
 	var statusSelector = document.querySelector('.status');
 	var status = M.FormSelect.getInstance(statusSelector);
 	var selectedStatus = status.getSelectedValues();
 
-	console.log(selectedCategory);	
 
 	if(selectedCategory[0] === ""){
 		selectors.category = null; 

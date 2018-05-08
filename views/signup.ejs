@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 <link rel="stylesheet" href="/stylesheets/signup.css" />
-<script type="text/javascript" src="/scripts/login.js"></script> 
+<script type="text/javascript" src="/scripts/signup.js"></script> 
 <body>
   <%- include('partials/navbar') -%>
   <div class="main-container">
@@ -34,7 +37,8 @@
         </h1>
         <form id="signup-form">
           <div class="input-container">
-            <input type="username" id="username-sign-up" required="required"/>
+            <input type="username" id="username-sign-up" required="required"  min="8" />
+            <span class="helper-text" data-error="wrong" data-success="right"></span>
             <label for="username">Username</label>
             <div class="bar"></div>
           </div>
@@ -44,12 +48,12 @@
               <div class="bar"></div>
             </div>
           <div class="input-container">
-            <input type="password" id="password-sign-up" required="required"/>
+            <input type="password" id="password_sign_up"/>
             <label for="password">Password</label>
             <div class="bar"></div>
           </div>
           <div class="input-container">
-            <input type="password" id="repeat-password" required="required"/>
+            <input type="password" id="repeat_password" />
             <label for="password">Repeat Password</label>
             <div class="bar"></div>
           </div>

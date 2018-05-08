@@ -15,7 +15,13 @@ router.get('/', function(req, res, next) {
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
-    console.log(req.body)
+    
+    //response body
+    var message = {
+        user: null,
+        redirect: null,
+        error: null,
+    };
 
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
@@ -26,6 +32,7 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
+            message.error = "There was an error signing up. We apologize. Please try again."
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
@@ -36,22 +43,26 @@ router.post('/', (req, res, next) => {
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save( function( err ){
-                                req.flash( 'message', 'Signup Successful' )
+                                message.user = user
                                 if(req.session.previousPage === 'submit'){
-                                    res.redirect( '/submit' );
+                                    message.redirect = '/submit';
                                 } else {
-                                    res.redirect( '/' );
+                                    message.redirect = '/';
                                 }
+                                res.send(message)
                             });
                         }
                     });
                 } else {
-                    res.send('Username already exists');
+                    message.error = 'That username already exists! Trying adding a number at the end of ' + username + '.';
+                    console.log(message)
+                    res.send(message)
                 }
             });
         }
     } else{
-        res.send("Missing required fields");
+        message.error =  message.error = 'There was an error signing up. We apologize. Please try again.';
+        res.send(message)
     }
 });
 

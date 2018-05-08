@@ -33,6 +33,7 @@ function determineSearch(key, status, category, order, pageNum) {
 		return fetchListings(pageNum);
 	}
 	var filter = "";
+
 	if(status) {
 		filter += " AND status = " + status;
 	}
@@ -42,6 +43,9 @@ function determineSearch(key, status, category, order, pageNum) {
 	if(!order) {
 		order = "post_date DESC";
 	}
+
+	console.log(filter)
+
 	if(isNaN(Number(key))) {
 		return addressSearch(key, filter, order, pageNum);
 	}
