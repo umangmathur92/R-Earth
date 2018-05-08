@@ -43,6 +43,10 @@ router.post('/', function(req, res, next) {
         current.then(userInfo => {
             userAgency = userInfo.agency;
             userType = userInfo.user_type;
+            if(userType != 1){
+                //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
+                res.redirect('/');
+            }
         })
         .catch(error =>{
             res.send({userId: userId, userType: userType, error:error});
@@ -53,11 +57,6 @@ router.post('/', function(req, res, next) {
             var message = {title: 'R-Earth', userId: null};
             res.render('signup', message);
         });
-    }
-
-    if(userType != 1){
-        //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
-        res.redirect('/');
     }
 
     var dateSort = listing.fetchListings();
