@@ -20,12 +20,24 @@
             <li <% if (page === 'about') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
                 <a class="nav-link" href="/about">Meet us</a>
             </li>
+			
+			<% if (userId === 1) { %>                         
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard </a>
+                </li>
+            <% } %>
               
-			  <% if (!userId) { %>                         
-                    <li <% if (page === 'login') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                        <a class="nav-link" href="/signup">Login / Sign Up </a>
-                    </li>
-              <% } %>
+			<% if (!userId) { %>                         
+                <li <% if (page === 'dashboard') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
+                    <a class="nav-link" href="/signup">Login / Sign Up </a>
+                </li>
+            <% } %>
+			  
+			<% if (userId) { %>                         
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout </a>
+                </li>
+            <% } %>
         </div>
     </div>
 </nav>
