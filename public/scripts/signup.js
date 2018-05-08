@@ -4,9 +4,9 @@ $(document).ready(function () {
 
     //TODO - VALIDATION
     const username =  $('#username-sign-up').val(); 
-    const password = $('#password-sign-up').val();
+    const password = $('#password_sign_up').val();
     const name = $('#name').val();
-    const confirmation = $('#repeat-password').val();
+    const confirmation = $('#repeat_password').val();
     
     const body = {
       username: username,
@@ -17,8 +17,7 @@ $(document).ready(function () {
       agency: null,
     }
 
-    signUpPOSTRequest(body);
-    
+    signUpPOSTRequest(body);    
     return false; 
   }); 
 
@@ -29,7 +28,6 @@ $(document).ready(function () {
       alert(message);
     }, 5000 );
   }
-
 
   $('#signup-form').validate({
     rules:{
@@ -46,7 +44,6 @@ $(document).ready(function () {
       },
   },
 });
-
 
   //Toggles between login and signup forms
   $('.toggle').on('click', function() {

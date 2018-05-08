@@ -23,6 +23,8 @@ router.post('/', (req, res, next) => {
         error: null,
     };
 
+    console.log(req.body);
+
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;

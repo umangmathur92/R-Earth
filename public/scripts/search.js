@@ -17,9 +17,8 @@ $(document).ready(function () {
 	fetchListings()
 	resizeElements();// Search Bar UI Functions 
 
-	//Initialize materialize select
-	$('.categories').formSelect();
-	$('.status').formSelect();
+	// //Initialize materialize select
+	$('select').formSelect();
 
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performedxss
@@ -30,6 +29,7 @@ $(document).ready(function () {
 	$("#apply_filter_button").click(function(){
 		searchListings();
 	});
+
 });
 
 fetchListings = () => {
@@ -210,6 +210,9 @@ generateListings = (list) => {
 
 getFilteredSelectors = () => {
 
+	//Reinitialize -> Materialize BUG 
+	$('select').formSelect();
+	
 	var selectors = {};
 
 	var categorySelector = document.querySelector('.categories');
@@ -240,6 +243,8 @@ getFilteredSelectors = () => {
 
 	return selectors; 
 }
+
+
 
 
 categoryStringToInt = () => {
