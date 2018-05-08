@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
     } else {
         req.session.previousPage = 'dashboard';
         req.session.save(function(error){
-            var message = {title: 'R-Earth', userId: null, page: 'login'};
+            var message = {title: 'R-Earth', userId: null, userType: null, page: 'login'};
             res.render('signup', message);
         });
     }
