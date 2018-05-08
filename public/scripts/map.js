@@ -12,35 +12,34 @@ function initMap() {
         mapTypeId: 'terrain'
     }
     map = new google.maps.Map(document.getElementById('map'), options);
-    infoWindow = new google.maps.InfoWindow({disableAutoPan:false});
+    infoWindow = new google.maps.InfoWindow({disableAutoPan:false, maxWidth: 200});
 }
 
-function addMarker(coords, image, category) {
-    var iconString = '/images/pins/';
-    switch(category){
-        case 0:
-            iconString += 'red';
-            break;
-        case 1:
-            iconString += 'orange';
-            break;
-        case 2:
-            iconString += 'yellow';
-            break;
-        case 3:
-            iconString += 'green';
-            break;
-    }
-    iconString += '.png'
+function addMarker(coords, image, address, title) {
+    var iconString = '/images/pins/red.png';
     var marker = new google.maps.Marker({
         position: coords,
         map:map,
         icon: iconString,
         animation: google.maps.Animation.DROP
     });
+
     markers.push(marker);
-    images.push(image)
+    images.push(image);
+
+    marker.addListener('click', function (){
+        var contentString = "<div id ='card'>" +
+            "<img id='image' src= " + image +   ">" +
+            "<div id='card-title'> <strong>" + title  +  "</strong> </div>" +
+            "<div id='card-address'>" + address + "</div>" +
+            "</div>";
+        infoWindow.setContent(contentString);
+        infoWindow.open(map, marker);
+        map.panTo(coords);
+        setAnimations(coords);
+    });
 }
+
 
 function removeMarkers(){
     for(var i = 0; i < markers.length; i++){
@@ -61,13 +60,19 @@ function setAnimations(coords){
     }
 }
 
-function setInfoWindow(coords){
-    
+function setInfoWindow(coords, address, title){
     var i = 0;
     while(!coords.equals(markers[i].getPosition())){
         i++;
     }
-    var contentString = "<img src='" + images[i] + "' style = 'width: 160px; height: 160px;'>";
+
+    var contentString = "<div id ='card'>" +
+        "<img id='image' src= " + images[i] +   ">" +
+        "<div id='card-title' > <strong>" + title  +  "</strong> </div>" +
+        "<div id='card-address'>" + address + "</div>" +
+        "</div>";
+
     infoWindow.setContent(contentString);
     infoWindow.open(map, markers[i]);
 }
+

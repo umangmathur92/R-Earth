@@ -1,12 +1,12 @@
 /**
- * @file Search.js
- * API Calls: 
- * GET '/Listings' - Get's all the Enviormental Listings
- * POST 'Listings/search' - Post's a search with either an address or Zip Code 
- * 
- * Functionality: 
- * Handles DOM creation of Listings, and handles UI events. @file 
- */
+* @file Search.js
+* API Calls: 
+* GET '/Listings' - Get's all the Enviormental Listings
+* POST 'Listings/search' - Post's a search with either an address or Zip Code 
+* 
+* Functionality: 
+* Handles DOM creation of Listings, and handles UI events. @file 
+*/
 
 var currentFocus;
 var pageNumber = 1;
@@ -14,9 +14,9 @@ var listings;
 
 $(document).ready(function () {
 	setNavbarScrollAnimation();
+	initMap();
 	fetchListings()
 	resizeElements();// Search Bar UI Functions 
-
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
@@ -86,28 +86,28 @@ setUpListingListeners = () => {
 	$('.listing').click(function () {
 		console.log(listings[$(this).index()]);
 		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
-	})
-}
-
-function createListingMapMarker(list) {
-	for (var i = 0; i < list.length; i++) {
-		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].category);
-	}
-	//Pan map to first list item's geographic coordinates
-	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
-	map.panTo(latlng);
-
-	//actions to be performed when mouse hovers over a list item
-	$("ul#resultlist li").hover(function () {
-		var latlng = new google.maps.LatLng(list[$(this).index()].latitude, list[$(this).index()].longitude);
+	});
+	
+	$('.listing').hover(function () {
+		var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
-			console.log("Test");
-			setInfoWindow(latlng);
+			setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0], listings[$(this).index()].title);
 			setAnimations(latlng);
 			map.panTo(latlng);
 			currentFocus = latlng;
 		}
 	});
+	
+}
+
+function createListingMapMarker(list) {
+	for (var i = 0; i < list.length; i++) {
+		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address.split(",")[0], list[i].title);
+	}
+	//Pan map to first list item's geographic coordinates
+	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
+	map.panTo(latlng);
+	
 }
 
 /**Generates HTML for each individual list item*/
@@ -137,7 +137,7 @@ function generateIndividualListItemHtml(list, i) {
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
-
+	
 	$(document).scroll(function () {
 		scroll_start = $(this).scrollTop();
 		$(".navbar").css('background-color', (scroll_start > 20) ? '#FFA06F' : 'transparent');
@@ -176,26 +176,25 @@ function resizeElements() {
 generateListings = (list) => {
 	list.forEach(listing => {
 		$('.listings').append(
-			'   <li class="listing">  ' +
-			'     <div class ="listing-container">  ' +
-			'       <div class="thumbnail-container">  ' +
-			'         <img class="thumbnail" src=' + listing.thumbnail + '>' + '</img>' +
-			'       </div>  ' +
-			'       <div class="info-container">  ' +
-			'         <div class="title-address-container">  ' +
-			'           <div class="title-container">  ' +
-			'             <h3 class="title">' + listing.title + '</h3>' +
-			'           </div>  ' +
-			'           <div class="address-container">  ' +
-			'             <p class="address">' + listing.address + '</p>  ' +
-			'           </div>  ' +
-			'         </div>  ' +
-			'         <div class="description-container">  ' +
-			'           <h5 class="description">' + listing.description + '</h5>' +
-			'         </div>  ' +
-			'       </div>  ' +
-			'     </div>  ' +
-			'  </li>  '
+			'<li class="listing">' +       
+			'<div class="listing-container">' +     
+			'<div class="thumbnail-container">' +      
+			'<img class="thumbnail" src="' + listing.thumbnail + '">' + '</img>' +
+			'</div>' +  
+			'<div class="info_container">' +  
+			'<div class="info-container-1">' +         
+			'<h3 class="li_title">' + listing.title + '</h3>' +
+			'<p class="li_description">' + listing.description + '</p>' +     
+			'<p class="li_address">' + listing.address + '</p>' +
+			'</div>' +  
+			'<div class="info-container-2">' +           
+			'<p class="li_status"><b>Status: </b>' + getStatusFromId(listing.status) + '</p>' +  
+			'<p class="li_category"><b>Category: </b>' + getCategoryFromId(listing.category) + '</p>' +  
+			'<p class="li_date"><b>Report Date: </b>' + getFormattedDateString(listing.post_date) + '</p>' +  
+			'</div>' +  
+			'</div>' +  
+			'</div>' +  
+			'</li>'
 		);
 	})
 }

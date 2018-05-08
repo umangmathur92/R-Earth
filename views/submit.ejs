@@ -10,44 +10,19 @@
 			<div class="submit-container">
 
 				<div class="header-container">
-					<h1>Submit A Report</h1>
+					<h1>Report An Issue</h1>
 				</div>
 
 				<div class="report-container">
-					<div class="image-upload-container">
-						<div id="upload"></div>
-						<div class="dropzone" id="dropzone">
-							Upload an Image Below
-						</div>
-						<br>
-						<input type="file" name="pic" accept="image/*" id="imageUpload" onchange="readURL(this)">
-						<br>
-						<br>
-					</div>
 					<div class="form-container">
 						<div id="form-div">
 							<form class="form" id="form1">
 								<div class="name">
 									<input name="title" type="text" required="required" class="validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*"
-									 id="title" required="required" />
-									<div class="dropdown">
-										<select name="one" class="dropdown-select" required>
-											<option value="" id="option">Select A Category</option>
-											<option value="1" id="option">Air</option>
-											<option value="2" id="option">Land</option>
-											<option value="3" id="option">Water</option>
-										</select>
-									</div>
+									 id="title" required="required"/>
 								</div>
 
-								<div style="width: 100%; overflow: hidden; margin-bottom: 10px;">
-									<div style="width: 260px; float: left;">
-										<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
-										</button>
-									</div>
-									<div style="margin-left: 260px; display: none; top: 50%;" id="locationSpinner" class="locationSpinner">
-									</div>
-								</div>
+
 
 								<div id="location">
 									<div class="addresstext">
@@ -58,13 +33,44 @@
 										/>
 									</div>
 								</div>
-								<div>
-									<textarea name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"
-									</textarea>
+
+
+
+								<div id="location-and-category" style="width: 100%; overflow: hidden; margin-bottom: 10px;">
+									<div id ="detect" style="width: 260px; float: left;">
+										<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
+										</button>
+									</div>
+									<div style="margin-left: 260px; display: none; top: 50%;" id="locationSpinner" class="locationSpinner">
+									</div>
+
+									<div class="dropdown">
+										<select name="one" class="dropdown-select" required>
+											<option value="" id="option">Category</option>
+											<option value="1" id="option">Air</option>
+											<option value="2" id="option">Land</option>
+											<option value="3" id="option">Water</option>
+										</select>
+									</div>
 								</div>
+
+									<textarea name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*">
+
+									</textarea>
+
+
+								<div class="image-upload-container">
+									<div id="upload"></div>
+									<div class="dropzone" id="dropzone">
+										Upload an Image Below
+									</div>
+									<input type="file" name="pic" accept="image/*" id="imageUpload" >
+
+								</div>
+
 								<div class="buttons">
 									<div class="submit">
-										<button type="button" value="SEND" id="button-blue" onclick="submitData();"></button>
+										<button type="button" value="SEND" id="button-blue" onclick="submitData();">SEND</button>
 									</div>
 									<div>
 										<button id="button-red" onclick="goBack()">CANCEL</button>
@@ -74,30 +80,7 @@
 							</form>
 						</div>
 					</div>
-						<div class="ziptext">
-							<input name="zip" type="text" class="validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip Code*" required="required"/>
-						</div>
 
-					</div>
-
-					<div>
-						 <textarea name="description" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*" srequired="required"></textarea>
-					</div>
-
-
-
-
-					<div class = "buttons">
-
-						<div class="submit">
-							<button type="button" value="SEND" id="button-blue" onclick = "submitData();"></button>
-						</div>
-
-						<div >
-							<button id="button-red" onclick = "location.replace("/")">CANCEL</button>
-						</div>
-
-					</div>
 				</form>
 
 			</div>

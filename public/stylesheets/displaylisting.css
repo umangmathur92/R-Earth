@@ -1,76 +1,14 @@
-html body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  min-height: 100vh;
-  background-color: #28544B;
-  padding-top: 70px; 
+.tb_col1 {
+	font-size: large;
+	font-weight: bold; 
+	padding: 3px;
 }
 
-.displaylisting-container{
-	background-color: #28544B;
-    justify-content: space-between;
-    height: 100vh;
-    align-items: center;
+.tb_col2 {
+	font-weight: bold; 
+	padding: 3px;
 }
 
-h1{
-    color: #333;
-    text-align: center;
-    font-size: 40px;
-}
-
-h2{
-	color: #333;
-    font-size: 20px;
-}
-
-.resized-image-container{
-	position: relative;
-	width: 450px;
-	height: 450px;
-	float:left;
-	left: 75px;
-}
-
-.title-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 200px;
-	top: -35px;
-}
-
-.date-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 155px;
-	top: 50px;
-}
-
-.location-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 255px;
-	top: -13px;
-}
-
-.submission-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 0	px;
-	top: 30px;
-}
-
-.description-container{
-	position: relative;
-	float: left;
-	display: inline-block;
-	background-color: white;
-	width: 1000px;
-	height: 250px;
-	left: 75px;
-	top: 50px;
-
+#description_paragraph {
+	font-weight: bold; 
 }

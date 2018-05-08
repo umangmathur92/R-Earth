@@ -7,6 +7,7 @@
     "start:dev": "NODE_ENV=development nodemon ./bin/www",
     "db:create:migration": "sequelize migration:generate --name",
     "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed",
     "db:rollback": "sequelize db:migrate:undo",
     "postinstall": "sequelize db:migrate"
   },
