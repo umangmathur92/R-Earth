@@ -19,11 +19,12 @@
 					<h4 class="description-heading"> Search local SF enviormantal hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs.</h4>
 			</div>
 		<% } %>
+		
 			<div class="search-container">
 					<form class="search-form" data-toggle="validator" onSubmit="false">
 						<div class="search-bar-container">
 						<input placeholder="Zip Code or Address" id="search_bar" class="search-bar" type="text" class="validate">
-						<button class="btn waves-effect waves-light" type="submit" value="Search" onSubmit="return false">Search
+						<button class="btn waves-effect waves-light search-button" type="submit" value="Search" onSubmit="return false">Search
 								<i class="material-icons">search</i>
 						</button>
 						</div>
@@ -62,6 +63,17 @@
 				<div class="listings-list-container" id="showData">
 						<ul class="listings" id="listings-list">
 						</ul> 
+						<div class="preloader-wrapper big active">
+								<div class="spinner-layer spinner-blue-only">
+									<div class="circle-clipper left">
+										<div class="circle"></div>
+									</div><div class="gap-patch">
+										<div class="circle"></div>
+									</div><div class="circle-clipper right">
+										<div class="circle"></div>
+									</div>
+								</div>
+							</div>
 				</div>
 				<div class="map-column-container">
 					<div class="map-container">
