@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
             if( error ) {
                 res.send({userId: null, userType: null, error:error});
             } else {
-                res.send({userId: null, userType: null});
+                res.redirect('/');
             }
         });
     }

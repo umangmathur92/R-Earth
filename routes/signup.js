@@ -4,7 +4,7 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    var message = {title: 'Sign Up', userId: null};
+    var message = {title: 'Sign Up', message: null, userId: null};
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
@@ -32,28 +32,14 @@ router.post('/', (req, res, next) => {
                             res.send({userId: null, userType: null, error: 'Internal Error Creating Account'});
                         } else {
                             req.session.userId = user.user_id; //Create user session
-                            req.session.save( function( err ){
-                                /*
-                                req.flash( 'message', 'Signup Successful' )
-                                if(req.session.previousPage === 'submit'){
-                                    console.log("Sub");
-                                    res.redirect( '/submit' );
-                                } else {
-                                    res.send( '/' );
-                                }
-                                */
-                            });
+                            req.session.save();
+                            res.send();
+                            //res.redirect('/');
                         }
-                    })
-                    .catch(error => {
-                        res.send({userId: null, userType: null, error:error});
                     });
                 } else {
                     res.send({userId: null, userType: null, error: 'Username already exists'});
                 }
-            }).
-            catch(error => {
-                res.send({userId: null, userType: null, error:error});
             });
         }
     } else{
