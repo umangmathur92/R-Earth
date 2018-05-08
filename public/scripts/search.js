@@ -27,26 +27,7 @@ $(document).ready(function () {
 	});
 
 	$("#apply_filter_button").click(function(){
-		var categorySelectors = document.querySelector('.categories');
-		var categories = M.FormSelect.getInstance(categorySelectors);
-		var selectedCategories = categories.getSelectedValues();
-
-		var statusSelectors = document.querySelector('.status');
-		var statuses = M.FormSelect.getInstance(statusSelectors);
-		var selectedStatuses = statuses.getSelectedValues();
-
-		console.log(selectedCategories);
-		console.log(selectedStatuses);
-		var filtered = [];
-		listings.forEach(listing => {
-			if(($.inArray(listing.category.toString(), selectedCategories) > -1) && ($.inArray(listing.status.toString(), selectedStatuses) > -1)) {
-				filtered.push(listing);
-			}
-		})
-
-		$('.listings').empty();
-		generateListings(filtered);
-		createListingMapMarker(filtered);
+		searchListings();
 	});
 });
 
@@ -61,9 +42,20 @@ fetchListings = () => {
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
+
+	var filters = getFilteredSelectors();
+
 	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
-	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
+
+	const body = {
+		key: key, 
+		pageNum: pageNumber,
+		category: filters.category,
+		status: filters.status
+	}
+
+	$.post("/listings/search/", body, function (response) {
 		console.log(response)
 		dataList = response.dataList;
 		totalPages = response.totalNumOfPages;
@@ -200,4 +192,53 @@ generateListings = (list) => {
 			'  </li>  '
 		);
 	})
+}
+
+/**
+ * @method getFilteredSelectors()
+	 Get's the chosen selectors of filters(categories, status) from the selectors. 
+	 
+	 Categories coresponding values: 
+	 null: all | 0: "Land" | 1: "Water" | 2: "Air" | 3: "Fire"
+	 
+	 Status's coresponding values: 
+	 null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resolved"
+
+	 @method 
+ */
+
+getFilteredSelectors = () => {
+
+	var selectors = {};
+
+	var categorySelector = document.querySelector('.categories');
+	var category = M.FormSelect.getInstance(categorySelector);
+	var selectedCategory = category.getSelectedValues();
+	var statusSelector = document.querySelector('.status');
+	var status = M.FormSelect.getInstance(statusSelector);
+	var selectedStatus = status.getSelectedValues();
+
+	console.log(selectedCategory);	
+
+	if(selectedCategory[0] === ""){
+		selectors.category = null; 
+	} else {
+
+		selectors.category = selectedCategory[0];
+	} 
+
+	if(selectedStatus[0] === ""){
+		selectors.status = null;  
+	} else {
+		selectors.status = selectedStatus[0];
+	}
+
+	console.log(selectors);
+
+	return selectors; 
+}
+
+
+categoryStringToInt = () => {
+
 }
