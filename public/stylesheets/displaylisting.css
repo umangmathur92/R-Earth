@@ -12,3 +12,24 @@
 #description_paragraph {
 	font-weight: bold; 
 }
+
+.info_container {
+	height: 500px;
+}
+
+.info_text_box {
+	float: left;
+	width: 50%;
+}
+
+.post_info {
+	width: 80%;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.table_style {
+	margin-top: 24px;
+}

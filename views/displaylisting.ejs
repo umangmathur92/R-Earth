@@ -9,11 +9,11 @@
 </script>
 <%- include('partials/navbar') -%>
 <body>
-	<div style="width: 80%; height: 500px; margin-left: auto; margin-right: auto; display: block;">
-		<div style="float: left; width: 50%;">
-			<div id="info_container" style="height: 500px;"> 
+	<div id="post_info">
+		<div id="info_text_box">
+			<div id="info_container"> 
 				<h1><%= data.title %></h1> 
-				<table style="margin-top: 24px"> 
+				<table> 
 					<tr><td class="tb_col1">Report Date: </td><td class="tb_col2"><%= data.post_date_string %></td></tr> 
 					<tr><td class="tb_col1">Address: </td> <td class="tb_col2"><%= data.address %></td></tr>
 					<tr><td class="tb_col1">Submitted By: </td><td class="tb_col2"><%= data.username %></td></tr>
