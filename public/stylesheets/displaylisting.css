@@ -1,3 +1,8 @@
+h4 {
+	margin-top: 10px;
+	text-align: center;
+}
+
 .tb_col1 {
 	font-size: large;
 	font-weight: bold; 
@@ -32,4 +37,33 @@
 
 .table_style {
 	margin-top: 24px;
+}
+
+.info_image_box {
+	float: rightl
+	width: 50%;
+}
+
+.post_image {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: 0;
+	display: block;
+}
+
+.image_style {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.map_info {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-bottom: 80px;
 }

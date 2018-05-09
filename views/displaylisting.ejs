@@ -9,11 +9,11 @@
 </script>
 <%- include('partials/navbar') -%>
 <body>
-	<div id="post_info">
-		<div id="info_text_box">
-			<div id="info_container"> 
+	<div class="post_info">
+		<div class="info_text_box">
+			<div class="info_container"> 
 				<h1><%= data.title %></h1> 
-				<table> 
+				<table class="table_style"> 
 					<tr><td class="tb_col1">Report Date: </td><td class="tb_col2"><%= data.post_date_string %></td></tr> 
 					<tr><td class="tb_col1">Address: </td> <td class="tb_col2"><%= data.address %></td></tr>
 					<tr><td class="tb_col1">Submitted By: </td><td class="tb_col2"><%= data.username %></td></tr>
@@ -24,14 +24,14 @@
 				<p id="description_paragraph"><%= data.description %></p>
 			</div> 
 		</div>
-		<div style="float: right; width: 50%;">
-			<div  style="width: 480px; height: 480px; margin-left: auto; margin-right: 0; display: block;">
-				<img src="<%= data.picture %>" style="width: 480px; height: 480px; margin-left: auto; margin-right: auto; display: block;">
-				<h4 style="margin-top: 10px; text-align: center">Photograph: <%= data.title %></h4>
+		<div class="info_image_box">
+			<div class="post_image">
+				<img src=  "<%= data.picture %>" class="image_style">
+				<h4>Photograph: <%= data.title %></h4>
 			</div>
 		</div>	
 	</div>
-	<div style="width: 80%; margin-left: auto; margin-right: auto; display: block; margin-bottom: 80px;">
+	<div class="map_info">
 		<h1>Location on Map</h1>
 		<iframe id="mapiframe" 
 		width="100%"
