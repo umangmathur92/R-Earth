@@ -28,7 +28,8 @@ router.post('/', function(req, res, next) {
 
         user.checkPassword(username, password, function (error, user) { //Check for valid password
            if (error || !user) {
-               res.send({userId: userId, userType: userType, error: "Invalid username or password"}); //Password incorrect or user does not exist
+			   message = { title: 'Error', message: null, userId: null, userType: null, error: "Invalid username or password"};
+               res.render('error', message); //Password incorrect or user does not exist
            } else {
                 req.session.userId = user.user_id; //Create user session
 				req.session.userType = user.user_type;
@@ -37,7 +38,8 @@ router.post('/', function(req, res, next) {
             }
         });
     } else {
-        res.send({userId: userId, userType: userType, error: "Missing required fields to login"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields to login"};
+        res.render('error', message); //Password incorrect or user does not exist
     }
 });
 

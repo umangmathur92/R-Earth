@@ -39,7 +39,8 @@ router.post('/', function(req, res, next) {
             res.send({userId: userId, userType: userType, error: error});
         });
     } else{
-        res.send({userId: userId, userType: userType, error: "User must be logged in to submit a listing"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
+		res.render('error', message);
     }
     const title = req.body.title;
     const description = req.body.description;
@@ -68,7 +69,8 @@ router.post('/', function(req, res, next) {
             });
         });
     } else {
-        res.send({userId: userId, userType: userType, error: "Missing fields required to submit a listing"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing fields required to submit a listing"};
+		res.render('error', message);
     }
 });
 

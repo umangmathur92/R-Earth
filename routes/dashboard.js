@@ -101,12 +101,13 @@ router.post('/respond', function(req, res, next) {
             res.send({userId: userId, userType: userType, error:error});
         });
     } else {
-        res.send({userId: userId, userType: userType, error: "User is not logged in"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "User is not logged in"};
+        res.render('error', message);
     }
 
     if(userType != 1){
      //   res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
-        res.redirect('/');
+		res.redirect('/');
     }
     const listingId = req.body.listingId;
     const status = req.body.status;
@@ -117,7 +118,8 @@ router.post('/respond', function(req, res, next) {
             res.send({userId: userId, userType: userType, error:error});
         });
     }else {
-        res.send({userId: userId, userType: userType, error: "Missing required fields to create a response"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields to create a response"};
+        res.render('error', message);
     }
 });
 

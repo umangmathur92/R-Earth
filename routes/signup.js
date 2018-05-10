@@ -22,14 +22,16 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-            res.send({userId: null, userType: null, error: 'Passwords do not match'});
+			message = { title: 'Error', message: null, userId: null, userType: null, error: 'Passwords do not match'};
+			res.render('error', message);
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send({userId: null, userType: null, error: 'Internal Error Creating Account'});
+							message = { title: 'Error', message: null, userId: null, userType: null, error: 'Internal Error Creating Account'};
+							res.render('error', message);
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save();
@@ -38,12 +40,14 @@ router.post('/', (req, res, next) => {
                         }
                     });
                 } else {
-                    res.send({userId: null, userType: null, error: 'Username already exists'});
+					message = { title: 'Error', message: null, userId: null, userType: null, error: 'Username already exists'};
+					res.render('error', message);
                 }
             });
         }
     } else{
-        res.send({userId: null, userType: null, error: "Missing required fields"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields"};
+		res.render('error', message);
     }
 });
 

@@ -108,3 +108,8 @@ html body {
   width: 40px;
   background: transparent; 
 }
+
+.error-container {
+  font-size: 48px; 
+  color: #ffffff;
+}
