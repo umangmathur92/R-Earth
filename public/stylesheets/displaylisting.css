@@ -1,25 +1,33 @@
 h1 {
 	color: #6d9f71;
 	font-size: 40px;
+	font-weight: bold;
 }
 
 h4 {
+	background-color: #4e6e5d;
+	color: #001011;
 	margin-top: 10px;
 	text-align: center;
 }
 
 .tb_col1 {
-	font-size: x-large;
+	color: #001011;
+	font-size: 20px;
 	font-weight: bold; 
 	padding: 3px;
 }
 
 .tb_col2 {
+	color: #1d1e18;
+	font-size: 18px;
 	font-weight: bold; 
 	padding: 3px;
 }
 
 #description_paragraph {
+	color: #1d1e18;
+	font-size: 22px;
 	font-weight: bold; 
 }
 
@@ -28,13 +36,14 @@ h4 {
 }
 
 .info_text_box {
+	background-color: #4e6e5d;
 	float: left;
 	width: 50%;
 }
 
 .post_info {
 	width: 80%;
-	height: 500px;
+	height: 520px;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;

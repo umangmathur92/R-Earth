@@ -9,6 +9,7 @@
 </script>
 <%- include('partials/navbar') -%>
 <body>
+	
 	<div class="post_info">
 		<div class="info_text_box">
 			<div class="info_container"> 
@@ -35,9 +36,9 @@
 		<h1>Location on Map</h1>
 		<iframe id="mapiframe" 
 		width="100%"
-		height="700px"
+		height="600px"
 		frameborder="1" style="border:1"
-		src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=<%= data.latitude %>,<%= data.longitude %>&zoom=12"></iframe>
+		src="https:/www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=<%= data.latitude %>,<%= data.longitude %>&zoom=16"></iframe>
 	</div>
 </body>
 </html>
