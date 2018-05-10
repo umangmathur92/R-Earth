@@ -1,10 +1,15 @@
+h1 {
+	color: #6d9f71;
+	font-size: 40px;
+}
+
 h4 {
 	margin-top: 10px;
 	text-align: center;
 }
 
 .tb_col1 {
-	font-size: large;
+	font-size: x-large;
 	font-weight: bold; 
 	padding: 3px;
 }
@@ -40,7 +45,7 @@ h4 {
 }
 
 .info_image_box {
-	float: rightl
+	float: right;
 	width: 50%;
 }
 
