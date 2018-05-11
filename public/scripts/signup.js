@@ -57,6 +57,7 @@ $(document).ready(function () {
 });
 
 signUpPOSTRequest = (body) => {
+  
   $.post( '/signup',  body  , function( response, status ) {
     console.log(response)
     if(response.user){
