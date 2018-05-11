@@ -29,14 +29,16 @@ router.get('/', function(req, res, next) {
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
     const user_id = req.session.userId;
-    var userType;
+    var userType = req.session.userType;
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
             userType = userInfo.user_type;
         })
         .catch(error => {
-            res.send({userId: userId, userType: userType, error: error});
+			message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error: error});
         });
     } else{
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
@@ -65,11 +67,13 @@ router.post('/', function(req, res, next) {
                 res.redirect( '/' );
             })
             .catch(error => {
-                res.send({userId: userId, userType: userType, error:error});
+				message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+				res.render('error', message);
+                //res.send({userId: userId, userType: userType, error:error});
             });
         });
     } else {
-		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing fields required to submit a listing"};
+		message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
 		res.render('error', message);
     }
 });

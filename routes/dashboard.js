@@ -24,7 +24,9 @@ router.get('/', function(req, res, next) {
         }
     })
     .catch(error =>{
-            res.send({userId: userId, userType: userType, error:error});
+		message = { title: 'Error', message: null, userId: null, userType: userType, error: error};
+		res.render('error', message);
+        //res.send({userId: userId, userType: userType, error:error});
     });
     } else {
         req.session.previousPage = 'dashboard';
@@ -51,7 +53,9 @@ router.post('/', function(req, res, next) {
             }
         })
         .catch(error =>{
-            res.send({userId: userId, userType: userType, error:error});
+			message = { title: 'Error', message: null, userId: null, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error:error});
         });
     } else {
         req.session.previousPage = 'dashboard';
@@ -79,7 +83,9 @@ router.post('/', function(req, res, next) {
         res.send(message);
     })
     .catch(error => {
-        res.send({userId: userId, userType: userType, error:error});
+		message = { title: 'Error', message: null, userId: null, userType: userType, error: error};
+		res.render('error', message);
+        //res.send({userId: userId, userType: userType, error:error});
     });
 
 
@@ -88,7 +94,7 @@ router.post('/', function(req, res, next) {
 
 /** Respond to existing listing if user is an authorized environmental agent*/
 router.post('/respond', function(req, res, next) {
-    var userType;
+    var userType = req.session.userType;
     var userAgency;
     const userId = req.session.userId;
     if(req.session && userId){
@@ -98,7 +104,9 @@ router.post('/respond', function(req, res, next) {
            userAgency = userInfo.agency;
         })
         .catch(error =>{
-            res.send({userId: userId, userType: userType, error:error});
+			message = { title: 'Error', message: null, userId: null, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error:error});
         });
     } else {
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "User is not logged in"};
@@ -115,7 +123,9 @@ router.post('/respond', function(req, res, next) {
     if(listingId && status && description) {
         var update = listing.updateResponse(listingId, status, description, userAgency); //Add response information to listing
         update.catch(error => {
-            res.send({userId: userId, userType: userType, error:error});
+			message = { title: 'Error', message: null, userId: null, userType: null, error: error};
+			res.render('error', message);
+           // res.send({userId: userId, userType: userType, error:error});
         });
     }else {
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields to create a response"};

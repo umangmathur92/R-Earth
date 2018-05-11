@@ -18,7 +18,9 @@ router.post('/', function(req, res, next) {
             userType = userInfo.user_type;
         })
         .catch(error => {
-            res.send({userId: userId, userType: userType, error: error});
+			message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error: error});
         });
     }
 
