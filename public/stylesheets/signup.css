@@ -15,14 +15,30 @@ body {
   width: 100vh; 
 }
 
+
+/* info */
 .info-container {
-  flex: 1;
-  display: flex;
+  align-items: center;
   flex-direction: column;
+  display: flex;
+  position: relative;
+  margin: 260px auto 100px;
+  margin-left: 100px;
 }
 
 .info-inner-container {
   background-color: olive;
+  text-align: center;
+  color: #fffaf5; 
+  font-size: 30px;
+  display: flex;
+  min-width: 400px;
+  min-height: 550px;
+  flex-direction: column; 
+}
+
+.info-text {
+	font-size: 24px;
 }
 
 
