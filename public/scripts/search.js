@@ -17,11 +17,20 @@ $(document).ready(function () {
 	initMap();
 	fetchListings()
 	resizeElements();// Search Bar UI Functions 
+
+	// //Initialize materialize select
+	$('select').formSelect();
+
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
 	});
+
+	$("#apply_filter_button").click(function(){
+		searchListings();
+	});
+
 });
 
 fetchListings = () => {
@@ -35,9 +44,20 @@ fetchListings = () => {
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
-	const key = $("#search-input").val().trim();
+
+	var filters = getFilteredSelectors();
+
+	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
-	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
+
+	const body = {
+		key: key, 
+		pageNum: pageNumber,
+		category: filters.category,
+		status: filters.status
+	}
+
+	$.post("/listings/search/", body, function (response) {
 		console.log(response)
 		dataList = response.dataList;
 		totalPages = response.totalNumOfPages;
@@ -46,8 +66,8 @@ function searchListings() {
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
 		if (dataList && dataList.length > 0) {
-			createListingMapMarker(dataList);
 			generateListings(dataList);
+			createListingMapMarker(dataList);
 		}
 	});
 }
@@ -104,36 +124,11 @@ function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address.split(",")[0], list[i].title);
 	}
+	
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
-	
 }
-
-/**Generates HTML for each individual list item*/
-function generateIndividualListItemHtml(list, i) {
-	var listItem = document.createElement('li');
-	var titlePara = document.createElement('h4');
-	var thumbnailImg = document.createElement('img');
-	var descrPara = document.createElement('p');
-	var addrPara = document.createElement('p');
-	var zipcodePara = document.createElement('p');
-	titlePara.textContent = list[i].title;
-	descrPara.textContent = list[i].description;
-	addrPara.textContent = list[i].address;
-	zipcodePara.textContent = list[i].zipcode;
-	thumbnailImg.src = list[i].thumbnail;
-	listItem.appendChild(titlePara);
-	listItem.appendChild(thumbnailImg);
-	listItem.appendChild(descrPara);
-	listItem.appendChild(addrPara);
-	listItem.appendChild(zipcodePara);
-	listItem.addEventListener("click", function () {
-		window.open('/displaylisting' + '/' + list[i].listing_id);
-	});
-	resultlist.appendChild(listItem);
-}
-
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
@@ -197,4 +192,53 @@ generateListings = (list) => {
 			'</li>'
 		);
 	})
+}
+
+/**
+ * @method getFilteredSelectors()
+	 Get's the chosen selectors of filters(categories, status) from the selectors. 
+	 
+	 Categories coresponding values: 
+	 null: all | 0: "Land" | 1: "Water" | 2: "Air" | 3: "Fire"
+	 
+	 Status's coresponding values: 
+	 null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resolved"
+
+	 @method 
+ */
+
+getFilteredSelectors = () => {
+
+	//Reinitialize -> Materialize BUG 
+	$('select').formSelect();
+	
+	var selectors = {};
+
+	var categorySelector = document.querySelector('.categories');
+	var category = M.FormSelect.getInstance(categorySelector);
+	var selectedCategory = category.getSelectedValues();
+
+	console.log(selectedCategory);	
+
+	var statusSelector = document.querySelector('.status');
+	var status = M.FormSelect.getInstance(statusSelector);
+	var selectedStatus = status.getSelectedValues();
+
+
+	if(selectedCategory[0] === ""){
+		selectors.category = null; 
+	} else {
+
+		selectors.category = selectedCategory[0];
+	} 
+
+	if(selectedStatus[0] === ""){
+		selectors.status = null;  
+	} else {
+		selectors.status = selectedStatus[0];
+	}
+
+	console.log(selectors);
+
+	return selectors; 
 }

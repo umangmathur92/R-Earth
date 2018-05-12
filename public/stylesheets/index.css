@@ -6,14 +6,49 @@
 
 .search-container {
   flex: 0.10;
+  width: 100%;
   display: flex;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;  
   padding-top: 100px;
   padding-bottom: 100px;
+  background-color: orchid;
+}
+.search-bar {
+}
+
+.search-form {
+  display: flex;
+  flex: 0.5;
+}
+
+ .search-button {
+  margin: 10px;
+}
+
+.search-bar-container {
+  justify-content: center;
+  align-items: center;  
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  margin-left: 50px;
 }
 
 .filters-container {
   height: 400px;
+  display: flex;
+  flex-direction: row;
+  background-color: orchid;
+}
+
+.categories-container {
+  padding-right: 20px; 
+  padding-left: 60px; 
+}
+
+.status-container {
+  padding-right: 20px;
 }
 
 .cover-container {
@@ -43,6 +78,33 @@
   align-items: center;
   height: 200px;
   width: 150px;
+}
+
+#apply_Filter_button {
+  padding: 10px;
+}
+
+.listing-container {
+  display: flex; 
+  flex-direction: row;
+  box-shadow: 0 3px 6px rgb(172, 189, 134, .16), 0 3px 6px rgb(172, 189, 134, .23);
+  position: relative;
+  background-color: #fff;
+  margin: 1rem;
+  min-height: 150px;
+  min-width: 100px;
+  border-radius: 10px;
+}
+
+.thumbnail-container {
+  flex: 0.25;
+  padding: 10px;
+}
+
+.info-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
 }
 
 #card-title{
@@ -86,6 +148,10 @@
   flex: 1;
   flex-direction: column;
   padding: 10px;
+  min-width: 970px;
+  max-height: 100vh;
+  overflow:hidden; 
+  overflow-y:scroll;
   min-width: 400px;
 }
 
@@ -185,7 +251,7 @@
 /* Map */
 .map {
   width: 600px; 
-  height: 600px; 
+  height: 600px;
 }
 
 .map-column-container {
@@ -196,11 +262,11 @@
 
 .map-container {
   position: static;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-items: center;
   padding: 10px;
-  flex: 1;
+  height: 100vh;
 }
 
 .submit-button-container {
@@ -241,8 +307,15 @@
 
 @media screen and (max-width:1024px) {
   .map {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
+  }
+  
+  .map-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 500px;
   }
 }
 
@@ -259,186 +332,10 @@
     width: 150px;
     height: 150px; 
   }
-}
 
-/* Search Bar */
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-
-.search-bar {
-  background: #fff;
-  border: #b7b7b7 solid 1px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 0 3px #ccc;
-          box-shadow: 0 0 3px #ccc;
-  position: relative;
-  font-family: 'Source Sans Pro', sans-serif;
-  max-width: 420px;
-  min-width: 300px;
-  flex: 0.5;
-}
-.search-bar input[type=text] {
-  border: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  font-weight: 600;
-  font-size: 14px;
-  width: 80%;
-  padding: .5em;
-  margin: 0;
-  overflow: hidden;
-}
-.search-bar input[type=text]:focus {
-  outline: none;
-}
-.search-bar button[type=submit] {
-  background: -webkit-gradient(linear, left top, left bottom, from(#237cd4), to(#1e6ab5));
-  background: linear-gradient(#237cd4, #1e6ab5);
-  color: rgba(255, 255, 255, 0);
-  border: 1px solid #1C62A8;
-  width: 10%;
-  min-width: 56px;
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  bottom: -1px;
-  border-radius: 0 3px 3px 0;
-  margin: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-.search-bar button[type=submit]:after {
-  content: '';
-  position: absolute;
-  top: 18%;
-  right: 0;
-  bottom: 22%;
-  left: 4%;
-  background: url("http://media.lib.byu.edu/assets/images/searchbar/1.0/search-icon.svg") no-repeat center center;
-  background-size: contain;
-}
-.search-bar button[type=submit]:hover, .search_bar button[type=submit]:focus {
-  background: -webkit-gradient(linear, left top, left bottom, from(#3388dd), to(#2174c7));
-  background: linear-gradient(#3388dd, #2174c7);
-  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-          box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-.search-bar .search-dropdown {
-  font-weight: 600;
-  min-width: 17px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#e2e2e2));
-  background: linear-gradient(#f4f4f4, #e2e2e2);
-  border-right: 1px solid #ddd;
-  color: #555;
-  padding: 0 28px 0 13px;
-  border-radius: 2px 0 0 2px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 10000;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-}
-.search-bar .search-dropdown:after {
-  content: "\2193";
-  color: rgba(85, 85, 85, 0);
-  background: url("http://media.lib.byu.edu/assets/images/searchbar/1.0/down-arrow.svg") no-repeat top left;
-  height: 8px;
-  width: 10px;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  margin-top: -6px;
-}
-.search-bar .search-dropdown:hover, .search_bar .search_dropdown.active {
-  background: -webkit-gradient(linear, left top, left bottom, from(#e7e7e7), to(#d5d5d5));
-  background: linear-gradient(#e7e7e7, #d5d5d5);
-  cursor: pointer;
-  border-right-color: #ccc;
-}
-.search-bar .search-dropdown > span {
-  position: absolute;
-  top: 50%;
-  margin-top: -8px;
-  white-space: nowrap;
-  font-size: 15px;
-}
-.search-bar .search-dropdown ul {
-  display: none;
-  position: absolute;
-  top: 105%;
-  left: -1px;
-  font-size: 14px;
-  width: 225px;
-  background: #fff;
-  -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 7px 0;
-}
-.search-bar .search-dropdown li {
-  list-style-type: none;
-  margin: 0;
-  padding: 5px 18px;
-  color: #1C62A8;
-  line-height: 1.2em;
-  position: relative;
-}
-.search-bar .search-dropdown li:hover {
-  background: #e7e7e7;
-}
-.search-bar .search-dropdown li.selected {
-  background: #1C62A8;
-  color: #fff;
-}
-.search-bar.small {
-  max-width: 300px;
-}
-.search-bar.small input[type=text] {
-  font-size: 13px;
-}
-.search-bar.large {
-  max-width: 560px;
-}
-.search-bar.large input[type=text] {
-  font-size: 16px;
-}
-.search-bar.larger {
-  max-width: 700px;
-}
-.search-bar.larger input[type=text] {
-  font-size: 18px;
-}
-.search-bar.huge {
-  max-width: 860px;
-}
-.search-bar.huge input[type=text] {
-  font-size: 21px;
-}
-.search-bar ::-webkit-input-placeholder {
-  font-weight: 400;
-}
-.search-bar :-ms-input-placeholder {
-  font-weight: 400;
-}
-.search-bar ::-ms-input-placeholder {
-  font-weight: 400;
-}
-.search-bar ::placeholder {
-  font-weight: 400;
+  .map-container {
+    height: 200px;
+  }
 }
 
 .pagination {

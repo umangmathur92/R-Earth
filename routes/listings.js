@@ -37,6 +37,7 @@ router.post('/search/', function(req, res, next) {
     const category = req.body.category;
     const order = req.body.order;
     const pageNum = req.body.pageNum;
+
     const response = listing.determineSearch(key, status, category, order, pageNum); //Apply search parameters
     response.then( data => {
         for(var i = 0; i < data.length; i++) { // Resolve picture URLs: full size and thumbnail
