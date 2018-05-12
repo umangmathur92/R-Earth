@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html>
- <link rel="stylesheet" href="/stylesheets/displaylisting.css">
+<%- include('partials/header') -%>
+<link rel="stylesheet" href="/stylesheets/displaylisting.css"/>
+<script type="text/javascript" src="/scripts/utils.js"></script>
+<script type="text/javascript" src="/scripts/displaylisting.js"></script>
+<script>
+	
+</script>
+<%- include('partials/navbar') -%>
 <body>
 	
-	<div class="displaylisting-container">
-	
-		<img class="resized-image-container" src="<%= data.picture %>">
-
-		<div class="title-container">
-			<h1><%= data.title %></h1>
+	<div class="post_info">
+		<div class="info_text_box">
+			<div class="info_container"> 
+				<h1><%= data.title %></h1> 
+				<table class="table_style"> 
+					<tr><td class="tb_col1">Report Date: </td><td class="tb_col2"><%= data.post_date_string %></td></tr> 
+					<tr><td class="tb_col1">Address: </td> <td class="tb_col2"><%= data.address %></td></tr>
+					<tr><td class="tb_col1">Submitted By: </td><td class="tb_col2"><%= data.username %></td></tr>
+					<tr><td class="tb_col1">Current Status: </td><td class="tb_col2"><%= data.status_string %></td></tr> 
+					<tr><td class="tb_col1">Category: </td><td class="tb_col2"><%= data.category_string %></td></tr>  
+				</table> 
+				<h1>Description</h1>
+				<p id="description_paragraph"><%= data.description %></p>
+			</div> 
 		</div>
-
-		<div class="date-container">
-			<h2><%= data.post_date %></h2>
-		</div>
-
-		<div class="location-container">
-			<h2><%= data.address %></h2>
-		</div>
-
-		<div class="submission-container">
-			<h2><%= data.username %></h2>
-		</div>
-
-		<div class="description-container">
-			<h2><%= data.description %></h2>
-		</div>
-
+		<div class="info_image_box">
+			<div class="post_image">
+				<img src=  "<%= data.picture %>" class="image_style">
+				<h4>Photograph: <%= data.title %></h4>
+			</div>
+		</div>	
+	</div>
+	<div class="map_info">
+		<h1>Location on Map</h1>
+		<iframe id="mapiframe" 
+		width="100%"
+		height="600px"
+		frameborder="1" style="border:1"
+		src="https:/www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=<%= data.latitude %>,<%= data.longitude %>&zoom=16"></iframe>
 	</div>
 </body>
 </html>

@@ -4,12 +4,10 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    const userId = null; 
-    var message = {title: 'Sign Up', };
+    var message = {title: 'Sign Up', message: null, userId: null, userType: null, page: 'login'};
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
-   var message = {title: 'Sign Up',userId};
    res.render('signup', message);
 });
 
@@ -23,7 +21,6 @@ router.post('/', (req, res, next) => {
         error: null,
     };
 
-    console.log(req.body);
 
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
@@ -41,7 +38,8 @@ router.post('/', (req, res, next) => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send('Error creating account');
+							message = { title: 'Error', message: null, userId: null, userType: null, error: 'Internal Error Creating Account'};
+							res.render('error', message);
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save( function( err ){
@@ -59,6 +57,7 @@ router.post('/', (req, res, next) => {
                     message.error = 'That username already exists! Trying adding a number at the end of ' + username + '.';
                     console.log(message)
                     res.send(message)
+
                 }
             });
         }

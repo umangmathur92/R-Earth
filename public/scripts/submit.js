@@ -20,6 +20,13 @@ $(document).ready(function () {
     document.getElementById('btnDetect').addEventListener("click", function() {
         getLocation();
     });
+    document.getElementById('imageUpload').addEventListener("change", function() {
+        readURL(document.getElementById('imageUpload'));
+    });
+    document.getElementById('button-blue').addEventListener("click", function() {
+        console.log("es");
+        submitData();
+    });
     //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
     //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
@@ -117,7 +124,7 @@ function submitData() {
     var address = $('#address').val();
     var zipcode = $('#zip').val();
     var description = $('#description').val();
-    var picture = sendImage
+    var picture = sendImage;
     $.post('/submit', {
             title: title,
             category: category,

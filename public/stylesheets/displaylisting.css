@@ -1,76 +1,83 @@
-html body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  min-height: 100vh;
-  background-color: #28544B;
-  padding-top: 70px; 
+h1 {
+	color: #6d9f71;
+	font-size: 40px;
+	font-weight: bold;
 }
 
-.displaylisting-container{
-	background-color: #28544B;
-    justify-content: space-between;
-    height: 100vh;
-    align-items: center;
+h4 {
+	background-color: #4e6e5d;
+	color: #001011;
+	margin-top: 10px;
+	text-align: center;
 }
 
-h1{
-    color: #333;
-    text-align: center;
-    font-size: 40px;
+.tb_col1 {
+	color: #001011;
+	font-size: 20px;
+	font-weight: bold; 
+	padding: 3px;
 }
 
-h2{
-	color: #333;
-    font-size: 20px;
+.tb_col2 {
+	color: #1d1e18;
+	font-size: 18px;
+	font-weight: bold; 
+	padding: 3px;
 }
 
-.resized-image-container{
-	position: relative;
-	width: 450px;
-	height: 450px;
-	float:left;
-	left: 75px;
+#description_paragraph {
+	color: #1d1e18;
+	font-size: 22px;
+	font-weight: bold; 
 }
 
-.title-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 200px;
-	top: -35px;
+.info_container {
+	height: 500px;
 }
 
-.date-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 155px;
-	top: 50px;
-}
-
-.location-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 255px;
-	top: -13px;
-}
-
-.submission-container{
-	text-align: right;
-	position: relative;
-	float: right;
-	right: 0	px;
-	top: 30px;
-}
-
-.description-container{
-	position: relative;
+.info_text_box {
+	background-color: #4e6e5d;
 	float: left;
-	display: inline-block;
-	background-color: white;
-	width: 1000px;
-	height: 250px;
-	left: 75px;
-	top: 50px;
+	width: 50%;
+}
 
+.post_info {
+	width: 80%;
+	height: 520px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.table_style {
+	margin-top: 24px;
+}
+
+.info_image_box {
+	float: right;
+	width: 50%;
+}
+
+.post_image {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: 0;
+	display: block;
+}
+
+.image_style {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.map_info {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-bottom: 80px;
 }

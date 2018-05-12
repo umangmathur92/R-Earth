@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 
     listings.then( data => { 
         const userId  = req.session.userId; 
-        console.log(userId)
-        res.render('index', { title: 'R-Earth', userId: userId ? userId : null});
+		const userType  = req.session.userType; 
+        res.render('index', { title: 'R-Earth', userId: userId ? userId : null, userType: userType ? userType : null, page: 'index'});
     });
 });
 

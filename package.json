@@ -7,14 +7,19 @@
     "start:dev": "NODE_ENV=development nodemon ./bin/www",
     "db:create:migration": "sequelize migration:generate --name",
     "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed",
     "db:rollback": "sequelize db:migrate:undo",
     "postinstall": "sequelize db:migrate"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
+<<<<<<< HEAD
     "bootstrap": "^4.1.0",
     "cloudinary": "",
+=======
+    "cloudinary": "^1.11.0",
+>>>>>>> test
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "dateformat": "^3.0.3",
