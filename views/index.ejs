@@ -1,42 +1,31 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-	<link rel="stylesheet" href="/stylesheets/index.css" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<script src="https://unpkg.com/ejs@2.5.7/ejs.min.js"></script>
-	<script src="http://momentjs.com/downloads/moment.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4"></script>
-	<script type="text/javascript" src="scripts/utils.js"></script>
-	<script type="text/javascript" src="scripts/map.js"></script>
-	<script type="text/javascript" src="scripts/search.js"></script>
-	<body>
+<link rel="stylesheet" href="/stylesheets/index.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://unpkg.com/ejs@2.5.7/ejs.min.js"></script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4"></script>
+<script type="text/javascript" src="scripts/utils.js"></script>
+<script type="text/javascript" src="scripts/map.js"></script>
+<script type="text/javascript" src="scripts/search.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<body>
 	<%- include('partials/navbar') -%>
-		<div class="index-container">
-		<% if (!userId) { %>   
-			<div class="cover-container">
-					<h1 class="heading"> Welcome to R-Earth</h1>
-					<h3 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h3>
-					<h4 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviormental hazards so local agencies can do their jobs.</h4>
-			</div>
-		<% } %>
-		
+	<div class="index-container">
+		<div class="cover-container">
+			<h1 class="heading"> Welcome to R-Earth</h1>
+			<h4 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h4>
+			<h6 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviornmental hazards so local agencies can do their jobs.</h6>
 			<div class="search-container">
-					<form class="search-form" data-toggle="validator" onSubmit="false">
-						<div class="search-bar-container">
-						<input placeholder="Zip Code or Address" id="search_bar" class="search-bar" type="text" class="validate">
-						<button class="btn waves-effect waves-light search-button" type="submit" value="Search" onSubmit="return false">Search
-								<i class="material-icons">search</i>
-						</button>
-						</div>
-					</form>	
-			</div>
-			<div class="filters-container">	
+				<form class="search-form" data-toggle="validator" onSubmit="false">
+					<div class="search-bar-container">
+						<div class="filters-container">	
+							<input placeholder="Zip Code or Address" id="search_bar" class="search-bar" type="text" class="validate">
 							<div class="categories-container">
 								<select class="categories" name="categories">
-									<option value="" class="category">All Categories
-									</option>
+									<option value="" class="category">All Categories</option>
 									<option value=0 class="category"> Land </option>
 									<option value=1 class="category" > Water </option>
 									<option value=2 class="category"> Air </option>
@@ -44,50 +33,43 @@
 								</select>
 							</div>
 							<div class="status-container">
-							<select class="status">
-									<option value="">All Statuses
-									</option>
+								<select class="status">
+									<option value="">All Statuses</option>
 									<option value=0> Reported </option>
 									<option value=1> Aknowledged </option>
 									<option value=2> Work in Progress </option>
 									<option value=3> Resolved </option>
 								</select>
 							</div>
-								<div>
-								<button class="btn waves-effect waves-light green accent-3" id="apply_filter_button" type="submit">Apply Filters
-										<i class="material-icons right">send</i>
-								</button>
-							</div>
-					<ul class="pagination" id="pageLinkContainer">
-					</ul>	
+							<button class="btn waves-effect waves-light search-button" type="submit" value="Search" onSubmit="return false">Search
+								<i class="material-icons">search</i>
+							</button>
+						</div>
+					</div>
+				</form>	
 			</div>
-			<div class="listings-map-container">
-				<div class="listings-list-container" id="showData">
-						<ul class="listings" id="listings-list">
-						</ul> 
-						<div class="preloader-wrapper big active">
-								<div class="spinner-layer spinner-blue-only">
-									<div class="circle-clipper left">
-										<div class="circle"></div>
-									</div><div class="gap-patch">
-										<div class="circle"></div>
-									</div><div class="circle-clipper right">
-										<div class="circle"></div>
-									</div>
-								</div>
-							</div>
-				</div>
-				<div class="map-column-container">
-					<div class="map-container">
-						<div class="map" id="map"></div>
-					</div>	
-				</div>
-				<div class="fixed-action-btn">
-						<a href="/submit" class="btn-large red">
-							<text> Report</text>
-							<i class="large material-icons">mode_edit</i>
-						</a>
-				</div>
+			
+		</div>
+		<div class="paginiationcontainerdiv">
+			<ul class="pagination" id="pageLinkContainer">
+			</ul>
+		</div>
+		<div class="listings-map-container">
+			<div class="listings-list-container" id="showData">
+				<ul class="listings" id="listings-list">
+				</ul> 
 			</div>
+			<div class="map-column-container">
+				<div class="map-container">
+					<div class="map" id="map"></div>
+				</div>	
+			</div>
+			<div class="fixed-action-btn">
+				<a href="/submit" class="btn-large red">
+					<text> Report</text>
+					<i class="large material-icons">mode_edit</i>
+				</a>
+			</div>
+		</div>
 	</body>
-</html>
+	</html>
