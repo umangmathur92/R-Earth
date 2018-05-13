@@ -9,9 +9,10 @@ router.get('/', function(req, res, next) {
 });
 
 /** User authentication*/
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res, next) {    
     var userId = req.session.userId;
     var userType;
+    
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {

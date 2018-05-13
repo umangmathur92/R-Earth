@@ -30,6 +30,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     const user_id = req.session.userId;
     var userType = req.session.userType;
+
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
@@ -44,6 +45,7 @@ router.post('/', function(req, res, next) {
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
 		res.render('error', message);
     }
+
     const title = req.body.title;
     const description = req.body.description;
     const longitude = req.body.longitude;
@@ -52,7 +54,7 @@ router.post('/', function(req, res, next) {
     const zipcode = req.body.zipcode;
     const category = req.body.category;
     const base64 = req.body.picture;
-    
+
     if(user_id && title && description && longitude && latitude && address && zipcode && category && base64) {
         cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
             const picture = result.public_id;
@@ -72,6 +74,7 @@ router.post('/', function(req, res, next) {
                 //res.send({userId: userId, userType: userType, error:error});
             });
         });
+
     } else {
 		message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
 		res.render('error', message);

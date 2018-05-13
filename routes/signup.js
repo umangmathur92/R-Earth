@@ -13,6 +13,15 @@ router.get('/', function(req, res, next) {
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
+    
+    //response body
+    var message = {
+        user: null,
+        redirect: null,
+        error: null,
+    };
+
+
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;
@@ -22,8 +31,7 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-			message = { title: 'Error', message: null, userId: null, userType: null, error: 'Passwords do not match'};
-			res.render('error', message);
+            message.error = "There was an error signing up. We apologize. Please try again."
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
@@ -34,20 +42,28 @@ router.post('/', (req, res, next) => {
 							res.render('error', message);
                         } else {
                             req.session.userId = user.user_id; //Create user session
-                            req.session.save();
-                            res.send();
-                            //res.redirect('/');
+                            req.session.save( function( err ){
+                                message.user = user
+                                if(req.session.previousPage === 'submit'){
+                                    message.redirect = '/submit';
+                                } else {
+                                    message.redirect = '/';
+                                }
+                                res.send(message)
+                            });
                         }
                     });
                 } else {
-					message = { title: 'Error', message: null, userId: null, userType: null, error: 'Username already exists'};
-					res.render('error', message);
+                    message.error = 'That username already exists! Trying adding a number at the end of ' + username + '.';
+                    console.log(message)
+                    res.send(message)
+
                 }
             });
         }
     } else{
-		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields"};
-		res.render('error', message);
+        message.error =  message.error = 'There was an error signing up. We apologize. Please try again.';
+        res.send(message)
     }
 });
 
