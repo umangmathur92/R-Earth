@@ -5,7 +5,6 @@ const dateFormat = require('dateformat');
 
 /** Search all listings by zipcode*/
 function zipSearch(key, filter, order, pageNum) {
-	if (key) {
         var term = "'" + key + "%'"
 		/*
 		var pageSize = 10;
@@ -14,9 +13,6 @@ function zipSearch(key, filter, order, pageNum) {
 		var subQueryToHandlePagination = ' LIMIT ' + 10 + ' OFFSET ' + ((pageNum - 1 ) * 10);
 		*/
 		return db.any('SELECT * FROM listings WHERE zipcode LIKE ' + term + filter + ' ORDER BY ' + order) ;
-	} else {
-		return fetchListings();
-	}
 }
 
 
@@ -49,11 +45,7 @@ function addressSearch(key, filter, order, pageNum) {
 
 /** Apply filters before executing zipcode or address search*/
 function determineSearch(key, status, category, order, pageNum) {
-	if(!key){
-		return fetchListings();
-	}
 	var filter = "";
-
 	if(status) {
 		filter += " AND status = " + status;
 	}
@@ -63,13 +55,10 @@ function determineSearch(key, status, category, order, pageNum) {
 	if(!order) {
 		order = "post_date DESC";
 	}
-
 	console.log(filter)
-
 	if(isNaN(Number(key))) {
 		return addressSearch(key, filter, order, pageNum);
-	}
-	else {
+	} else {
 		return zipSearch(key, filter, order, pageNum);
 	}
 }

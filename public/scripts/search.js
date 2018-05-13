@@ -3,7 +3,6 @@
 * API Calls: 
 * GET '/Listings' - Get's all the Enviormental Listings
 * POST 'Listings/search' - Post's a search with either an address or Zip Code 
-* 
 * Functionality: 
 * Handles DOM creation of Listings, and handles UI events. @file 
 */
@@ -15,41 +14,26 @@ var listings;
 $(document).ready(function () {
 	setNavbarScrollAnimation();
 	initMap();
-	fetchListings()
+	searchListings();
 	resizeElements();// Search Bar UI Functions 
-
 	// //Initialize materialize select
 	$('select').formSelect();
-
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performedxss
 		searchListings();
 		return false;
 	});
-
 	$("#apply_filter_button").click(function(){
 		searchListings();
 	});
-
 });
-
-fetchListings = () => {
-	$.get("/listings", function (response) {
-		listings = response;
-		generateListings(response);
-		createListingMapMarker(response);
-		setUpListingListeners();
-	});
-}
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
-
 	var filters = getFilteredSelectors();
-
 	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
-
+	console.log('Query data: ' + 'key='+key + ', pagenumber=' + pageNumber + ', category='+filters.category + ', status='+ filters.status);
 	const body = {
 		key: key, 
 		pageNum: pageNumber,
@@ -59,15 +43,16 @@ function searchListings() {
 
 	$.post("/listings/search/", body, function (response) {
 		console.log(response)
-		dataList = response.dataList;
+		listings = response.dataList;
 		totalPages = response.totalNumOfPages;
 		var totalNumOfResults = response.totalNumOfResults;
-		var numResultsOnThisPage = dataList.length;
+		var numResultsOnThisPage = listings.length;
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
-		if (dataList && dataList.length > 0) {
-			generateListings(dataList);
-			createListingMapMarker(dataList);
+		if (listings && listings.length > 0) {
+			generateListings(listings);
+			createListingMapMarker(listings);
+			setUpListingListeners(listings);
 		}
 	});
 }
@@ -102,12 +87,11 @@ function getPageNumberClickListener(pageNum) {
 	};
 }
 
-setUpListingListeners = () => {
+setUpListingListeners = (response) => {
 	$('.listing').click(function () {
-		console.log(listings[$(this).index()]);
-		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
+		console.log(response[$(this).index()]);
+		window.open('/displaylisting' + '/' + response[$(this).index()].listing_id);
 	});
-	
 	$('.listing').hover(function () {
 		var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
@@ -117,14 +101,12 @@ setUpListingListeners = () => {
 			currentFocus = latlng;
 		}
 	});
-	
 }
 
 function createListingMapMarker(list) {
 	for (var i = 0; i < list.length; i++) {
 		addMarker(new google.maps.LatLng(list[i].latitude, list[i].longitude), list[i].picture, list[i].address.split(",")[0], list[i].title);
 	}
-	
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
@@ -132,7 +114,6 @@ function createListingMapMarker(list) {
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
-	
 	$(document).scroll(function () {
 		scroll_start = $(this).scrollTop();
 		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : 'transparent');
@@ -195,50 +176,20 @@ generateListings = (list) => {
 }
 
 /**
- * @method getFilteredSelectors()
-	 Get's the chosen selectors of filters(categories, status) from the selectors. 
-	 
-	 Categories coresponding values: 
-	 null: all | 0: "Land" | 1: "Water" | 2: "Air" | 3: "Fire"
-	 
-	 Status's coresponding values: 
-	 null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resolved"
-
-	 @method 
- */
-
+* @method getFilteredSelectors()
+Get's the chosen selectors of filters(categories, status) from the selectors. 
+Categories coresponding values: 
+null: all | 0: "Land" | 1: "Water" | 2: "Air" | 3: "Fire"
+Status's coresponding values: 
+null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resolved"
+@method 
+*/
 getFilteredSelectors = () => {
-
-	//Reinitialize -> Materialize BUG 
 	$('select').formSelect();
-	
+	let category = $('#sel_categories').find('option:selected').val();
+	let status = $('#sel_status').find('option:selected').val();
 	var selectors = {};
-
-	var categorySelector = document.querySelector('.categories');
-	var category = M.FormSelect.getInstance(categorySelector);
-	var selectedCategory = category.getSelectedValues();
-
-	console.log(selectedCategory);	
-
-	var statusSelector = document.querySelector('.status');
-	var status = M.FormSelect.getInstance(statusSelector);
-	var selectedStatus = status.getSelectedValues();
-
-
-	if(selectedCategory[0] === ""){
-		selectors.category = null; 
-	} else {
-
-		selectors.category = selectedCategory[0];
-	} 
-
-	if(selectedStatus[0] === ""){
-		selectors.status = null;  
-	} else {
-		selectors.status = selectedStatus[0];
-	}
-
-	console.log(selectors);
-
+	selectors.category = (category === "") ? null : category;
+	selectors.status = (status === "") ? null : status;
 	return selectors; 
 }
