@@ -1,8 +1,7 @@
 html body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   min-height: 100vh;
-  background-color: #28544B;
-  padding-top: 70px; 
+  background-color: #1e1e24;
 }
 
 .container {
