@@ -46,7 +46,7 @@ router.get('/:listingId', function(req, res, next) {
     var postUser = user.getUserById(userId);
     postUser.then( userData => {
       data.username = userData.username;
-      res.render('displaylisting', {userId: userId, userType: userType, data: data});
+      res.render('displaylisting', {userId: userId, userType: userType, data: data, page: 'submit'});
     })
     .catch(error => {
       res.send({userId: userId, userType: userType, error: error});
