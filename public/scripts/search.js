@@ -33,12 +33,14 @@ function searchListings() {
 	var filters = getFilteredSelectors();
 	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
+	console.log('Query data: ' + 'key='+key + ', pagenumber=' + pageNumber + ', category='+filters.category + ', status='+ filters.status);
 	const body = {
 		key: key, 
 		pageNum: pageNumber,
 		category: filters.category,
 		status: filters.status
 	}
+
 	$.post("/listings/search/", body, function (response) {
 		console.log(response)
 		listings = response.dataList;
@@ -183,26 +185,11 @@ null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resol
 @method 
 */
 getFilteredSelectors = () => {
-	//Reinitialize -> Materialize BUG 
 	$('select').formSelect();
+	let category = $('#sel_categories').find('option:selected').val();
+	let status = $('#sel_status').find('option:selected').val();
 	var selectors = {};
-	var categorySelector = document.querySelector('.categories');
-	var category = M.FormSelect.getInstance(categorySelector);
-	var selectedCategory = category.getSelectedValues();
-	console.log(selectedCategory);	
-	var statusSelector = document.querySelector('.status');
-	var status = M.FormSelect.getInstance(statusSelector);
-	var selectedStatus = status.getSelectedValues();
-	if(selectedCategory[0] === ""){
-		selectors.category = null; 
-	} else {
-		selectors.category = selectedCategory[0];
-	} 
-	if(selectedStatus[0] === ""){
-		selectors.status = null;  
-	} else {
-		selectors.status = selectedStatus[0];
-	}
-	console.log(selectors);
+	selectors.category = (category === "") ? null : category;
+	selectors.status = (status === "") ? null : status;
 	return selectors; 
 }
