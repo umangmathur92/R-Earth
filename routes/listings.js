@@ -48,7 +48,6 @@ router.post('/search/', function(req, res, next) {
             data[i].thumbnail = thumb;
         }
         const isSuccess = data.length > 0;
-        console.log('wwooohhhhhooo' + JSON.stringify(data[0]));
         var message = {
             success: isSuccess,
             dataList: isSuccess ? data : [],

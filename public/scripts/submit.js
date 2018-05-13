@@ -31,12 +31,12 @@ $(document).ready(function () {
     //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
 
-
+    /*
     $("#form1").submit(function(){
         submitData();
         return false; 
     })
-
+    */
 });
 
 function onAddressSelectedFromDropdown() {
@@ -137,6 +137,7 @@ function submitData() {
     },
         function(data, status){
             if(status == "success"){
+                console.log("Success");
                 window.location.replace("/");
             } else {
                 alert("Data: " + data + "\nStatus: " + status);

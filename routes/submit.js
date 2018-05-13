@@ -13,7 +13,6 @@ cloudinary.config({
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
   var message = {title: 'R-Earth', userId: null, userType: null, page: 'submit'};
-  console.log(req.session)
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
 	 message.userType = req.session.userType;
@@ -28,7 +27,7 @@ router.get('/', function(req, res, next) {
 
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
-    const user_id = req.session.userId;
+    const userId = req.session.userId;
     var userType = req.session.userType;
 
     if(req.session && userId) {
@@ -55,18 +54,16 @@ router.post('/', function(req, res, next) {
     const category = req.body.category;
     const base64 = req.body.picture;
 
-    if(user_id && title && description && longitude && latitude && address && zipcode && category && base64) {
+    if(userId && title && description && longitude && latitude && address && zipcode && category && base64) {
         cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
             const picture = result.public_id;
-            var newListing = listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
+            var newListing = listing.createListing(userId, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
             newListing.catch(error => {
                 res.send({userId: userId, userType: userType, error:error});
             });
-            const listings = fetchListings(1);
+            const listings = listing.fetchListings();
             listings.then(data => {
-                console.log(data)
-                res.render('index', {title: 'R-Earth', listings: data})
-                res.redirect( '/' );
+                res.send({data: data, status: "success"});
             })
             .catch(error => {
 				message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
