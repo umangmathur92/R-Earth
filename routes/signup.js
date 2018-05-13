@@ -4,7 +4,7 @@ const user = require('../db/users');
 
 /** Display sign up page if user is not already logged in*/
 router.get('/', function(req, res, next) {
-    var message = {title: 'Sign Up', userId: null};
+    var message = {title: 'Sign Up', message: null, userId: null, userType: null, page: 'login'};
     if( req.session && req.session.userId ) { //Check for user login
         message.userId = req.session.userId;
     }
@@ -13,6 +13,15 @@ router.get('/', function(req, res, next) {
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
+    
+    //response body
+    var message = {
+        user: null,
+        redirect: null,
+        error: null,
+    };
+
+
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;
         const password = req.body.password;
@@ -22,42 +31,39 @@ router.post('/', (req, res, next) => {
         const agency = req.body.agency;
 
         if(confirmation != password) {
-            res.send({userId: null, userType: null, error: 'Passwords do not match'});
+            message.error = "There was an error signing up. We apologize. Please try again."
         } else {
             const exists = user.getUser(username);
             exists.then(data => {
                 if(data == null){ //Check if username already exists
                     user.signUp(name, username, password, userType, agency, function(error, user) { //Create new account
                         if(error || !user) {
-                            res.send({userId: null, userType: null, error: 'Internal Error Creating Account'});
+							message = { title: 'Error', message: null, userId: null, userType: null, error: 'Internal Error Creating Account'};
+							res.render('error', message);
                         } else {
                             req.session.userId = user.user_id; //Create user session
                             req.session.save( function( err ){
-                                /*
-                                req.flash( 'message', 'Signup Successful' )
+                                message.user = user
                                 if(req.session.previousPage === 'submit'){
-                                    console.log("Sub");
-                                    res.redirect( '/submit' );
+                                    message.redirect = '/submit';
                                 } else {
-                                    res.send( '/' );
+                                    message.redirect = '/';
                                 }
-                                */
+                                res.send(message)
                             });
                         }
-                    })
-                    .catch(error => {
-                        res.send({userId: null, userType: null, error:error});
                     });
                 } else {
-                    res.send({userId: null, userType: null, error: 'Username already exists'});
+                    message.error = 'That username already exists! Trying adding a number at the end of ' + username + '.';
+                    console.log(message)
+                    res.send(message)
+
                 }
-            }).
-            catch(error => {
-                res.send({userId: null, userType: null, error:error});
             });
         }
     } else{
-        res.send({userId: null, userType: null, error: "Missing required fields"});
+        message.error =  message.error = 'There was an error signing up. We apologize. Please try again.';
+        res.send(message)
     }
 });
 

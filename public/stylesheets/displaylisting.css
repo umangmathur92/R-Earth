@@ -1,14 +1,89 @@
+.navbar {
+	background-color: #000000e0;
+}
+
+h1 {
+	color: #6d9f71;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+h4 {
+	background-color: #4e6e5d;
+	color: #001011;
+	margin-top: 10px;
+	text-align: center;
+}
+
 .tb_col1 {
-	font-size: large;
+	color: #001011;
+	font-size: 20px;
 	font-weight: bold; 
 	padding: 3px;
 }
 
 .tb_col2 {
+	color: #1d1e18;
+	font-size: 18px;
 	font-weight: bold; 
 	padding: 3px;
 }
 
 #description_paragraph {
+	color: #1d1e18;
+	font-size: 22px;
 	font-weight: bold; 
+}
+
+.info_container {
+	height: 500px;
+}
+
+.info_text_box {
+	background-color: #4e6e5d;
+	float: left;
+	width: 50%;
+}
+
+.post_info {
+	width: 80%;
+	height: 520px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	padding-top: 100px;
+}
+
+.table_style {
+	margin-top: 24px;
+}
+
+.info_image_box {
+	float: right;
+	width: 50%;
+}
+
+.post_image {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: 0;
+	display: block;
+}
+
+.image_style {
+	width: 480px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.map_info {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-top: 120px;
+	margin-bottom: 80px;
 }

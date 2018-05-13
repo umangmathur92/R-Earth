@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
+.navbar {
+	background-color: #000000e0;
+}
+
 .dashboard{
     display: flex;
     flex-direction: column;
@@ -9,6 +13,7 @@
     flex-wrap: wrap;
     align-items: center;
     padding-left: 5%;
+    padding-top: 100px;
 }
 
 .listings{

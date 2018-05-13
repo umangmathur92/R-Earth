@@ -31,7 +31,8 @@ router.get('/:listingId', function(req, res, next) {
 
   const listingId = req.params.listingId;
   if(!listingId) {
-      res.send({userId: userId, userType: userType, error: "No listing ID specified"})
+	  message = { title: 'Error', message: null, userId: null, userType: null, error: "No listing ID specified"};
+      res.render('error', message);
   }
   var currentListing = listing.getListingById(listingId);
   currentListing.then( data => {
@@ -45,7 +46,7 @@ router.get('/:listingId', function(req, res, next) {
     var postUser = user.getUserById(userId);
     postUser.then( userData => {
       data.username = userData.username;
-      res.render('displaylisting', {userId: userId, userType: userType, data: data});
+      res.render('displaylisting', {userId: userId, userType: userType, data: data, page: 'submit'});
     })
     .catch(error => {
       res.send({userId: userId, userType: userType, error: error});

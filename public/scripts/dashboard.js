@@ -7,6 +7,7 @@ $(document).ready(function () {
     $.post('/dashboard',
     function(response){
         listings = response.date;
+        console.log(listings)
         update();
     });
 

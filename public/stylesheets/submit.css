@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
+.navbar {
+	background-color: #000000e0;
+}
+
 .submit-container {
     display: flex;
     flex-direction: column;
@@ -9,6 +13,7 @@
     background-repeat: no-repeat;
     background-image: url("https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg");
     background-size: 110%;
+    padding-top: 100px;
 }
 .header-container {
     flex: 0.5;

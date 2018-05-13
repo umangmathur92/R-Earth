@@ -3,7 +3,6 @@
 * API Calls: 
 * GET '/Listings' - Get's all the Enviormental Listings
 * POST 'Listings/search' - Post's a search with either an address or Zip Code 
-* 
 * Functionality: 
 * Handles DOM creation of Listings, and handles UI events. @file 
 */
@@ -15,39 +14,45 @@ var listings;
 $(document).ready(function () {
 	setNavbarScrollAnimation();
 	initMap();
-	fetchListings()
+	searchListings();
 	resizeElements();// Search Bar UI Functions 
+	// //Initialize materialize select
+	$('select').formSelect();
 	$("form").submit(function () {
-		pageNumber = 1;//Reset page number each time a new search is performedxss
+		pageNumber = 1;//Reset page number each time a new search is performed
 		searchListings();
 		return false;
 	});
-});
-
-fetchListings = () => {
-	$.get("/listings", function (response) {
-		listings = response;
-		generateListings(response);
-		createListingMapMarker(response);
-		setUpListingListeners();
+	$("#apply_filter_button").click(function(){
+		searchListings();
 	});
-}
+});
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
-	const key = $("#search-input").val().trim();
+	var filters = getFilteredSelectors();
+	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
-	$.post("/listings/search/", { key: key, pageNum: pageNumber }, function (response) {
+	console.log('Query data: ' + 'key='+key + ', pagenumber=' + pageNumber + ', category='+filters.category + ', status='+ filters.status);
+	const body = {
+		key: key, 
+		pageNum: pageNumber,
+		category: filters.category,
+		status: filters.status
+	}
+
+	$.post("/listings/search/", body, function (response) {
 		console.log(response)
-		dataList = response.dataList;
+		listings = response.dataList;
 		totalPages = response.totalNumOfPages;
 		var totalNumOfResults = response.totalNumOfResults;
-		var numResultsOnThisPage = dataList.length;
+		var numResultsOnThisPage = listings.length;
 		removeMarkers();
 		setPaginationButtons(pageNumber, totalPages, totalNumOfResults, numResultsOnThisPage);
-		if (dataList && dataList.length > 0) {
-			createListingMapMarker(dataList);
-			generateListings(dataList);
+		if (listings && listings.length > 0) {
+			generateListings(listings);
+			createListingMapMarker(listings);
+			setUpListingListeners(listings);
 		}
 	});
 }
@@ -55,7 +60,9 @@ function searchListings() {
 /**Creates buttons for page numbers, highlights the current page number and displays number of results*/
 function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, numResultsOnThisPage) {
 	var paginationDiv = document.getElementById('pageLinkContainer');
+	var numResultsDiv = document.getElementById('numResultsContainerDiv');
 	$('#pageLinkContainer').empty();
+	$('#numResultsContainerDiv').empty();
 	var numResultsSpan = document.createElement('span');
 	numResultsSpan.setAttribute('id', 'numResultsSpan');
 	const firstResultNum = (((currentPageNum - 1) * 10) + 1);
@@ -63,7 +70,7 @@ function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, num
 	var successMessage = 'Displaying ' + firstResultNum + ' to ' + lastResultNum + ' of ' + totalNumOfResults + ' Results';
 	var failureMessage = 'No Results Found !';
 	numResultsSpan.innerHTML = (totalNumOfResults > 0) ? successMessage : failureMessage;
-	paginationDiv.appendChild(numResultsSpan);
+	numResultsDiv.appendChild(numResultsSpan);
 	for (var i = 1; i <= totalPages; i++) {
 		var pageLink = document.createElement('button');
 		pageLink.innerHTML = i;
@@ -82,12 +89,11 @@ function getPageNumberClickListener(pageNum) {
 	};
 }
 
-setUpListingListeners = () => {
+setUpListingListeners = (response) => {
 	$('.listing').click(function () {
-		console.log(listings[$(this).index()]);
-		window.open('/displaylisting' + '/' + listings[$(this).index()].listing_id);
+		console.log(response[$(this).index()]);
+		window.open('/displaylisting' + '/' + response[$(this).index()].listing_id);
 	});
-	
 	$('.listing').hover(function () {
 		var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
@@ -97,7 +103,6 @@ setUpListingListeners = () => {
 			currentFocus = latlng;
 		}
 	});
-	
 }
 
 function createListingMapMarker(list) {
@@ -107,40 +112,13 @@ function createListingMapMarker(list) {
 	//Pan map to first list item's geographic coordinates
 	var latlng = new google.maps.LatLng(list[0].latitude, list[0].longitude);
 	map.panTo(latlng);
-	
 }
-
-/**Generates HTML for each individual list item*/
-function generateIndividualListItemHtml(list, i) {
-	var listItem = document.createElement('li');
-	var titlePara = document.createElement('h4');
-	var thumbnailImg = document.createElement('img');
-	var descrPara = document.createElement('p');
-	var addrPara = document.createElement('p');
-	var zipcodePara = document.createElement('p');
-	titlePara.textContent = list[i].title;
-	descrPara.textContent = list[i].description;
-	addrPara.textContent = list[i].address;
-	zipcodePara.textContent = list[i].zipcode;
-	thumbnailImg.src = list[i].thumbnail;
-	listItem.appendChild(titlePara);
-	listItem.appendChild(thumbnailImg);
-	listItem.appendChild(descrPara);
-	listItem.appendChild(addrPara);
-	listItem.appendChild(zipcodePara);
-	listItem.addEventListener("click", function () {
-		window.open('/displaylisting' + '/' + list[i].listing_id);
-	});
-	resultlist.appendChild(listItem);
-}
-
 
 function setNavbarScrollAnimation() {
 	var scroll_start = 0;
-	
 	$(document).scroll(function () {
 		scroll_start = $(this).scrollTop();
-		$(".navbar").css('background-color', (scroll_start > 20) ? '#FFA06F' : 'transparent');
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : 'transparent');
 	});
 }
 
@@ -197,4 +175,23 @@ generateListings = (list) => {
 			'</li>'
 		);
 	})
+}
+
+/**
+* @method getFilteredSelectors()
+Get's the chosen selectors of filters(categories, status) from the selectors. 
+Categories coresponding values: 
+null: all | 0: "Land" | 1: "Water" | 2: "Air" | 3: "Fire"
+Status's coresponding values: 
+null: all | 0: "Reported" | 1: "Acknowledged | 2: "Work in Progress" | 3: "Resolved"
+@method 
+*/
+getFilteredSelectors = () => {
+	$('select').formSelect();
+	let category = $('#sel_categories').find('option:selected').val();
+	let status = $('#sel_status').find('option:selected').val();
+	var selectors = {};
+	selectors.category = (category === "") ? null : category;
+	selectors.status = (status === "") ? null : status;
+	return selectors; 
 }

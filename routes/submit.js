@@ -12,10 +12,11 @@ cloudinary.config({
 
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
-  var message = {title: 'R-Earth', userId: null};
+  var message = {title: 'R-Earth', userId: null, userType: null, page: 'submit'};
   console.log(req.session)
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
+	 message.userType = req.session.userType;
      res.render('submit', message);
   } else {
       req.session.previousPage = 'submit';
@@ -28,18 +29,23 @@ router.get('/', function(req, res, next) {
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
     const user_id = req.session.userId;
-    var userType;
+    var userType = req.session.userType;
+
     if(req.session && userId) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
             userType = userInfo.user_type;
         })
         .catch(error => {
-            res.send({userId: userId, userType: userType, error: error});
+			message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error: error});
         });
     } else{
-        res.send({userId: userId, userType: userType, error: "User must be logged in to submit a listing"});
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
+		res.render('error', message);
     }
+
     const title = req.body.title;
     const description = req.body.description;
     const longitude = req.body.longitude;
@@ -48,7 +54,7 @@ router.post('/', function(req, res, next) {
     const zipcode = req.body.zipcode;
     const category = req.body.category;
     const base64 = req.body.picture;
-    
+
     if(user_id && title && description && longitude && latitude && address && zipcode && category && base64) {
         cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
             const picture = result.public_id;
@@ -63,11 +69,15 @@ router.post('/', function(req, res, next) {
                 res.redirect( '/' );
             })
             .catch(error => {
-                res.send({userId: userId, userType: userType, error:error});
+				message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+				res.render('error', message);
+                //res.send({userId: userId, userType: userType, error:error});
             });
         });
+
     } else {
-        res.send({userId: userId, userType: userType, error: "Missing fields required to submit a listing"});
+		message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
+		res.render('error', message);
     }
 });
 

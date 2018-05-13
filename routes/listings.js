@@ -37,6 +37,7 @@ router.post('/search/', function(req, res, next) {
     const category = req.body.category;
     const order = req.body.order;
     const pageNum = req.body.pageNum;
+
     const response = listing.determineSearch(key, status, category, order, pageNum); //Apply search parameters
     response.then( data => {
         for(var i = 0; i < data.length; i++) { // Resolve picture URLs: full size and thumbnail
@@ -47,6 +48,7 @@ router.post('/search/', function(req, res, next) {
             data[i].thumbnail = thumb;
         }
         const isSuccess = data.length > 0;
+        console.log('wwooohhhhhooo' + JSON.stringify(data[0]));
         var message = {
             success: isSuccess,
             dataList: isSuccess ? data : [],
