@@ -5,18 +5,19 @@ const user = require('../db/users');
 const dateFormat = require('dateformat');
 
 
-/* GET home page. */
+/* Used to initially load the Dashboard page. Wait for public/scripts/dashboard.js to fill all elements
+* Created by: Chloe Zirbel*/
 router.get('/', function(req, res, next) {
     var userType;
     var userAgency;
     var userId = req.session.userId;
     var message = {userId: userId, userType: 0, page: 'dashboard'};
-    if(req.session && userId) {
+    if(req.session && userId) { //Check for existing session
         var current = user.getUserById(userId);
         current.then(userInfo => {
-        userAgency = userInfo.agency;
+        userAgency = userInfo.agency;   //Set user information
 		userType = userInfo.user_type;
-        if(userType != 1) {
+        if(userType != 1) { //If not an environmental agent (deny access)
             res.redirect('/');
         } else {
 			message = {userId: userId, userType: userType, page: 'dashboard'}
@@ -37,17 +38,19 @@ router.get('/', function(req, res, next) {
     }
 });
 
-/* GET home page. */
+/* Used to fully load Dashboard page. public/scripts/dashboard.js calls this to retrieve elements
+* Created by: Chloe Zirbel
+* Contributions from: Taylor Marquez*/
 router.post('/', function(req, res, next) {
     var userType;
     var userAgency;
     var userId = req.session.userId;
-    if(req.session && userId) {
+    if(req.session && userId) { //Check for existing session
         var current = user.getUserById(userId);
         current.then(userInfo => {
-            userAgency = userInfo.agency;
+            userAgency = userInfo.agency; //Set user information
             userType = userInfo.user_type;
-            if(userType != 1){
+            if(userType != 1){ //If not an environmental agent (deny access)
                 //res.send({userId: userId, userType: userType, error: "User is not authorized to view the dashboard"})
                 res.redirect('/');
             }
@@ -87,21 +90,24 @@ router.post('/', function(req, res, next) {
 		res.render('error', message);
         //res.send({userId: userId, userType: userType, error:error});
     });
-
-
-
 });
 
-/** Respond to existing listing if user is an authorized environmental agent*/
+/** Respond to existing listing if user is an authorized environmental agent
+ * Created by: Chloe Zirbel
+ * Contributions from: Taylor Marquez*/
 router.post('/respond', function(req, res, next) {
     var userType = req.session.userType;
     var userAgency;
     const userId = req.session.userId;
-    if(req.session && userId){
+    if(req.session && userId){ //Check for existing session
         var current = user.getUserById(userId);
         current.then(userInfo => {
-           userType = userInfo.user_type;
+           userType = userInfo.user_type; //Set user information
            userAgency = userInfo.agency;
+            if(userType != 1){ //If not an environmental agent (deny access)
+                //   res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
+                res.redirect('/');
+            }
         })
         .catch(error =>{
 			message = { title: 'Error', message: null, userId: null, userType: userType, error: error};
@@ -113,10 +119,6 @@ router.post('/respond', function(req, res, next) {
         res.render('error', message);
     }
 
-    if(userType != 1){
-     //   res.send({userId: userId, userType: userType, error: "User is not authorized to respond to a listing"})
-		res.redirect('/');
-    }
     const listingId = req.body.listingId;
     const status = req.body.status;
     const description = req.body.description;
@@ -133,6 +135,8 @@ router.post('/respond', function(req, res, next) {
     }
 });
 
+/** Utility function for changing database date format to human-readable dates
+ * Created by: Chloe Zirbel */
 function changeAllDates(dataSet) {
     for(var i = 0; i < dataSet.length; i++) {
         var date = dataSet[i].post_date;
