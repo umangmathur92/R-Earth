@@ -12,18 +12,39 @@ cloudinary.config({
 
 /** Display submission page (create new listing) if user is logged in */
 router.get('/', function(req, res, next) {
-  var message = {title: 'R-Earth'};
+  var message = {title: 'R-Earth', userId: null, userType: null, page: 'submit'};
   if( req.session && req.session.userId ) { //Check for user login
      message.userId = req.session.userId;
+	 message.userType = req.session.userType;
+     res.render('submit', message);
+  } else {
+      req.session.previousPage = 'submit';
+      req.session.save(function(error){
+        res.render('signup', message);
+      })
   }
-  res.render('submit', message);
 });
-
 
 /** Create new listing with user information*/
 router.post('/', function(req, res, next) {
-    //const user_id = req.session.userId;
-    const user_id = 1;
+    const userId = req.session.userId;
+    var userType = req.session.userType;
+
+    if(req.session && userId) {
+        var current = user.getUserById(userId);
+        current.then(userInfo => {
+            userType = userInfo.user_type;
+        })
+        .catch(error => {
+			message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+			res.render('error', message);
+            //res.send({userId: userId, userType: userType, error: error});
+        });
+    } else{
+		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
+		res.render('error', message);
+    }
+
     const title = req.body.title;
     const description = req.body.description;
     const longitude = req.body.longitude;
@@ -33,43 +54,29 @@ router.post('/', function(req, res, next) {
     const category = req.body.category;
     const base64 = req.body.picture;
 
-    cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
-        const picture = result.public_id;
-        listing.createListing(user_id, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
-    });
-    var login = {};
-    if( req.session && req.session.userId ) { //Check for user login and type
-        login.userId = req.session.userId;
-        const current = user.getUserById(req.session.userId);
-            current.then( userInfo => {
-                login.userType = userInfo.user_type;
-            res.send(login);
+    if(userId && title && description && longitude && latitude && address && zipcode && category && base64) {
+        cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
+            const picture = result.public_id;
+            var newListing = listing.createListing(userId, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
+            newListing.catch(error => {
+                res.send({userId: userId, userType: userType, error:error});
+            });
+            const listings = listing.fetchListings();
+            listings.then(data => {
+                res.send({data: data, status: "success"});
+            })
+            .catch(error => {
+				message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
+				res.render('error', message);
+                //res.send({userId: userId, userType: userType, error:error});
+            });
         });
+
     } else {
-        res.send(login);
+		message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
+		res.render('error', message);
     }
 });
-
-/** Respond to existing listing if user is an authorized environmental agent*/
-router.post('/respond', function(req, res, next) {
-    const listingId = req.body.listingId;
-    const status = req.body.status;
-    const description = req.body.description;
-    const agency = req.body.agency;
-    listing.updateResponse(listingId, status, description, agency); //Add response information to listing
-    var login = {};
-    if( req.session && req.session.userId ) { //Check for user login and type
-        login.userId = req.session.userId;
-        const current = user.getUserById(req.session.userId);
-        current.then( userInfo => {
-            login.userType = userInfo.user_type;
-            res.send(login);
-      });
-    } else {
-        res.send(login);
-    }
-});
-
 
 function upload(base64) {
     return cloudinary.uploader.upload(base64, function(result) {
@@ -79,4 +86,3 @@ function upload(base64) {
 }
 
 module.exports = router;
-

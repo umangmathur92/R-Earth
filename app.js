@@ -1,7 +1,6 @@
-if(process.env.NODE_ENV === 'development ') {
+if(process.env.NODE_ENV === 'development') {
   require("dotenv").config();
 }
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -9,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -20,6 +20,9 @@ var signup = require('./routes/signup');
 var temp = require('./routes/temp');
 var submit = require('./routes/submit');
 var displayListing = require('./routes/displaylisting');
+var dashboard = require('./routes/dashboard');
+var logout = require('./routes/logout');
+
 
 var app = express();
 
@@ -43,16 +46,20 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('keyboard cat'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 app.use(session ({
     secret: 'team1 loves the earth',
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: false
+      secure: false,
+      maxAge: 60000
     }
 }));
+
+
 
 app.use('/', index);
 app.use('/users', users);
@@ -63,6 +70,8 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/submit', submit);
 app.use('/displaylisting', displayListing);
+app.use('/dashboard', dashboard);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
