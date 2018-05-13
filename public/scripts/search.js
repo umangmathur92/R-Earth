@@ -19,7 +19,7 @@ $(document).ready(function () {
 	// //Initialize materialize select
 	$('select').formSelect();
 	$("form").submit(function () {
-		pageNumber = 1;//Reset page number each time a new search is performedxss
+		pageNumber = 1;//Reset page number each time a new search is performed
 		searchListings();
 		return false;
 	});
@@ -60,7 +60,9 @@ function searchListings() {
 /**Creates buttons for page numbers, highlights the current page number and displays number of results*/
 function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, numResultsOnThisPage) {
 	var paginationDiv = document.getElementById('pageLinkContainer');
+	var numResultsDiv = document.getElementById('numResultsContainerDiv');
 	$('#pageLinkContainer').empty();
+	$('#numResultsContainerDiv').empty();
 	var numResultsSpan = document.createElement('span');
 	numResultsSpan.setAttribute('id', 'numResultsSpan');
 	const firstResultNum = (((currentPageNum - 1) * 10) + 1);
@@ -68,7 +70,7 @@ function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, num
 	var successMessage = 'Displaying ' + firstResultNum + ' to ' + lastResultNum + ' of ' + totalNumOfResults + ' Results';
 	var failureMessage = 'No Results Found !';
 	numResultsSpan.innerHTML = (totalNumOfResults > 0) ? successMessage : failureMessage;
-	paginationDiv.appendChild(numResultsSpan);
+	numResultsDiv.appendChild(numResultsSpan);
 	for (var i = 1; i <= totalPages; i++) {
 		var pageLink = document.createElement('button');
 		pageLink.innerHTML = i;

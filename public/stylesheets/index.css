@@ -9,7 +9,7 @@
   padding-left: 10px;
   padding-right: 10px;
   background-color: white;
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 .search-bar {
@@ -115,14 +115,14 @@
 .listing-container {
   padding: 10px;
   overflow: auto;
-  background: #ffffff;
+  background: #e9eded;
   box-shadow: 0 10px 14px 0 rgba(0,0,0,0.6);
   transition: 0.3s;
 }
 
 .listing-container:hover {
-  background: #afafaf;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  background: #afafafda;
+  box-shadow: 0 8px 16px 0 #00000033;
   cursor: pointer;
 }
 
@@ -196,7 +196,7 @@
 /* Map */
 .map {
   width: 600px; 
-  height: 600px;
+  height: 750px;
 }
 
 .map-column-container {
@@ -268,6 +268,12 @@
 
 .pagination {
   display: inline-block;
+  margin: 0;
+}
+
+.paginiationcontainerdiv {
+  margin: 20px;
+  display: inline-block;
 }
 
 .pagination button {
@@ -275,7 +281,7 @@
   outline: none;
   color: yellowgreen;
   float: left;
-  padding: 8px 16px;
+  padding: 8px 8px;
   text-decoration: none;
 }
 
@@ -288,6 +294,16 @@
 
 .pagination #numResultsSpan {
   color: yellowgreen;
+}
+
+.paginiationcontainerdiv {
+  color: white;
+  display: inline-block;
+}
+
+.pg_div {
+  align-content: center; 
+  float: left;
 }
 
 .description-heading {
@@ -322,4 +338,9 @@ svg.caret {
   margin-left: 10px;
   align-content: center;
   align-self: center;
+}
+
+#numResultsContainerDiv {
+  color: white;
+  margin: 20px;
 }
