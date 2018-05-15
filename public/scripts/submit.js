@@ -23,20 +23,21 @@ $(document).ready(function () {
     document.getElementById('imageUpload').addEventListener("change", function() {
         readURL(document.getElementById('imageUpload'));
     });
-    document.getElementById('button-blue').addEventListener("click", function() {
+    /*document.getElementById('button-blue').addEventListener("click", function() {
         console.log("es");
         submitData();
     });
+    */
     //TODO: Add the click listener for the image upload here. Remove the javascript call to readURL from the HTML code.
     //TODO: Add the click listener for the send button here. Remove the javascript call to submitData from the HTML code.
     locationSpinner = document.getElementById('locationSpinner');
 
-    /*
+
     $("#form1").submit(function(){
         submitData();
         return false; 
     })
-    */
+
 });
 
 function onAddressSelectedFromDropdown() {
@@ -125,26 +126,26 @@ function submitData() {
     var zipcode = $('#zip').val();
     var description = $('#description').val();
     var picture = sendImage;
-    $.post('/submit', {
-            title: title,
-            category: category,
-            address: address,
-            zipcode: zipcode,
-            description: description,
-            longitude: longitude,
-            latitude: latitude,
-            picture:picture
-    },
-        function(data, status){
-            if(status == "success"){
-                console.log("Success");
-                window.location.replace("/");
-            } else {
-                alert("Data: " + data + "\nStatus: " + status);
-            }
-    });
-
-
+    if(title && category && address && zipcode && description && picture) {
+        $.post('/submit', {
+                title: title,
+                category: category,
+                address: address,
+                zipcode: zipcode,
+                description: description,
+                longitude: longitude,
+                latitude: latitude,
+                picture:picture
+            },
+            function(response){
+                console.log("function");
+                if(response.status == "success"){
+                    console.log("Success");
+                    window.location.replace("/");
+                } else
+                    console.log("status: " + status);
+            });
+    }
 }
 
 function setVisibility(htmlElement, setVisible) {
