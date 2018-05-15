@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 app.use(session ({
     secret: 'team1 loves the earth',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
       secure: false,

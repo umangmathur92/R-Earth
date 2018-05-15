@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
       req.session.previousPage = 'submit';
       req.session.save(function(error){
         res.render('signup', message);
-      })
+      });
   }
 });
 
@@ -34,6 +34,31 @@ router.post('/', function(req, res, next) {
         var current = user.getUserById(userId);
         current.then(userInfo => {
             userType = userInfo.user_type;
+
+            const title = req.body.title;
+            const description = req.body.description;
+            const longitude = req.body.longitude;
+            const latitude = req.body.latitude;
+            const address = req.body.address;
+            const zipcode = req.body.zipcode;
+            const category = req.body.category;
+            const base64 = req.body.picture;
+
+            if(userId && title && description && longitude && latitude && address && zipcode && category && base64) {
+                cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
+                    const picture = result.public_id;
+                    var newListing = listing.createListing(userId, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
+                    newListing.catch(error => {
+                        res.send({userId: userId, userType: userType, error:error});
+                    });
+                    res.send({status: "success"});
+                    //res.redirect('/');
+                });
+
+            } else {
+                message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
+                res.render('error', message);
+            }
         })
         .catch(error => {
 			message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
@@ -44,43 +69,10 @@ router.post('/', function(req, res, next) {
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "User must be logged in to submit a listing"};
 		res.render('error', message);
     }
-
-    const title = req.body.title;
-    const description = req.body.description;
-    const longitude = req.body.longitude;
-    const latitude = req.body.latitude;
-    const address = req.body.address;
-    const zipcode = req.body.zipcode;
-    const category = req.body.category;
-    const base64 = req.body.picture;
-
-    if(userId && title && description && longitude && latitude && address && zipcode && category && base64) {
-        cloudinary.uploader.upload(base64, function(result) { // Upload image to cloudinary
-            const picture = result.public_id;
-            var newListing = listing.createListing(userId, title, picture, description, longitude, latitude, address, zipcode, category); //Create new listing
-            newListing.catch(error => {
-                res.send({userId: userId, userType: userType, error:error});
-            });
-            const listings = listing.fetchListings();
-            listings.then(data => {
-                res.send({data: data, status: "success"});
-            })
-            .catch(error => {
-				message = { title: 'Error', message: null, userId: userId, userType: userType, error: error};
-				res.render('error', message);
-                //res.send({userId: userId, userType: userType, error:error});
-            });
-        });
-
-    } else {
-		message = { title: 'Error', message: null, userId: userId, userType: userType, error: "Missing fields required to submit a listing"};
-		res.render('error', message);
-    }
 });
 
 function upload(base64) {
     return cloudinary.uploader.upload(base64, function(result) {
-        console.log(result);
         return result.public_id;
     });
 }
