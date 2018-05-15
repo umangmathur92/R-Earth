@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
         if(userType != 1) { //If not an environmental agent (deny access)
             res.redirect('/');
         } else {
+            req.session.previousPage = 'dashboard';
 			message = {userId: userId, userType: userType, page: 'dashboard'}
             res.render('dashboard', message);
         }

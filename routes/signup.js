@@ -13,14 +13,12 @@ router.get('/', function(req, res, next) {
 
 /** Create new account with valid user information*/
 router.post('/', (req, res, next) => {
-    
     //response body
     var message = {
         user: null,
         redirect: null,
         error: null,
     };
-
 
     if(req.body.name && req.body.username && req.body.password && req.body.password_confirmation && req.body.user_type) {
         const username = req.body.username;

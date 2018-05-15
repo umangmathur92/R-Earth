@@ -37,7 +37,15 @@ router.post('/', function(req, res, next) {
                 req.session.userId = user.user_id; //Create user session
 				req.session.userType = user.user_type;
                 req.session.save();
-                res.redirect('/');
+                if(req.session.previousPage === 'submit'){
+                    res.redirect('/submit');
+                } else if(req.session.previousPage === 'dashboard') {
+                    res.redirect('/dashboard');
+                }
+                else {
+                    res.redirect('/');
+                }
+
             }
         });
     } else {
