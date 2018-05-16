@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 .navbar {
-	background-color: #000000e0;
+    background-color: #000000e0;
 }
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 .submit-container {
     display: flex;
@@ -12,21 +13,24 @@
     align-items: center;
     background-repeat: no-repeat;
     background-image: url("https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg");
-    background-size: 110%;
-    padding-top: 100px;
+
+    background-size: 100%;
+    padding-top: 60px;
 }
 .header-container {
-    flex: 0.5;
-    min-width: 100%;
+    flex: 0.25;
+    min-width: 30%;
     align-items:center;
+    color: white;
 }
 
 .report-container {
     flex: 3;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+    width: 40%;
 }
 
 #feedback-page{
@@ -34,7 +38,8 @@
 }
 
 .form-container{
-    flex: 4 ;
+    flex: 4;
+
 }
 
 .image-upload-container {
@@ -42,20 +47,22 @@
     height: 50%;
     align-items: center;
     padding-left: 35px;
-    padding-top: 10px;
-    padding-buttom: 100px;
 }
 
 #form-div {
     background-color:rgba(72,72,72,0.4);
-    padding-left:35px;
-    padding-right:35px;
+    padding-left:2%;
+    padding-right:2%;
     padding-bottom:25px;
     position: relative;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     width: 100%;
     height: 100%;
+}
+
+input{
+    height: 30px;
 }
 
 .feedback-input {
@@ -94,8 +101,8 @@
 /* Icons ---------------------------------- */
 #title{
     background-image: url(https://cdn3.iconfinder.com/data/icons/minicons-for-web-sites/24/minicons2-78-128.png);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position: 8px;
     background-repeat: no-repeat;
     flex-grow: 2;
     width: 101%;
@@ -104,50 +111,51 @@
 
 #title:focus{
     background-image: url(https://cdn3.iconfinder.com/data/icons/minicons-for-web-sites/24/minicons2-78-128.png);
-    background-size: 30px 30px;
-    background-position: 8px 5px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position:   8px;
     background-repeat: no-repeat;
 }
 
 #zip{
     background-image: url(https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Zip-128.png);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position: 8px;
     background-repeat: no-repeat;
     flex-grow: 3;
 }
 
 #zip:focus{
     background-image: url(https://cdn4.iconfinder.com/data/icons/proglyphs-files-and-folders/512/Zip-128.png);
-    background-position: 11px 8px;
+    background-position: 8px;
     background-repeat: no-repeat;
 }
 
 
 #address{
     background-image: url(http://www.cook.qld.gov.au/cook-shire-council/images/address-icon.png);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position: 8px;
     background-repeat: no-repeat;
     flex-grow: 2;
 }
 
 #address:focus{
     background-image: url(http://www.cook.qld.gov.au/cook-shire-council/images/address-icon.png);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position: 8px;
     background-repeat: no-repeat;
 }
 
 #description{
     background-image: url(https://cdn0.iconfinder.com/data/icons/human-resource-vol-1/48/22-128.png);
-    background-size: 30px 30px;
-    background-position: 11px 8px;
+    background-size: 20px 20px;
+    background-position: 4px;
     background-repeat: no-repeat;
+    font-size: 12px;
 }
 
 #btnDetect{
+    align-self: center;
     padding-left: 54px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -157,13 +165,15 @@
     background-size: 25px 25px;
     background-position: 11px 4px;
     background-repeat: no-repeat;
+    height: 100%;
 }
 
 textarea {
     width: 100%;
-    height: 150px;
-    line-height: 150%;
-    resize:vertical;
+    height: 100%;
+    resize: vertical;
+    font-size: 12px;
+    text-align: start;
 }
 
 .buttons{
@@ -174,47 +184,53 @@ textarea {
 #button-blue{
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     float:right;
-    width: 25%;
-    border: #fbfbfb solid 4px;
+    width: auto;
+    height: auto;
+    border: white solid 2px;
     cursor:pointer;
     background-color: #3498db;
     color:white;
     font-size:24px;
-    padding-top:22px;
-    padding-bottom:22px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     margin-top:-4px;
     font-weight:700;
+    position: fixed;
+    bottom: 2%;
+    right: 30.1%;
 }
 
 #button-blue:hover{
     background-color: rgba(0,0,0,0);
     color: #0493bd;
+    border: black solid 2px;
 }
 
 #button-red{
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     float:left;
-    width: 25%;
-    border: #fbfbfb solid 4px;
+    width: auto;
+    height: auto;
+    border: white solid 2px;
     cursor:pointer;
     background-color: red;
     color:white;
     font-size:24px;
-    padding-top:22px;
-    padding-bottom:22px;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
     margin-top:-4px;
     font-weight:700;
+    position: fixed;
+    bottom: 2%;
+    left: 30.1%;
 }
 
 #button-red:hover{
     background-color: rgba(0,0,0,0);
     color: red;
+    border: black solid 2px;
 }
 
 .submit:hover {
@@ -249,21 +265,20 @@ textarea {
     }
 }
 
-h1{
+h2{
     color: white;
     text-align: center;
     width: 90%;
 }
 
 .dropzone{
+    flex: 1;
     background-color: transparent;
     border-color: white;
     border: dashed;
     text-align: center;
     width: 90%;
     height: 90%;
-    min-width: 400px;
-    min-height: 300px;
     color: white;
     font-size: large;
     line-height: 1000%;
@@ -273,10 +288,13 @@ h1{
     border: 3px solid #f3f3f3; /* Light grey */
     border-top: 3px solid #3498db; /* Blue */
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 10px;
+    height: 10px;
     animation: spin 2s linear infinite;
+    width: 100%; overflow: hidden;
 }
+
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -293,13 +311,15 @@ h1{
 }
 
 .dropdown{
-    height: 80%;
+    height: auto;
     width: 50%;
     text-align: center;
-    font-size: 24px;
+    font-size: 16px;
     flex-grow: 2;
     align-self: center;
 }
+
+
 
 #location{
     display: flex;
@@ -325,7 +345,9 @@ h1{
 }
 
 .detect{
+    flex: 5;
     align-items: center;
+    justify-content: center;
 }
 
 
@@ -334,5 +356,6 @@ h1{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
+    width: 100%;
+    overflow: hidden;
 }
