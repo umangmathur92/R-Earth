@@ -55,7 +55,7 @@ app.use(session ({
     saveUninitialized: true,
     cookie: {
       secure: false,
-      maxAge: 60000
+      maxAge: 24 * 60 * 60 * 1000 //Session valid for 24 hrs
     }
 }));
 
