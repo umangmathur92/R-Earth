@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-
 <link rel="stylesheet" href="/stylesheets/index.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
@@ -15,41 +14,44 @@
 <body>
 	<%- include('partials/navbar') -%>
 	<div class="index-container">
-		<div class="cover-container">
-			<h1 class="heading"> Welcome to R-Earth</h1>
-			<h4 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h4>
-			<h6 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviornmental hazards so local agencies can do their jobs.</h6>
-			<div class="search-container">
-				<form class="search-form" data-toggle="validator" onSubmit="false">
-					<div class="search-bar-container">
-						<div class="filters-container">	
-							<input placeholder="Zip Code or Address" id="search_bar" class="search-bar" type="text" class="validate">
-							<div class="categories-container">
-								<select class="categories" id="sel_categories" name="categories">
-									<option value="" class="category">All Categories</option>
-									<option value=0 class="category"> Land </option>
-									<option value=1 class="category" > Water </option>
-									<option value=2 class="category"> Air </option>
-									<option value=3 class="category"> Fire </option>
-								</select>
+		<div class="outer-cover-container">
+			<div class="cover-container">
+				<h1 class="heading"> Welcome to R-Earth</h1>
+				<h4 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h4>
+				<h6 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviornmental hazards so local agencies can do their jobs.</h6>
+				<div class="search-parent-container">
+					<form class="search-form" data-toggle="validator" onSubmit="false">
+						<div class="container search-bar-container" style="width: 100%;">
+							<div class="filters-container row">	
+								<div class="col">
+									<input placeholder="Enter Zip Code..." id="search_bar" class="search-bar" type="text" class="validate">
+								</div>
+								<div class="categories-container col">
+									<select class="categories" id="sel_categories" name="categories">
+										<option value="" class="category">All Categories</option>
+										<option value=0 class="category"> Land </option>
+										<option value=1 class="category" > Water </option>
+										<option value=2 class="category"> Air </option>
+										<option value=3 class="category"> Fire </option>
+									</select>
+								</div>
+								<div class="status-container col" id="sel_status">
+									<select class="status">
+										<option value="">All Statuses</option>
+										<option value=0> Reported </option>
+										<option value=1> Aknowledged </option>
+										<option value=2> Work in Progress </option>
+										<option value=3> Resolved </option>
+									</select>
+								</div>
+								<div class="col">
+									<button class="btn search-button" type="submit" value="Search" onSubmit="return false"><i class="material-icons">search</i>Search</button>
+								</div>
 							</div>
-							<div class="status-container" id="sel_status">
-								<select class="status">
-									<option value="">All Statuses</option>
-									<option value=0> Reported </option>
-									<option value=1> Aknowledged </option>
-									<option value=2> Work in Progress </option>
-									<option value=3> Resolved </option>
-								</select>
-							</div>
-							<button class="btn waves-effect waves-light search-button" type="submit" value="Search" onSubmit="return false">Search
-								<i class="material-icons">search</i>
-							</button>
 						</div>
-					</div>
-				</form>	
+					</form>	
+				</div>
 			</div>
-			
 		</div>
 		<div id="numResultsContainerDiv"></div>
 		<div class="listings-map-container">

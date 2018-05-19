@@ -5,51 +5,50 @@
   height: 100%;
 }
 
-.search-container {
-  margin-top: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: white;
-  opacity: 0.9;
+.search-parent-container {
+  margin-top: 20px;
 }
 
 .search-bar {
   color: black;
 }
 
-.search-bar-container {
-  justify-content: center;
-  align-items: center;  
-  display: flex;
-  flex: 1;
-  flex-direction: row;
+.filters-container {
+  background-color: rgba(255, 255, 255, 0.897);
 }
 
-.filters-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+.search-button {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .cover-container {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(#00000088, #00000088),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
-  background-repeat:no-repeat;
-  background-position:center; 
   display: flex;
   align-items: center;
   justify-content: center;  
   flex-direction: column;
+  padding-top: 35px;
 }
 
-#image{
+.outer-cover-container {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(#00000088, #000000b0),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
+  background-repeat:no-repeat;
+  background-position:center; 
+}
+
+#image {
   width: 100%;
   height: 100%;
   flex: 2;
 }
 
-#card{
+#card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,7 +71,7 @@
   text-align: center;
 }
 
-#card-address{
+#card-address {
   flex: 0.5;
   align-items: center;
   justify-content: center;
@@ -80,14 +79,15 @@
 }
 
 .heading {
-  padding-top: 50px;
   color: white;
   align-content: center;
+  text-align: center;
 }
 
 .sub-heading {
   color: white;
   align-content: center;
+  text-align: center;
 }
 
 .listings {
@@ -107,7 +107,7 @@
   display: inline-block;
   margin: 1rem;
   position: relative;
-  box-shadow: 0 3px 6px rgb(172, 189, 134, .16), 0 3px 6px rgb(172, 189, 134, .23);
+  box-shadow: 0 3px 6px #acbd8629, 0 3px 6px #acbd863b;
   min-width: 700px;
   max-height: 124px;
   display: block;
@@ -117,7 +117,7 @@
   padding: 10px;
   overflow: auto;
   background: #e9eded;
-  box-shadow: 0 10px 14px 0 rgba(0,0,0,0.6);
+  box-shadow: 0 10px 14px 0 #00000099;
   transition: 0.3s;
 }
 
@@ -291,7 +291,9 @@
   color: white;
 }
 
-.pagination button:hover:not(.active) {background-color: #ddd;}
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
 
 .pagination #numResultsSpan {
   color: yellowgreen;
@@ -323,22 +325,6 @@
 svg.caret {
   opacity: 1;
   color: black;
-}
-
-.categories-container {
-  margin-left: 10px; 
-  width: 220px;
-}
-
-.status-container {
-  margin-left: 10px; 
-  width: 220px;
-}
-
-.search-button {
-  margin-left: 10px;
-  align-content: center;
-  align-self: center;
 }
 
 #numResultsContainerDiv {

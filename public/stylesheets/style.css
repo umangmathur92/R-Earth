@@ -4,7 +4,7 @@ html body {
   background-color: #1e1e24;
 }
 
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -12,7 +12,7 @@ html body {
   min-width: 100vw;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .index-container {
   display: flex;
@@ -65,7 +65,7 @@ html body {
 
 .navbar-brand{
   color:#fffaf5;
-  font-size: 42px !important;
+  font-size: 38px !important;
 }
 
 .nav>li>a{
