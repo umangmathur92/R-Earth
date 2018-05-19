@@ -1,87 +1,85 @@
 <!DOCTYPE html>
 <html>
 <%- include('partials/header') -%>
-	<link rel="stylesheet" href="/stylesheets/submit.css" />
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&libraries=places"></script>
-	<script type="text/javascript" src="scripts/submit.js"></script>
+<link rel="stylesheet" href="/stylesheets/submit.css" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&libraries=places"></script>
+<script type="text/javascript" src="scripts/submit.js"></script>
 
-	<body>
-		<%- include('partials/navbar') -%>
-			<div class="submit-container">
+<body>
+<%- include('partials/navbar') -%>
+<div class="submit-container">
 
-				<div class="header-container">
-					<h1>Report An Issue</h1>
-				</div>
+	<div class="header-container">
+		<h1>Report An Issue</h1>
+	</div>
 
-				<div class="report-container">
-					<div class="form-container">
-						<div id="form-div">
-							<form class="form" id="form1">
-								<div class="name">
-									<input name="title" type="text" required="required" class="validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*"
-									 id="title" required="required"/>
-								</div>
-
-
-
-								<div id="location">
-									<div class="addresstext">
-										<input name="address" required="required" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
-									</div>
-									<div class="ziptext">
-										<input name="zip" type="text" required="required" class="validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip Code*" required="required"
-										/>
-									</div>
-								</div>
+	<div class="report-container">
+		<div class="form-container">
+			<div id="form-div">
+				<form class="form" id="form1">
+					<div class="name">
+						<input name="title" type="text" required="required" class="validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*"
+							   id="title" required="required"/>
+					</div>
 
 
 
-								<div id="location-and-category" style="width: 100%; overflow: hidden; margin-bottom: 10px;">
-									<div id ="detect" style="width: 260px; float: left;">
-										<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
-										</button>
-									</div>
-									<div style="margin-left: 260px; display: none; top: 50%;" id="locationSpinner" class="locationSpinner">
-									</div>
-
-									<div class="dropdown">
-										<select name="one" class="dropdown-select" required>
-											<option value="" id="option">Category</option>
-											<option value="0" id="option">Land</option>
-											<option value="1" id="option">Water</option>
-											<option value="2" id="option">Air</option>
-											<option value="3" id="option">Fire</option>
- 										</select>
-									</div>
-								</div>
-
-									<textarea name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*">
-
-									</textarea>
+					<div id="location">
+						<div class="addresstext">
+							<input name="address" required="required" class="validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
+						</div>
+						<div class="ziptext">
+							<input name="zip" type="text" required="required" class="validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip*" required="required"
+							/>
+						</div>
+					</div>
 
 
-								<div class="image-upload-container">
-									<div id="upload"></div>
-									<div class="dropzone" id="dropzone">
-										Upload an Image Here
-									</div>
-									<input type="file" name="pic" accept="image/*" id="imageUpload" >
 
-								</div>
+					<div id="location-and-category" style="width: 100%; overflow: hidden; margin-bottom: 10px;">
+						<div id ="detect" style="width: 260px; float: left;">
+							<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
+							</button>
+						</div>
+						<div style="margin-left: 260px; display: none; top: 50%;" id="locationSpinner" class="locationSpinner">
+						</div>
 
-								<div class="buttons">
-									<div class="submit">
-										<button type="submit" id="button-blue" > Submit</button>
-									</div>
-									<div>
-										<button id="button-red" onclick="goBack()">CANCEL</button>
-									</div>
-								</div>
-							</form>
+						<div class="dropdown">
+							<select name="one" class="dropdown-select" required>
+								<option value="" id="option">Category</option>
+								<option value="1" id="option">Air</option>
+								<option value="2" id="option">Land</option>
+								<option value="3" id="option">Water</option>
+							</select>
+						</div>
+					</div>
+
+					<textarea name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
+
+
+					<div class="image-upload-container">
+						<div id="upload"></div>
+						<input type="file" name="pic" accept="image/*" id="imageUpload" >
+						<div class="dropzone" id="dropzone">
+							Upload an Image Here
+						</div>
+
+					</div>
+
+					<div class="buttons">
+						<div class="submit">
+							<button type="submit" id="button-blue" > Submit</button>
+						</div>
+						<div>
+							<button id="button-red" onclick="goBack()">CANCEL</button>
 						</div>
 					</div>
 				</form>
 			</div>
+		</div>
+		</form>
 	</div>
+</div>
 </body>
+<%- include('partials/warning') -%>
 </html>
