@@ -118,7 +118,7 @@ function setNavbarScrollAnimation() {
 	var scroll_start = 0;
 	$(document).scroll(function () {
 		scroll_start = $(this).scrollTop();
-		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : 'transparent');
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : '#0000007e');
 	});
 }
 
