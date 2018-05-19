@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100%;
 }
 
 .search-container {
@@ -32,7 +33,7 @@
 
 .cover-container {
   width: 100%;
-  height: 1000px;
+  height: 100%;
   background-image: linear-gradient(#00000088, #00000088),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
   background-repeat:no-repeat;
   background-position:center; 
@@ -79,7 +80,7 @@
 }
 
 .heading {
-  margin:0;
+  padding-top: 50px;
   color: white;
   align-content: center;
 }
