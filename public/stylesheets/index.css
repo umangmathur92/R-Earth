@@ -2,53 +2,53 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100%;
 }
 
-.search-container {
-  margin-top: 30px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: white;
-  opacity: 0.9;
+.search-parent-container {
+  margin-top: 20px;
 }
 
 .search-bar {
   color: black;
 }
 
-.search-bar-container {
-  justify-content: center;
-  align-items: center;  
-  display: flex;
-  flex: 1;
-  flex-direction: row;
+.filters-container {
+  background-color: #ffffffe5;
 }
 
-.filters-container {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
+.search-button {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .cover-container {
   width: 100%;
-  height: 1000px;
-  background-image: linear-gradient(#00000088, #00000088),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
-  background-repeat:no-repeat;
-  background-position:center; 
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;  
   flex-direction: column;
+  padding-top: 30px;
 }
 
-#image{
+.outer-cover-container {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(#0000007e, #0000007e),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
+  background-repeat:no-repeat;
+  background-position:center; 
+}
+
+#image {
   width: 100%;
   height: 100%;
   flex: 2;
 }
 
-#card{
+#card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +71,7 @@
   text-align: center;
 }
 
-#card-address{
+#card-address {
   flex: 0.5;
   align-items: center;
   justify-content: center;
@@ -79,51 +79,25 @@
 }
 
 .heading {
-  margin:0;
   color: white;
   align-content: center;
+  text-align: center;
 }
 
 .sub-heading {
   color: white;
   align-content: center;
+  text-align: center;
 }
 
 .listings {
   list-style-type: none;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 10px;
-  min-width: 400px;
-  max-height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 700px;
   overflow-y:scroll;
-}
-
-.listing {
-  background-color: #e9eded;
-  margin: 10px;
-  display: inline-block;
-  margin: 1rem;
-  position: relative;
-  box-shadow: 0 3px 6px rgb(172, 189, 134, .16), 0 3px 6px rgb(172, 189, 134, .23);
-  min-width: 700px;
-  max-height: 124px;
-  display: block;
-}
-
-.listing-container {
-  padding: 10px;
-  overflow: auto;
-  background: #e9eded;
-  box-shadow: 0 10px 14px 0 rgba(0,0,0,0.6);
-  transition: 0.3s;
-}
-
-.listing-container:hover {
-  background: #afafafda;
-  box-shadow: 0 8px 16px 0 #00000033;
-  cursor: pointer;
+  margin-left: 10px;
 }
 
 .thumbnail {
@@ -133,76 +107,23 @@
 }
 
 .li_title {
-  vertical-align: top; 
-  position:absolute; 
-  top: 0px; 
   font-size: 20px;
-  margin-top: 8px;
-}
-
-.li_description {
-  padding-top: 28px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; 
-}
-
-.li_address {
-  vertical-align: bottom; 
-  position:absolute; 
-  bottom: 0px; 
-  margin-bottom: 12px;
-}
-
-.li_status {
-  vertical-align: top; 
-  position:absolute; 
-  top: 0px; 
-  margin-top: 12px;
-}
-
-.li_category {
-  padding-top: 24px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; 
-}
-
-.li_date {
-  vertical-align: bottom; 
-  position:absolute; 
-  bottom: 0px; 
-  margin-bottom: 12px;
-}
-
-.thumbnail-container {
-  float: left;
-  width: 15%;
-  height: 110px;
-}
-
-.info-container-1 {
-  display: table-cell;
-  width: 60%; float: left;
-  height: 110px;
-}
-
-.info-container-2 {
-  display: table-cell;
-  width: 25%; float: right;
-  height: 110px;
+  font-weight: bolder; 
+  margin: 0;
 }
 
 /* Map */
 .map {
   width: 600px; 
-  height: 750px;
+  height: 700px;
 }
 
 .map-column-container {
   flex: 0.75;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
+  margin-right: 40px;
 }
 
 .map-container {
@@ -210,8 +131,7 @@
   align-items: center;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  height: 100vh;
+  height: 700px;
 }
 
 .listings-map-container {
@@ -223,47 +143,7 @@
 .listings-list-container {
   flex: 1;
   flex-direction: column;
-}
-
-/* Responsive Design  */
-@media only screen and (max-width:1366px) {
-  .map {
-    width: 400px;
-    height: 400px; 
-  }
-}
-
-@media screen and (max-width:1024px) {
-  .map {
-    width: 500px;
-    height: 500px;
-  }
-  
-  .map-container {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 500px;
-  }
-}
-
-@media screen and (max-width:768px) {
-  .map {
-    width: 250px;
-    height: 250px; 
-  }
-}
-
-/* Smartphones Responsive design */
-@media screen and (max-width: 479px) {  
-  .map {
-    width: 150px;
-    height: 150px; 
-  }
-
-  .map-container {
-    height: 200px;
-  }
+  margin-right: 20px;
 }
 
 .pagination {
@@ -272,8 +152,10 @@
 }
 
 .paginiationcontainerdiv {
-  margin: 20px;
+  margin-top: 15px;
   display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .pagination button {
@@ -288,9 +170,12 @@
 .pagination button.active {
   background-color: #4CAF50;
   color: white;
+  border-color: #4CAF50;
 }
 
-.pagination button:hover:not(.active) {background-color: #ddd;}
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
 
 .pagination #numResultsSpan {
   color: yellowgreen;
@@ -324,23 +209,43 @@ svg.caret {
   color: black;
 }
 
-.categories-container {
-  margin-left: 10px; 
-  width: 220px;
-}
-
-.status-container {
-  margin-left: 10px; 
-  width: 220px;
-}
-
-.search-button {
-  margin-left: 10px;
-  align-content: center;
-  align-self: center;
-}
-
 #numResultsContainerDiv {
   color: white;
-  margin: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
+.search_li h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.search_li h6 {
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.search_li img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 15px 0 0;
+}
+
+.search_li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+.search_li {
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.search_li:hover {
+  background: #7aaff5;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
 }

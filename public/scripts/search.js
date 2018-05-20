@@ -61,6 +61,7 @@ function searchListings() {
 function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, numResultsOnThisPage) {
 	var paginationDiv = document.getElementById('pageLinkContainer');
 	var numResultsDiv = document.getElementById('numResultsContainerDiv');
+	var paginiationcontainerdiv = document.getElementById('paginiationcontainerdiv');
 	$('#pageLinkContainer').empty();
 	$('#numResultsContainerDiv').empty();
 	var numResultsSpan = document.createElement('span');
@@ -70,6 +71,7 @@ function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, num
 	var successMessage = 'Displaying ' + firstResultNum + ' to ' + lastResultNum + ' of ' + totalNumOfResults + ' Results';
 	var failureMessage = 'No Results Found !';
 	numResultsSpan.innerHTML = (totalNumOfResults > 0) ? successMessage : failureMessage;
+	setVisibility(paginiationcontainerdiv, (totalNumOfResults > 0));
 	numResultsDiv.appendChild(numResultsSpan);
 	for (var i = 1; i <= totalPages; i++) {
 		var pageLink = document.createElement('button');
@@ -90,11 +92,11 @@ function getPageNumberClickListener(pageNum) {
 }
 
 setUpListingListeners = (response) => {
-	$('.listing').click(function () {
+	$('.search_li').click(function () {
 		console.log(response[$(this).index()]);
 		window.open('/displaylisting' + '/' + response[$(this).index()].listing_id);
 	});
-	$('.listing').hover(function () {
+	$('.search_li').hover(function () {
 		var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
 			setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0], listings[$(this).index()].title);
@@ -154,24 +156,13 @@ function resizeElements() {
 generateListings = (list) => {
 	list.forEach(listing => {
 		$('.listings').append(
-			'<li class="listing">' +       
-			'<div class="listing-container">' +     
-			'<div class="thumbnail-container">' +      
-			'<img class="thumbnail" src="' + listing.thumbnail + '">' + '</img>' +
-			'</div>' +  
-			'<div class="info_container">' +  
-			'<div class="info-container-1">' +         
-			'<h3 class="li_title">' + listing.title + '</h3>' +
-			'<p class="li_description">' + listing.description + '</p>' +     
-			'<p class="li_address">' + listing.address + '</p>' +
-			'</div>' +  
-			'<div class="info-container-2">' +           
-			'<p class="li_status"><b>Status: </b>' + getStatusFromId(listing.status) + '</p>' +  
-			'<p class="li_category"><b>Category: </b>' + getCategoryFromId(listing.category) + '</p>' +  
-			'<p class="li_date"><b>Report Date: </b>' + getFormattedDateString(listing.post_date) + '</p>' +  
-			'</div>' +  
-			'</div>' +  
-			'</div>' +  
+			'<li class="search_li">' +       
+			'<img src="' + listing.thumbnail + '">' + '</img>' +
+            '<h3 class="li_title">' + listing.title + '</h3>' +
+            '<h6 class="li_title">' + 'Category: ' + getCategoryFromId(listing.category) + '</h6>' +
+			'<h6 class="li_title">' + 'Status: '  + getStatusFromId(listing.status) + '</h6>' +
+			'<h6 class="li_title">' + 'Report Date: '  + getFormattedDateString(listing.post_date) + '</h6>' +
+			'<h6 class="li_title">' + 'Address: '  + listing.address + '</h6>' +
 			'</li>'
 		);
 	})
@@ -194,4 +185,8 @@ getFilteredSelectors = () => {
 	selectors.category = (category === "") ? null : category;
 	selectors.status = (status === "") ? null : status;
 	return selectors; 
+}
+
+function setVisibility(htmlElement, setVisible) {
+    htmlElement.style.display = (setVisible) ? "block" : "none";
 }
