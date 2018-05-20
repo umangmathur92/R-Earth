@@ -61,6 +61,7 @@ function searchListings() {
 function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, numResultsOnThisPage) {
 	var paginationDiv = document.getElementById('pageLinkContainer');
 	var numResultsDiv = document.getElementById('numResultsContainerDiv');
+	var paginiationcontainerdiv = document.getElementById('paginiationcontainerdiv');
 	$('#pageLinkContainer').empty();
 	$('#numResultsContainerDiv').empty();
 	var numResultsSpan = document.createElement('span');
@@ -70,6 +71,7 @@ function setPaginationButtons(currentPageNum, totalPages, totalNumOfResults, num
 	var successMessage = 'Displaying ' + firstResultNum + ' to ' + lastResultNum + ' of ' + totalNumOfResults + ' Results';
 	var failureMessage = 'No Results Found !';
 	numResultsSpan.innerHTML = (totalNumOfResults > 0) ? successMessage : failureMessage;
+	setVisibility(paginiationcontainerdiv, (totalNumOfResults > 0));
 	numResultsDiv.appendChild(numResultsSpan);
 	for (var i = 1; i <= totalPages; i++) {
 		var pageLink = document.createElement('button');
@@ -183,4 +185,8 @@ getFilteredSelectors = () => {
 	selectors.category = (category === "") ? null : category;
 	selectors.status = (status === "") ? null : status;
 	return selectors; 
+}
+
+function setVisibility(htmlElement, setVisible) {
+    htmlElement.style.display = (setVisible) ? "block" : "none";
 }
