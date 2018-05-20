@@ -1,7 +1,3 @@
-body {
-  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 .index-container {
   display: flex;
   flex-direction: column;
@@ -35,13 +31,13 @@ body {
   align-items: center;
   justify-content: center;  
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .outer-cover-container {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(#0000006b, #0000006b),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
+  background-image: linear-gradient(#0000007e, #0000007e),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg');
   background-repeat:no-repeat;
   background-position:center; 
 }
@@ -201,7 +197,7 @@ body {
 }
 
 .navbar {
-  background-color: #0000007e;
+  background-color: transparent;
 }
 
 .select-dropdown  {
