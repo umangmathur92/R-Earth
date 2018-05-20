@@ -90,11 +90,11 @@ function getPageNumberClickListener(pageNum) {
 }
 
 setUpListingListeners = (response) => {
-	$('.listing').click(function () {
+	$('.search_li').click(function () {
 		console.log(response[$(this).index()]);
 		window.open('/displaylisting' + '/' + response[$(this).index()].listing_id);
 	});
-	$('.listing').hover(function () {
+	$('.search_li').hover(function () {
 		var latlng = new google.maps.LatLng(listings[$(this).index()].latitude, listings[$(this).index()].longitude);
 		if (!latlng.equals(currentFocus)) {
 			setInfoWindow(latlng, listings[$(this).index()].address.split(",")[0], listings[$(this).index()].title);
@@ -154,22 +154,31 @@ function resizeElements() {
 generateListings = (list) => {
 	list.forEach(listing => {
 		$('.listings').append(
-			'<li class="listing">' +       
-			'<div class="listing-container">' +     
-			'<div class="thumbnail-container">' +      
-			'<img class="thumbnail" src="' + listing.thumbnail + '">' + '</img>' +
-			'</div>' +  
-			'<div class="info_container">' +  
-			'<div class="info-container-1">' +         
-			'<ul>' +
-			'<li>' + '<h6 class="li_title">' + listing.title +'</h6></li>' +
-			'<li>' + '<div style="height: 4px;"></div></li>' +
-			'<li>' + '<b>Category: </b>' + getCategoryFromId(listing.category) +'</li>' +
-			'<li>' + '<b>Status: </b>' + getStatusFromId(listing.status) +'</li>' +
-			'<li>' + '<b>Report Date: </b>' + getFormattedDateString(listing.post_date) +'</li>' +
-			'<li>' + '<b>Address: </b>' + listing.address +'</li>' +
-			'</ul>' +
-			'</div>'  
+			'<li class="search_li">' +       
+			'<img src="' + listing.thumbnail + '">' + '</img>' +
+            '<h3 class="li_title">' + listing.title + '</h3>' +
+            '<h6 class="li_title">' + 'Category: ' + getCategoryFromId(listing.category) + '</h6>' +
+			'<h6 class="li_title">' + 'Status: '  + getStatusFromId(listing.status) + '</h6>' +
+			'<h6 class="li_title">' + 'Report Date: '  + getFormattedDateString(listing.post_date) + '</h6>' +
+			'<h6 class="li_title">' + 'Address: '  + listing.address + '</h6>' +
+			// '<p class="li_description">' + movie.description + '</p>' +     
+			'</li>'
+			// '<li class="listing">' +       
+			// '<div class="listing-container">' +     
+			// '<div class="thumbnail-container">' +      
+			// '<img class="thumbnail" src="' + listing.thumbnail + '">' + '</img>' +
+			// '</div>' +  
+			// '<div class="info_container">' +  
+			// '<div class="info-container-1">' +         
+			// '<ul>' +
+			// '<li>' + '<h6 class="li_title">' + listing.title +'</h6></li>' +
+			// '<li>' + '<div style="height: 4px;"></div></li>' +
+			// '<li>' + '<b>Category: </b>' + getCategoryFromId(listing.category) +'</li>' +
+			// '<li>' + '<b>Status: </b>' + getStatusFromId(listing.status) +'</li>' +
+			// '<li>' + '<b>Report Date: </b>' + getFormattedDateString(listing.post_date) +'</li>' +
+			// '<li>' + '<b>Address: </b>' + listing.address +'</li>' +
+			// '</ul>' +
+			// '</div>'  
 		);
 	})
 }

@@ -1,3 +1,7 @@
+body {
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 .index-container {
   display: flex;
   flex-direction: column;
@@ -92,14 +96,9 @@
 
 .listings {
   list-style-type: none;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 400px;
-  max-height: 700px;
-  overflow-y:scroll;
-  margin-left: 20px;
-  margin-right: 40px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 .listing {
@@ -183,19 +182,6 @@
 .thumbnail-container {
   float: left;
   width: 15%;
-  height: 110px;
-}
-
-.info-container-1 {
-  display: table-cell;
-  width: 60%; float: left;
-  height: 110px;
-  margin-left: 10px;
-}
-
-.info-container-2 {
-  display: table-cell;
-  width: 25%; float: right;
   height: 110px;
 }
 
@@ -333,3 +319,38 @@ svg.caret {
   margin-left: 40px;
   margin-bottom: 15px;
 }
+
+.search_li h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+.search_li h6 {
+  font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.search_li img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 15px 0 0;
+}
+
+.search_li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+.search_li {
+  padding: 10px;
+  margin: 10px;
+  overflow: auto;
+  background: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.search_li:hover {
+  background: #7aaff5;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
