@@ -161,24 +161,7 @@ generateListings = (list) => {
 			'<h6 class="li_title">' + 'Status: '  + getStatusFromId(listing.status) + '</h6>' +
 			'<h6 class="li_title">' + 'Report Date: '  + getFormattedDateString(listing.post_date) + '</h6>' +
 			'<h6 class="li_title">' + 'Address: '  + listing.address + '</h6>' +
-			// '<p class="li_description">' + movie.description + '</p>' +     
 			'</li>'
-			// '<li class="listing">' +       
-			// '<div class="listing-container">' +     
-			// '<div class="thumbnail-container">' +      
-			// '<img class="thumbnail" src="' + listing.thumbnail + '">' + '</img>' +
-			// '</div>' +  
-			// '<div class="info_container">' +  
-			// '<div class="info-container-1">' +         
-			// '<ul>' +
-			// '<li>' + '<h6 class="li_title">' + listing.title +'</h6></li>' +
-			// '<li>' + '<div style="height: 4px;"></div></li>' +
-			// '<li>' + '<b>Category: </b>' + getCategoryFromId(listing.category) +'</li>' +
-			// '<li>' + '<b>Status: </b>' + getStatusFromId(listing.status) +'</li>' +
-			// '<li>' + '<b>Report Date: </b>' + getFormattedDateString(listing.post_date) +'</li>' +
-			// '<li>' + '<b>Address: </b>' + listing.address +'</li>' +
-			// '</ul>' +
-			// '</div>'  
 		);
 	})
 }
