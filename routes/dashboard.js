@@ -3,6 +3,13 @@ var router = express.Router();
 const listing = require('../db/listing');
 const user = require('../db/users');
 const dateFormat = require('dateformat');
+var cloudinary = require('cloudinary');
+
+cloudinary.config({
+    cloud_name: 'csc648team01',
+    api_key: '532321131662413',
+    api_secret: 'RqHswX8LkdYsslb5VX_74AEMckg'
+});
 
 
 /* Used to initially load the Dashboard page. Wait for public/scripts/dashboard.js to fill all elements
@@ -142,8 +149,25 @@ function changeAllDates(dataSet) {
     for(var i = 0; i < dataSet.length; i++) {
         var date = dataSet[i].post_date;
         dataSet[i].post_date = dateFormat(date, 'mmmm d yyyy, h:MM tt Z');
+        var publicId = dataSet[i].picture;
+        var full = getFullImage(publicId);
+        var thumb = getThumbnail(publicId);
+        dataSet[i].picture = full;
+        dataSet[i].thumbnail = thumb;
     }
     return dataSet;
+}
+
+/** Generate full sized image*/
+function getFullImage(publicId) {
+    var url = cloudinary.url(publicId, {width: 500, height: 375, crop: 'fill'});
+    return url;
+}
+
+/** Generate thumbnail*/
+function getThumbnail(publicId) {
+    var url = cloudinary.url(publicId, {width: 80, height: 80, crop: 'fill'});
+    return url;
 }
 
 module.exports = router;

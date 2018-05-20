@@ -1,16 +1,19 @@
 <nav class="navbar navbar-fixed-top navbar-expand-lg" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="navbar-toggler-icon"></span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar" style="background-color: whitesmoke;"></span>
+                <span class="icon-bar" style="background-color: whitesmoke;"></span>
+                <span class="icon-bar" style="background-color: whitesmoke;"></span>
             </button>
             <a class="navbar-brand" href="/">R - Earth</a>
         </div>
-        <div class="collapse navbar-collapse">      
+        <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">      
             <ul class="nav navbar-nav navbar-right">
                 <li <% if (page === 'submit') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                    <a href="/submit">Report an Issue</a>
-                </li>	  
+                        <button class="btn red" style="padding: 0px; margin-right: 10px; text-transform: none;"><a href="/submit" >Report an Issue</a></button>
+                </li>
                 
                 <li <% if (page === 'index') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
                     <a class="nav-link" href="/">Home</a>
@@ -21,24 +24,24 @@
                 </li>
                 
                 <% if (userType === 1) { %>                         
-                <li <% if (page === 'dashboard') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                    <a class="nav-link" href="/dashboard">Dashboard </a>
-                </li>
-                <% } %>
+                    <li <% if (page === 'dashboard') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
+                        <a class="nav-link" href="/dashboard">Dashboard </a>
+                    </li>
+                    <% } %>
                     
-                <% if (!userId) { %>                         
-                <li <% if (page === 'login') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                    <a class="nav-link" href="/signup">Login / Sign Up </a>
-                </li>
-                <% } %>
+                    <% if (!userId) { %>                         
+                        <li <% if (page === 'login') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
+                            <a class="nav-link" href="/signup">Login / Sign Up </a>
+                        </li>
+                        <% } %>
                         
-                <% if (userId) { %>                         
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout </a>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</nav>
-                
+                        <% if (userId) { %>                         
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout">Logout </a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
