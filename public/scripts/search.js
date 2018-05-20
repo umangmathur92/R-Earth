@@ -161,18 +161,15 @@ generateListings = (list) => {
 			'</div>' +  
 			'<div class="info_container">' +  
 			'<div class="info-container-1">' +         
-			'<h3 class="li_title">' + listing.title + '</h3>' +
-			'<p class="li_description">' + listing.description + '</p>' +     
-			'<p class="li_address">' + listing.address + '</p>' +
-			'</div>' +  
-			'<div class="info-container-2">' +           
-			'<p class="li_status"><b>Status: </b>' + getStatusFromId(listing.status) + '</p>' +  
-			'<p class="li_category"><b>Category: </b>' + getCategoryFromId(listing.category) + '</p>' +  
-			'<p class="li_date"><b>Report Date: </b>' + getFormattedDateString(listing.post_date) + '</p>' +  
-			'</div>' +  
-			'</div>' +  
-			'</div>' +  
-			'</li>'
+			'<ul>' +
+			'<li>' + '<h6 class="li_title">' + listing.title +'</h6></li>' +
+			'<li>' + '<div style="height: 4px;"></div></li>' +
+			'<li>' + '<b>Category: </b>' + getCategoryFromId(listing.category) +'</li>' +
+			'<li>' + '<b>Status: </b>' + getStatusFromId(listing.status) +'</li>' +
+			'<li>' + '<b>Report Date: </b>' + getFormattedDateString(listing.post_date) +'</li>' +
+			'<li>' + '<b>Address: </b>' + listing.address +'</li>' +
+			'</ul>' +
+			'</div>'  
 		);
 	})
 }

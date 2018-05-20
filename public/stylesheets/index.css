@@ -136,11 +136,9 @@
 }
 
 .li_title {
-  vertical-align: top; 
-  position:absolute; 
-  top: 0px; 
   font-size: 20px;
-  margin-top: 8px;
+  font-weight: bolder; 
+  margin: 0;
 }
 
 .li_description {
@@ -169,7 +167,9 @@
 .li_category {
   padding-top: 24px;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
+  box-orient: vertical;
   -webkit-box-orient: vertical; 
 }
 
@@ -190,6 +190,7 @@
   display: table-cell;
   width: 60%; float: left;
   height: 110px;
+  margin-left: 10px;
 }
 
 .info-container-2 {
