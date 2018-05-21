@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
-
-  
+  setNavbarScrollAnimation();
 
   $('#signup-form').submit(function(event) {
 
@@ -59,10 +58,9 @@ $(document).ready(function () {
 
 });
 
-signUpPOSTRequest = (body) => {
+function signUpPOSTRequest(body) {
   
   $.post( '/signup',  body  , function( response, status ) {
-    console.log(response)
     if(response.user){
       alert( "Sign up was a success! Welcome, to R-Earth " + response.user.name );
       window.location.replace(response.redirect);
@@ -70,4 +68,16 @@ signUpPOSTRequest = (body) => {
       alert( response.error );
     }
 })
+}
+
+function loginValidation(username,password){
+  return username != "" && password != "";
+}
+
+function setNavbarScrollAnimation() {
+	var scroll_start = 0;
+	$(document).scroll(function () {
+		scroll_start = $(this).scrollTop();
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : 'transparent');
+	});
 }
