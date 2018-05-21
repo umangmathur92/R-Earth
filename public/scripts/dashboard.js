@@ -78,7 +78,6 @@ function setClickEventListener() {
         let strResponse = $(txtResponseId).val();
         let dropDownSelectedOptionVal = $(dropdownSelectId).val();
         let listingId = listings[index].listing_id;
-        window.alert(listingId);
         let postBody = {listingId: listingId, status: dropDownSelectedOptionVal, description: strResponse};
         $.post('/dashboard/respond', postBody, function(response) {
             window.alert(response);
