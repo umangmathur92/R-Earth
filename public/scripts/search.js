@@ -33,8 +33,10 @@ $(document).ready(function () {
 function searchValidation(){
 	const zip = $(".search-bar").val().trim();
 	var isValidZip = /^\d{1,5}$/.test(zip);
-
-	if(isValidZip){
+	if(zip==='') {
+		isValidZip = true;
+	}
+	if(isValidZip) {
 		searchListings();
 	} else {
 		alert("Please enter a valid Zip Code.");
