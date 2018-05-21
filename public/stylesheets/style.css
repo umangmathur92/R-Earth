@@ -14,6 +14,10 @@ html body {
   align-items: center;
 } */
 
+.nav {
+  background-color: transparent!important;
+}
+
 .index-container {
   display: flex;
   flex-direction: row;
