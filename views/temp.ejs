@@ -3,6 +3,15 @@
 <%- include('partials/header') -%>
 <link rel="stylesheet" href="/stylesheets/tempcss.css" />
 <script type="text/javascript" src="javascripts/search.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119585549-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-119585549-1');
+  </script>
 
 <body onLoad="document.getElementById('submit').click();">
 	<%- include('partials/navbar') -%>
