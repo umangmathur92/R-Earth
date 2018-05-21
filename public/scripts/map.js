@@ -23,10 +23,8 @@ function addMarker(coords, image, address, title) {
         icon: iconString,
         animation: google.maps.Animation.DROP
     });
-
     markers.push(marker);
     images.push(image);
-
     marker.addListener('click', function (){
         var contentString = "<div id ='card'>" +
             "<img id='image' src= " + image +   ">" +
@@ -50,7 +48,6 @@ function removeMarkers(){
 }
 
 function setAnimations(coords){
-
     for(var i = 0; i < markers.length; i++){
         if(coords.equals(markers[i].getPosition())){
             markers[i].setAnimation(google.maps.Animation.BOUNCE);
@@ -65,13 +62,11 @@ function setInfoWindow(coords, address, title){
     while(!coords.equals(markers[i].getPosition())){
         i++;
     }
-
     var contentString = "<div id ='card'>" +
         "<img id='image' src= " + images[i] +   ">" +
         "<div id='card-title' > <strong>" + title  +  "</strong> </div>" +
         "<div id='card-address'>" + address + "</div>" +
         "</div>";
-
     infoWindow.setContent(contentString);
     infoWindow.open(map, markers[i]);
 }

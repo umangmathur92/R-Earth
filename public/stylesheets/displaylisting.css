@@ -1,89 +1,63 @@
+body {
+	/* background-image: linear-gradient(#0000007e, #0000007e),url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg'); */
+	background: url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg') no-repeat center center fixed;  
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: white;
+}
+
 .navbar {
 	background-color: #000000e0;
 }
 
-h1 {
-	color: #6d9f71;
-	font-size: 40px;
-	font-weight: bold;
-}
-
-h4 {
-	background-color: #4e6e5d;
-	color: #001011;
-	margin-top: 10px;
-	text-align: center;
-}
-
-.tb_col1 {
-	color: #001011;
-	font-size: 20px;
-	font-weight: bold; 
-	padding: 3px;
-}
-
-.tb_col2 {
-	color: #1d1e18;
-	font-size: 18px;
-	font-weight: bold; 
-	padding: 3px;
-}
-
-#description_paragraph {
-	color: #1d1e18;
-	font-size: 22px;
-	font-weight: bold; 
-}
-
-.info_container {
-	height: 500px;
-}
-
-.info_text_box {
-	background-color: #4e6e5d;
-	float: left;
-	width: 50%;
-}
-
-.post_info {
-	width: 80%;
-	height: 520px;
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	padding-top: 100px;
-}
-
-.table_style {
-	margin-top: 24px;
-}
-
-.info_image_box {
-	float: right;
-	width: 50%;
-}
-
-.post_image {
-	width: 480px;
-	height: 480px;
-	margin-left: auto;
-	margin-right: 0;
-	display: block;
-}
-
 .image_style {
-	width: 480px;
-	height: 480px;
-	margin-left: auto;
-	margin-right: auto;
+	padding: 10px;
+	height: 100%;
+	width: 100%;
 	display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .map_info {
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
-	margin-top: 120px;
-	margin-bottom: 80px;
+	margin-top: 40px;
+	margin-bottom: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.report_container {
+	background-color:#000000e5;
+	margin: auto;
+	margin-top: 80px;
+	width: 80%;
+	padding: 30px;
+}
+
+.post_info {
+	margin: auto;
+	width: 100%;
+}
+
+.tb_col1, .tb_col2 {
+	color: white;
+	font-size: 16px;
+	padding: 3px;
+	height: 70px;
+	text-transform: uppercase;
+}
+
+#txt_title {
+	padding-left: 30px;
+	text-transform: uppercase;
+}
+
+#agency_response_div {
+	padding-left: 30px;
 }
