@@ -69,6 +69,7 @@ html body {
 .navbar-brand{
   color:#fffaf5;
   font-size: 38px !important;
+  margin-top: 5px !important;
 }
 
 .nav>li>a{

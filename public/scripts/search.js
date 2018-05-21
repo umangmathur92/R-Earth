@@ -32,7 +32,7 @@ $(document).ready(function () {
 
 function searchValidation(){
 	const zip = $(".search-bar").val().trim();
-	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip);
+	var isValidZip = /^\d{1,5}$/.test(zip);
 
 	if(isValidZip){
 		searchListings();
