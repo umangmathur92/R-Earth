@@ -14,6 +14,10 @@ html body {
   align-items: center;
 } */
 
+.nav {
+  background-color: transparent!important;
+}
+
 .index-container {
   display: flex;
   flex-direction: row;
@@ -59,13 +63,13 @@ html body {
 }
 
 .navbar {
-  padding: 0px;
-  height: 8%;
+  padding-bottom: 2px;
 } 
 
 .navbar-brand{
   color:#fffaf5;
   font-size: 38px !important;
+  margin-top: 5px !important;
 }
 
 .nav>li>a{
@@ -73,12 +77,9 @@ html body {
   font-size: 18px;
 }
 
-.nav>li>a:focus, .nav>li>a:hover {
+.nav>li>a:focus, .nav>li>a:hover  {
   text-decoration: none;
   background-color: transparent !important;
-  padding: 0; 
-  border-bottom: 2px solid #acbd86;
-  margin: 14px; 
 }
 
 .navbar-collapse {

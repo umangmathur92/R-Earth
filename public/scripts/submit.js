@@ -17,9 +17,9 @@ $(document).ready(function () {
         onAddressSelectedFromDropdown();
     });
     //Set a click listener on the 'auto-detect address from current location' button
-    // document.getElementById('btnDetect').addEventListener("click", function() {
-    //     getLocation();
-    // });
+    document.getElementById('btnDetect').addEventListener("click", function() {
+        getLocation();
+    });
     document.getElementById('imageUpload').addEventListener("change", function() {
         readURL(document.getElementById('imageUpload'));
     });

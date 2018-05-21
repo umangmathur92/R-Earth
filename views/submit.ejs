@@ -7,32 +7,36 @@
 <body>
 	<%- include('partials/navbar') -%>
 	<form class="form" id="form1">
-	<div class="form-container container">
-		<h1>Report An Issue</h1>
-		<div class="container">
-			<input  name="title" type="text" required="required" class="input-field validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*" id="title" required="required">
-			<input name="address" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
-			<input name="zip" type="text" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip*" required="required">
-			<div id="dropdown-select-container">
-				<select name="one" class="dropdown-select col-md-4" required>
-					<option value="" id="option">Category</option>
-					<option value="0" id="option">Land</option>
-					<option value="1" id="option">Water</option>
-					<option value="2" id="option">Air</option>
-					<option value="3" id="option">Fire</option>
-				</select>
+		<div class="form-container container">
+			<h1>Report An Issue</h1>
+			<div class="container">
+				<input  name="title" type="text" required="required" class="input-field validate[required,custom[onlyLetter],length[0,50]] feedback-input" placeholder="Title*" id="title" required="required">
+				<div id="btnDetectContainer" class="container row">
+					<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
+					<div style="margin-left: 260px; display: none;" id="locationSpinner" class="locationSpinner"></div>
+				</div>
+				<input name="address" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
+				<input name="zip" type="text" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip*" required="required">
+				<div id="dropdown-select-container">
+					<select name="one" class="dropdown-select col-md-4" required>
+						<option value="" id="option">Category</option>
+						<option value="0" id="option">Land</option>
+						<option value="1" id="option">Water</option>
+						<option value="2" id="option">Air</option>
+						<option value="3" id="option">Fire</option>
+					</select>
+				</div>
+				<textarea rows="4" name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
 			</div>
-			<textarea rows="4" name="description" required="required" class="validate[required,length[6,300]] feedback-input" id="description" placeholder="Description*"></textarea>
+			<div class="image-upload-container container">
+				<div id="upload"></div>
+				<input type="file" name="pic" accept="image/*" id="imageUpload" >
+				<div class="dropzone" id="dropzone">Upload an Image Here</div>
+			</div>
+			<div class="buttons-container container">
+				<button type="submit" class="btn btn-lg btn-success" id="button-blue">Submit</button>
+			</div>
 		</div>
-		<div class="image-upload-container container">
-			<div id="upload"></div>
-			<input type="file" name="pic" accept="image/*" id="imageUpload" >
-			<div class="dropzone" id="dropzone">Upload an Image Here</div>
-		</div>
-		<div class="buttons-container container">
-			<button type="submit" class="btn btn-lg btn-success" id="button-blue">Submit</button>
-		</div>
-	</div>
-</form>
+	</form>
 </body>
 </html>

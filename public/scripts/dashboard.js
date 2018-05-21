@@ -1,8 +1,20 @@
+/**
+* @file Dashboard.js
+* API Calls: 
+* GET '/Listings' - Get's all the Enviormental Listings for the dashboard
+* POST 'dashboard/update' - updates a single listing. 
+* Functionality: 
+* Handles DOM creation of Listings, and handles UI events. @file 
+*/
+
+
 var listings = [];
 var index = 0;
 var cards = [];
 
 $(document).ready(function () {
+    setNavbarScrollAnimation();
+    
     $.post('/dashboard',
     function(response){
         listings = response.date;
@@ -78,9 +90,26 @@ function setClickEventListener() {
         let strResponse = $(txtResponseId).val();
         let dropDownSelectedOptionVal = $(dropdownSelectId).val();
         let listingId = listings[index].listing_id;
-        let postBody = {listingId: listingId, status: dropDownSelectedOptionVal, description: strResponse};
-        $.post('/dashboard/respond', postBody, function(response) {
-            window.alert(response);
-        });
+        if(strResponse) {
+            let postBody = {listingId: listingId, status: dropDownSelectedOptionVal, description: strResponse};
+            $.post('/dashboard/respond', postBody, function(response) {
+                if(response.success) {
+                    window.alert('Report Status Updated Successfully');
+                } else {
+                    window.alert('Something went wrong!!');
+                    console.log(JSON.stringify(response));
+                }
+            });
+        } else {
+            window.alert('Please enter a Response before updating the status of this Report');
+        }
+	});
+}
+
+function setNavbarScrollAnimation() {
+	var scroll_start = 0;
+	$(document).scroll(function () {
+		scroll_start = $(this).scrollTop();
+		$(".navbar").css('background-color', (scroll_start > 20) ? '#000000e0' : 'transparent');
 	});
 }
