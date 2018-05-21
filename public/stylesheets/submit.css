@@ -14,7 +14,6 @@
     align-items: center;
     background-repeat: no-repeat;
     background-image: url("https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg");
-
     background-size: 100%;
     padding-top: 60px;
 }
@@ -40,7 +39,6 @@
 
 .form-container{
     flex: 4;
-
 }
 
 .image-upload-container {
@@ -51,11 +49,12 @@
 }
 
 #form-div {
-    background-color:rgba(72,72,72,0.4);
+    background-color:#48484866;
     padding-left:2%;
     padding-right:2%;
     padding-bottom:25px;
     position: relative;
+    border-radius: 7px;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     width: 100%;
