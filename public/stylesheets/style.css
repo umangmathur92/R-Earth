@@ -63,8 +63,8 @@ html body {
 }
 
 .navbar {
-  padding: 0px;
-  height: 8%;
+  padding-bottom: 2px;
+
 } 
 
 .navbar-brand{
