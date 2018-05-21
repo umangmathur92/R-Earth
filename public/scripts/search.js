@@ -20,20 +20,32 @@ $(document).ready(function () {
 	$('select').formSelect();
 	$("form").submit(function () {
 		pageNumber = 1;//Reset page number each time a new search is performed
-		searchListings();
+		searchValidation()
 		return false;
 	});
+
 	$("#apply_filter_button").click(function(){
-		searchListings();
+		searchValidation();
 	});
 });
+
+
+function searchValidation(){
+	const zip = $(".search-bar").val().trim();
+	var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip);
+
+	if(isValidZip){
+		searchListings();
+	} else {
+		alert("Please enter a valid Zip Code.");
+	}
+}
 
 /**Searches the listings table and returns paginated data for the text in the search input field*/
 function searchListings() {
 	var filters = getFilteredSelectors();
 	const key = $(".search-bar").val().trim();
 	$('.listings').empty();
-	console.log('Query data: ' + 'key='+key + ', pagenumber=' + pageNumber + ', category='+filters.category + ', status='+ filters.status);
 	const body = {
 		key: key, 
 		pageNum: pageNumber,
@@ -153,7 +165,7 @@ function resizeElements() {
 	$(input).css({ 'margin-left': dropdownWidth, 'width': inputWidthPercent });
 }
 
-generateListings = (list) => {
+function generateListings(list){
 	list.forEach(listing => {
 		$('.listings').append(
 			'<li class="search_li">' +       
