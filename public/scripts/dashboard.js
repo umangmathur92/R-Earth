@@ -90,10 +90,19 @@ function setClickEventListener() {
         let strResponse = $(txtResponseId).val();
         let dropDownSelectedOptionVal = $(dropdownSelectId).val();
         let listingId = listings[index].listing_id;
-        let postBody = {listingId: listingId, status: dropDownSelectedOptionVal, description: strResponse};
-        $.post('/dashboard/respond', postBody, function(response) {
-            window.alert(response);
-        });
+        if(strResponse) {
+            let postBody = {listingId: listingId, status: dropDownSelectedOptionVal, description: strResponse};
+            $.post('/dashboard/respond', postBody, function(response) {
+                if(response.success) {
+                    window.alert('Report Status Updated Successfully');
+                } else {
+                    window.alert('Something went wrong!!');
+                    console.log(JSON.stringify(response));
+                }
+            });
+        } else {
+            window.alert('Please enter a Response before updating the status of this Report');
+        }
 	});
 }
 
