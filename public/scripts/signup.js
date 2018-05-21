@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+
+  
+
   $('#signup-form').submit(function(event) {
 
     //TODO - VALIDATION
