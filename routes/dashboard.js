@@ -137,6 +137,8 @@ router.post('/respond', function(req, res, next) {
 			res.render('error', message);
            // res.send({userId: userId, userType: userType, error:error});
         });
+        var message = {success: true}
+        res.send(message);
     }else {
 		message = { title: 'Error', message: null, userId: null, userType: null, error: "Missing required fields to create a response"};
         res.render('error', message);
