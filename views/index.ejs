@@ -55,7 +55,7 @@
 									</select>
 								</div>
 								<div class="col">
-									<button class="btn search-button" type="submit" value="Search" onSubmit="return false"><i class="material-icons">search</i>Search</button>
+									<button class="btn search-button" type="submit" value="Search" onSubmit="return false" onClick="ga('send', 'event', 'Search', 'New Search');"><i class="material-icons">search</i>Search</button>
 								</div>
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 				</div>	
 			</div>
 			<div class="fixed-action-btn">
-				<a href="/submit" class="btn-large red">
+				<a href="/submit" class="btn-large red" onClick="ga('send', 'event', 'Home Page', 'Submit');">
 					<text> Report</text>
 					<i class="large material-icons">mode_edit</i>
 				</a>

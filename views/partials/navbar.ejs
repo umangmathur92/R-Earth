@@ -7,34 +7,34 @@
                 <span class="icon-bar" style="background-color: whitesmoke;"></span>
                 <span class="icon-bar" style="background-color: whitesmoke;"></span>
             </button>
-            <a class="navbar-brand" href="/">R - Earth</a>
+            <a class="navbar-brand" href="/" onClick="ga('send', 'event', 'NavBar', 'Home');">R - Earth</a>
         </div>
         <div class="collapse navbar-collapse">      
             <ul class="nav navbar-nav navbar-right">
          
                 <li <% if (page === 'submit') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                    <a class="nav-link" href="/submit">Report an Issue</a>
+                    <a class="nav-link" href="/submit" onClick="ga('send', 'event', 'NavBar', 'Submit');">Report an Issue</a>
                 </li>
                 
                 <li <% if (page === 'about') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                    <a class="nav-link" href="/about">Meet us</a>
+                    <a class="nav-link" href="/about" onClick="ga('send', 'event', 'NavBar', 'About');">Meet us</a>
                 </li>
                 
                 <% if (userType === 1) { %>                         
                     <li <% if (page === 'dashboard') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                        <a class="nav-link" href="/dashboard">Dashboard </a>
+                        <a class="nav-link" href="/dashboard" onClick="ga('send', 'event', 'NavBar', 'Dashboard');">Dashboard </a>
                     </li>
                     <% } %>
                     
                     <% if (!userId) { %>                         
                         <li <% if (page === 'login') { %>class="active" <% } else{ %>class="nav-item"<% } %>>
-                            <a class="nav-link" href="/signup">Login / Sign Up </a>
+                            <a class="nav-link" href="/signup" onClick="ga('send', 'event', 'NavBar', 'Login/Sign Up');">Login / Sign Up </a>
                         </li>
                         <% } %>
                         
                         <% if (userId) { %>                         
                             <li class="nav-item">
-                                <a class="nav-link" href="/logout">Logout </a>
+                                <a class="nav-link" href="/logout" onClick="ga('send', 'event', 'NavBar', 'Logout');">Logout </a>
                             </li>
                             <% } %>
                         </ul>
