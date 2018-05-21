@@ -138,7 +138,6 @@ function submitData() {
                 picture:picture
             },
             function(response){
-                console.log("function");
                 if(response.status == "success"){
                     console.log("Success");
                     window.location.replace("/");
