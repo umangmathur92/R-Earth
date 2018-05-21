@@ -4,7 +4,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 <link rel="stylesheet" href="/stylesheets/signup.css" />
 <script type="text/javascript" src="/scripts/signup.js"></script>
-
 <body>
   <%- include('partials/navbar') -%>
   <div class="main-container">
@@ -12,7 +11,7 @@
     <div class="card"></div>
       <div class="card">
         <h1 class="title">Login</h1>
-        <form class="login-form" method="post" action="/login" >
+        <form class="login-form" method="post" action="/login" onsubmit="return validateLogin()">
           <div class="input-container">
             <input type="text"value="" name="username" id="username" required="required"/>
             <label for="username">Username</label>

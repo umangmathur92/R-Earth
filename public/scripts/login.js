@@ -1,5 +1,18 @@
 $(document).ready(function () {
 
+  //Login Validation 
+  validateLogin = () => {
+    const username =  $('#username-sign-up').val(); 
+    const password = $('#password-sign-up').val();
+    var message;
+
+    if(username == "" || password == ""){
+      alert("Please enter a valid username and password.");
+    }
+
+    return false; 
+  }
+
   $('#signup-form').submit(function(event) {
 
     //TODO - VALIDATION
