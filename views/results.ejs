@@ -22,7 +22,7 @@
 				<span class="input-group-btn">
 					<form class="search-bar huge">
 						<input id="search-input" type="text" placeholder="Search for Zip & Address" />
-						<button type="submit" value="Search"></button>
+						<button type="submit" value="Search" onClick="ga('send', 'event', 'Results', 'New Search');"></button>
 					</form>
 				</span>
 			</div>
@@ -42,7 +42,7 @@
 					<div class="map-container">
 						<div class="map" id="map"></div>
 						<div class="submit-button-container">
-								<button class="submit-button"> Report an Issue</button>
+								<button class="submit-button" onClick="ga('send', 'event', 'Results', 'Submit');"> Report an Issue</button>
 							</div>
 					</div>	
 				</div>
