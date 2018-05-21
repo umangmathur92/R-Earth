@@ -27,7 +27,7 @@ body {
 	margin-right: auto;
 	display: block;
 	margin-top: 40px;
-	margin-bottom: 80px;
+	margin-bottom: 30px;
 	padding-left: 30px;
 	padding-right: 30px;
 }
@@ -56,4 +56,8 @@ body {
 #txt_title {
 	padding-left: 30px;
 	text-transform: uppercase;
+}
+
+#agency_response_div {
+	padding-left: 30px;
 }

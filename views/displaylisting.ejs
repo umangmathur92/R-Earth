@@ -34,6 +34,13 @@
 			frameborder="1" style="border:1"
 			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDg-AaiQ6fJN0KvJvmT9lfCwJ7qPBFIUS4&q=<%= data.latitude %>,<%= data.longitude %>&zoom=16"></iframe>
 		</div>
+		<!-- Display only if any environmental agent has responded to the issue -->
+		<% if (data.response) { %>
+		<div id="agency_response_div">
+			<h2>ENVIRONMENTAL AGENCY RESPONSE</h2>
+			<p><%= data.response %></p>
+		</div>
+		<% } %>
 	</div>
 </body>
 </html>
