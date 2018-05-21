@@ -1,0 +1,26 @@
+.navbar {
+	background-color: #000000e0;
+}
+
+body {
+    background: linear-gradient(#0000007e, #0000007e), url('http://www.sftravel.com/sites/sftraveldev.prod.acquia-sites.com/files/field/image/158827123_thinkstock_stdlc.jpg') no-repeat center center fixed;  
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	color: white;
+}
+
+.caption-name {
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 100vh;
+    min-width: 100vw;
+    justify-content: center;
+    align-items: center;
+  }
