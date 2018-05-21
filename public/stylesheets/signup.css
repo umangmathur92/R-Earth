@@ -420,10 +420,10 @@ h1 {
   cursor: pointer;
 }
 .card.alt .toggle:before {
-  content: '\f040';
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
+  content: "Register";
+  display: flex;
+  font-size: 34px;
+  text-align: center;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
