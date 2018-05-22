@@ -14,11 +14,11 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119585549-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-119585549-1');
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	
+	gtag('config', 'UA-119585549-1');
 </script>
 
 <body>
@@ -27,66 +27,67 @@
 		<div class="outer-cover-container">
 			<div class="cover-container">
 				<h2 class="heading"> Welcome to R-Earth</h1>
-				<h5 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h4>
-				<h6 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviornmental hazards so local agencies can do their jobs.</h6>
-				<div class="search-parent-container">
-					<form class="search-form" data-toggle="validator" onSubmit="false">
-						<div class="container search-bar-container" style="width: 100%;">
-							<div class="filters-container row">	
-								<div class="col">
-									<input placeholder="Enter Zip Code..." id="search_bar" class="search-bar" type="text" class="validate">
+					<div id = "warning" style="color: white; font-size: 15px; width: 100%; text-align: center;">SFSU Software Engineering Project, Spring 2018.  For Demonstration Only</div>
+					<h5 class="sub-heading"> Let's keep San Francisco Clean. Together.  </h4>
+						<h6 class="description-heading"> Search local SF environmental hazards and be aware of what's going on around you. Report your own witnessed enviornmental hazards so local agencies can do their jobs.</h6>
+						<div class="search-parent-container">
+							<form class="search-form" data-toggle="validator" onSubmit="false">
+								<div class="container search-bar-container" style="width: 100%;">
+									<div class="filters-container row">	
+										<div class="col">
+											<input placeholder="Enter Zip Code..." id="search_bar" class="search-bar" type="text" class="validate">
+										</div>
+										<div class="categories-container col">
+											<select class="categories" id="sel_categories" name="categories">
+												<option value="" class="category">All Categories</option>
+												<option value=0 class="category"> Land </option>
+												<option value=1 class="category" > Water </option>
+												<option value=2 class="category"> Air </option>
+												<option value=3 class="category"> Fire </option>
+											</select>
+										</div>
+										<div class="status-container col" id="sel_status">
+											<select class="status">
+												<option value="">All Statuses</option>
+												<option value=0> Reported </option>
+												<option value=1> Aknowledged </option>
+												<option value=2> Work in Progress </option>
+												<option value=3> Resolved </option>
+											</select>
+										</div>
+										<div class="col">
+											<button class="btn search-button" type="submit" value="Search" onSubmit="return false" onClick="ga('send', 'event', 'Search', 'New Search');"><i class="material-icons">search</i>Search</button>
+										</div>
+									</div>
 								</div>
-								<div class="categories-container col">
-									<select class="categories" id="sel_categories" name="categories">
-										<option value="" class="category">All Categories</option>
-										<option value=0 class="category"> Land </option>
-										<option value=1 class="category" > Water </option>
-										<option value=2 class="category"> Air </option>
-										<option value=3 class="category"> Fire </option>
-									</select>
-								</div>
-								<div class="status-container col" id="sel_status">
-									<select class="status">
-										<option value="">All Statuses</option>
-										<option value=0> Reported </option>
-										<option value=1> Aknowledged </option>
-										<option value=2> Work in Progress </option>
-										<option value=3> Resolved </option>
-									</select>
-								</div>
-								<div class="col">
-									<button class="btn search-button" type="submit" value="Search" onSubmit="return false" onClick="ga('send', 'event', 'Search', 'New Search');"><i class="material-icons">search</i>Search</button>
-								</div>
-							</div>
+							</form>	
 						</div>
-					</form>	
+					</div>
 				</div>
-			</div>
-		</div>
-		<div id="numResultsContainerDiv"></div>
-		<div class="listings-map-container">
-			<div class="listings-list-container" id="showData">
-				<div>
-					<ul class="listings" id="listings-list">
-					</ul> 
+				<div id="numResultsContainerDiv"></div>
+				<div class="listings-map-container">
+					<div class="listings-list-container" id="showData">
+						<div>
+							<ul class="listings" id="listings-list">
+							</ul> 
+						</div>
+						<div class="paginiationcontainerdiv" id="paginiationcontainerdiv">
+							<div id="pg_div">Page(s):</div>
+							<ul class="pagination" id="pageLinkContainer">
+							</ul>
+						</div>
+					</div>
+					<div class="map-column-container">
+						<div class="map-container">
+							<div class="map" id="map"></div>
+						</div>	
+					</div>
+					<div class="fixed-action-btn">
+						<a href="/submit" class="btn-large red" onClick="ga('send', 'event', 'Home Page', 'Submit');">
+							<text> Report</text>
+							<i class="large material-icons">mode_edit</i>
+						</a>
+					</div>
 				</div>
-				<div class="paginiationcontainerdiv" id="paginiationcontainerdiv">
-					<div id="pg_div">Page(s):</div>
-					<ul class="pagination" id="pageLinkContainer">
-					</ul>
-				</div>
-			</div>
-			<div class="map-column-container">
-				<div class="map-container">
-					<div class="map" id="map"></div>
-				</div>	
-			</div>
-			<div class="fixed-action-btn">
-				<a href="/submit" class="btn-large red" onClick="ga('send', 'event', 'Home Page', 'Submit');">
-					<text> Report</text>
-					<i class="large material-icons">mode_edit</i>
-				</a>
-			</div>
-		</div>
-	</body>
-	</html>
+			</body>
+			</html>
