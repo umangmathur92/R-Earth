@@ -24,8 +24,10 @@
 					<input id="btnDetect" type="button" class="btn btn-info" value="Auto-Detect Address & Zip">
 					<div style="margin-left: 260px; display: none;" id="locationSpinner" class="locationSpinner"></div>
 				</div>
-				<input name="address" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
-				<input name="zip" type="text" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip*" required="required">
+				<div id="addresszip-container">
+					<input name="address" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="address" placeholder="Address*" required="required">
+					<input name="zip" type="text" required="required" class="input-field validate[required,length[0,50]] feedback-input" id="zip" placeholder="Zip*" required="required">
+				</div>
 				<div id="dropdown-select-container">
 					<select name="one" class="dropdown-select col-md-4" required>
 						<option value="" id="option">Category</option>
